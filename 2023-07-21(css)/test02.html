@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul#top_menu {
+      list-style: none;
+      border: 0px solid black;
+      padding: 0;
+      /* height: 60px; */
+      width: 1000px;
+      overflow: visible; /* li를 float해서 가로로 하면 공중부양됨 */
+      
+    }
+    #top_menu > li {
+      line-height: 60px;
+      text-align: center;
+      border-top:1px solid red ;
+      border-bottom: 1px solid red;
+      margin: 0;
+      width: 200px;
+      height: 60px;
+      float: left;
+      /* box-sizing: border-box; */
+      
+      color: white;
+      font-weight: bold;
+      
+    }
+    #top_menu > li:hover {
+      background-color: pink;
+      
+    }
+    li div {
+      display: none;
+    }
+
+    #top_menu > li:hover > div {
+      display: block;
+    }
+    a{
+      text-decoration: none;
+      color: black;
+    }
+    a:visited {
+      color: red;   
+    }
+    /* mouse over link */
+    a:hover {
+      color: hotpink;
+    }
+  </style>
+</head>
+<body>
+  <h1>길동이의 홈페이지</h1>
+  <nav>
+    <ul id="top_menu">
+      <li><a href="https://www.naver.com">HOME</a></li>
+      <li><a href="https://www.naver.com">PROFILE<div>hello</div></a></li>
+      <li><a href="https://www.naver.com">GALERY</a></li>
+      <li><a href="https://www.naver.com">LECTURE</a></li>
+      <li><a href="https://www.naver.com">BOARD</a></li>
+    </ul>
+  </nav>
+</body>
+</html>

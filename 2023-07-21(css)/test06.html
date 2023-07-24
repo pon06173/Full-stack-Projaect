@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div, header, nav, aside, article, footer,section {
+      border: 1px solid brown;
+      margin: 3px;
+      padding: 3px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    aside, article {
+      float: left;
+      height: 300px;
+      
+    }
+    aside {
+      width: 20%;
+      line-height: 300px;
+    }
+    article {
+      width: 55%;
+      
+    }
+    
+    div.container {
+      width: 1000px;
+    }
+    footer {
+      clear: both;
+    }
+    main article section:nth-child(1) {
+      height: 100px;
+    }
+    main article section:nth-child(2), 
+    main article section:nth-child(3) {
+      height: 170px;
+      width: 47%;
+      float: left;
+    }
+    main {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>컴스터디 코딩 스쿨</h1>
+    </header>
+    <nav>
+      Home | Profile | Gallery | Lecture | Board
+    </nav>
+    <main>
+      <aside>Left</aside>
+      <article>
+        <section>Banner</section>
+        <section>Board list</section>
+        <section>Lecture list</section>
+      </article>
+      <aside>Right</aside>
+    </main>
+    <footer>
+      <address>대구광역시 동구</address>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      border: 3px solid black;
+      padding: 5px;
+      margin: 5px;
+      border-radius: 8px;
+    }
+    div.container {
+      left: 0px;
+      top: 5px;
+      position: relative;
+      width: 600px;
+      height: 900px;
+    }
+    div#box1 {
+      position: absolute;
+      background-color: bisque;
+      left: 0px;
+      top: 0px;
+      width: 600px;
+      height: 280px;
+      z-index: 100;
+      box-sizing: border-box;
+    }
+    div#box2 {
+      position: absolute;
+      left: 0px;
+      top: 290px;
+      background-color: aquamarine;
+      width: 300px;
+      height: 300px;
+      box-sizing: border-box;
+      /* z-index: ; */
+    }
+    div#box3 { 
+      position: absolute;
+      left: 310px;
+      top:290px;
+      width: 290px;
+      height: 300px;
+      background-color: antiquewhite;
+      box-sizing: border-box;
+    }
+    div#box4 {
+      position: absolute;
+      left: 0px;
+      top: 600px;
+      width: 600px;
+      height: 280px;
+      background-color: aquamarine;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>컴스터디 코딩 스쿨</h1>
+  </header>
+  <div class="container">  
+    <div id="box1">BOX1</div>
+    <div id="box2">BOX2</div>
+    <div id="box3">BOX3</div>
+    <div id="box4">BOX4</div>
+  </div>
+</body>
+</html>

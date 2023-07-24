@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0px;
+      border-radius: 10px;
+    }
+    input[type=submit] {
+      width: 200px;
+      padding: 20px;
+      background-color: antiquewhite;
+      color: navy;
+      font-weight: bold;
+    }
+    input[type=submit]:hover {
+      background-color: pink;
+    }
+    input[name=input1] {
+      border: 2px solid red;
+      /* border-radius: 10px; */
+    }
+    input[name=input2] {
+      border: 2px solid blue;
+      background-color: skyblue;
+      border-bottom: 4px solid yellow;
+      /* border-radius: 10px; */
+    }
+    input[name=input3] {
+      width: 200px;
+      transition: width 0.4s ease-in-out; /*ease-in-out 속도 변경가능 홈페이지 참고*/
+    }
+    input[name=input3]:focus {
+      background-color: green;
+      width: 100%;
+    }
+    input[name=input1]:focus {
+      background-color: pink;
+      /* border-radius: 10px; */
+    }
+    input[name=input2]:focus {
+      background-color: skyblue;
+      /* border-radius: 10px; */
+    }
+  </style>
+</head>
+<body>
+  <h1>html Form 스타일 설정</h1>
+  <form action="">
+    <input type="text"></input>
+    <input type="text" name="input1"></input>
+    <input type="text" name="input2"></input>
+    <input type="text" name="input3"></input>
+    <input type="submit">
+  </form>
+</body>
+</html>

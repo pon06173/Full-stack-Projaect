@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      list-style: none;
+      border: 1px solid blue;
+      /* padding: 10px 50px 20px 100px /* 상 10 우 50 하 20 좌 100(시계방향) */ 
+      padding-left: 0;
+    }
+    li {
+      border: 1px solid red;
+      color: orange;
+      font-size: 24pt;
+      padding: 20px;
+      margin: 5px;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px; /* 글자를 센터로 할려면height랑 높이를 같게해야함 */
+    }
+    li:first-child {
+      border: 1px solid green;
+    }
+    li:nth-child(5) {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  
+  <h1>CSS 선택기</h1>
+  <div id="box">box</div>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>4</li>
+    <li>3</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+  </ul>
+</body>
+</html>

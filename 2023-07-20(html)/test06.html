@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    main {
+      border: 1px solid black;
+      padding: 5px;
+    }
+    article {
+      border: 1px solid orange;
+      padding: 5px;
+    }
+    section {
+      border: 1px solid red;
+      padding: 5px;
+      /* margin: 5px; */
+      height: 200px;
+      color: yellow;
+    }
+    section:nth-child(2){
+      background-image: url("/img/풍경.jpg");
+      background-size: 280px;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <section>
+        <img src="/img/풍경.jpg" height="200">
+      </section>
+      <section>
+        hell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o<br>
+        컴스터디 코딩 스쿨!
+      </section>
+    </article>
+  </main>
+</body>
+</html>

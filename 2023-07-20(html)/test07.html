@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <title>Document</title>
+
+  <!-- 스타일링 -->
+  <style>
+    div {
+      width: 100vw;
+      height: 100vh;
+      margin: 10px;
+      background-color: aqua;
+    }
+    div#box2{
+      background-color: blue;
+    }
+    div#bottom{
+      background-color: brown;
+    }
+    a{
+      color: red;
+      text-decoration: underline;
+    }
+    a:hover{
+      color: purple;
+    }
+    a:visited{
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>컴스터디 코딩 스쿨</h1>
+  <p>내부 링크를 이용한 섹션 이동</p>
+  <div id="box1">box1
+    <ul>
+      <li><a href="mailto:pon06173@naver.com">서영민 이메일</a></li>
+      <li><a href="#box1">box1</a></li>
+      <li><a href="#box2">box2</a></li>
+      <li><a href="#bottom">아래로</a></li>
+    </ul>
+  </div>
+  <div id="box2">box2
+    <ul>
+      <li><a href="#box1">box1</a></li>
+      <li><a href="#box2">box2</a></li>
+      <li><a href="#bottom">아래로</a></li>
+    </ul>
+  </div>
+  <div id="bottom">bottom
+    <ul>
+      <li><a href="#box1">box1</a></li>
+      <li><a href="#box2">box2</a></li>
+      <li><a href="#bottom">아래로</a></li>
+    </ul>
+  </div>
+</body>
+</html>

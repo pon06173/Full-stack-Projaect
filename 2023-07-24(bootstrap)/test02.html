@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="okBtn">ok!!</button>
+  <script>
+    /* okBtn 변수 선언 */
+    /* okBtn 변수가 button (객체)참조 한다. */
+    var okBtn = document.getElementById("okBtn");
+    /* okBtn DOM이 참조 된것을 확인 */
+    console.log('okBtn DOM이 참조 된것을 확인');
+    console.dir(okBtn);
+    okBtn.innerHTML = "확인";
+    okBtn.style.backgroundColor = "red";
+    okBtn.style.color = 'yellow';
+    okBtn.style.position = "relative";
+    okBtn.style.left = "300px";
+    okBtn.style.top = "500px";
+  </script>
+</body>
+</html>

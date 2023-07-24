@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS 실습 예제</title>
+    <style>/* 내부 스타일(internel) */
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+        }
+        h1 {
+          color: red; text-shadow: 2px 2px 2px brown;
+        }
+        p{
+          border: 1px dashed black;
+          font-size: 16px;
+          color: #333;
+          line-height: 18px;
+        }
+        div p {
+          color: #ff4500;
+        }
+
+        em {
+          font-style: italic;
+        }
+
+        .override-em {
+            font-style: normal;
+        }
+
+        .box-example {
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            border: 2px solid #000;
+            margin: 20px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1 style="color: brown; text-shadow: 2pt 2pt 2pt black;">스타일 적용 예제</h1>
+    <p>This is a paragraph with <span class="highlight">highlighted</span> text.</p>
+    <p id="special">This is a special paragraph with <em>italic</em> text.</p>
+    <div>
+        <p>This paragraph is inside a div and has a <span class="highlight">highlighted</span> text color.</p>
+    </div>
+    <p class="override-em">This paragraph overrides the <em>italic</em> style of the <code>em</code> selector.</p>
+
+    <div class="box-example">
+        This is an example of the box model.
+    </div>
+</body>
+</html>
+

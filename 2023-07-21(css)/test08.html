@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Grid 레이아웃</title>
+    <style>
+      .container {
+        display: grid;
+        /* grid-template-columns: 20% 60% 20%; */
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        background-color: orange;
+        padding: 20px;
+      }
+      .item {
+        border: 1px solid red;
+        background-color: white;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">Item 1</div>
+        <div class="item">Item 2</div>
+        <div class="item">Item 3</div>
+        <div class="item">Item 4</div>
+        <div class="item">Item 5</div>
+        <div class="item">Item 6</div>
+        <div class="item">Item 7</div>
+        <div class="item">Item 8</div>
+        <div class="item">Item 9</div>
+    </div>
+    
+</body>
+</html>
+
