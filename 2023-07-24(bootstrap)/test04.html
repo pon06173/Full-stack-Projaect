@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>계산기</title>
+ 
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            padding: 5px 10px;
+            text-align: center;
+        }
+        input {
+            text-align: right;
+            border: none;
+        }
+        input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td colspan="4">
+                <input type="text" id="display">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <input type="text" id="result">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" onclick="reset()">AC</td>
+            <td onclick="add('/')">/</td>
+        </tr>
+        <tr>
+            <td onclick="add(7)">7</td>
+            <td onclick="add(8)">8</td>
+            <td onclick="add(9)">9</td>
+            <td onclick="add('*')">*</td>
+        </tr>
+        <tr>
+            <td onclick="add(4)">4</td>
+            <td onclick="add(5)">5</td>
+            <td onclick="add(6)">6</td>
+            <td onclick="add('-')">-</td>
+        </tr>
+        <tr>
+            <td onclick="add(1)">1</td>
+            <td onclick="add(2)">2</td>
+            <td onclick="add(3)">3</td>
+            <td onclick="add('+')">+</td>
+        </tr>
+        <tr>
+            <td colspan="2" onclick="add(0)">0</td>
+            <td onclick="add('.')">.</td>
+            <td onclick="calculate()">=</td>
+        </tr>
+    </table>
+    <script>
+        function add(char) {
+            var display = document.getElementById('display'); // 우리가 식을 입력할 input 태그를 불러옵니다.
+            // display.value는 input 태그 안에 들어 있는 값을 의미합니다.
+            display.value = display.value + char;
+            // display.value += char; 로 쓸 수도 있습니다.
+            // input 태그의 값 뒤에 char 문자를 추가해 주는 역할을 합니다.
+        }
+        function calculate() {
+            var display = document.getElementById('display');
+            var result = eval(display.value); // 식을 계산하고 result 변수에 저장합니다.
+            document.getElementById('result').value = result;
+        }
+        function reset() {
+            document.getElementById('display').value = "";
+            document.getElementById('result').value = "";
+        }
+    </script>
+<!-- Code injected by live-server -->
+<script>
+// <![CDATA[  <-- For SVG support
+if ('WebSocket' in window) {
+(function () {
+function refreshCSS() {
+var sheets = [].slice.call(document.getElementsByTagName("link"));
+var head = document.getElementsByTagName("head")[0];
+for (var i = 0; i < sheets.length; ++i) {
+var elem = sheets[i];
+var parent = elem.parentElement || head;
+parent.removeChild(elem);
+var rel = elem.rel;
+if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+}
+parent.appendChild(elem);
+}
+}
+var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+var address = protocol + window.location.host + window.location.pathname + '/ws';
+var socket = new WebSocket(address);
+socket.onmessage = function (msg) {
+if (msg.data == 'reload') window.location.reload();
+else if (msg.data == 'refreshcss') refreshCSS();
+};
+if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+console.log('Live reload enabled.');
+sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+}
+})();
+}
+else {
+console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+}
+// ]]>
+</script>
+</body>
+</html>
