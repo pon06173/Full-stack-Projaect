@@ -7,17 +7,23 @@
 </head>
 <body>
   <h4>덧셈 계산기</h4>
-  <form>
+  <form action="https://www.naver.com" onsubmit="add()">
     <input type="text" size="2" name="num1" id="num1" pattern="\d*">
     +
     <input type="text" size="2" name="num2" id="num2" pattern="\d*">
-    <button onclick="add()" type="button">=</button>
+    <!-- <input type="button" onclick="add()" value="="></input> -->
+    <input type="submit" value="=">
     <input type="text" size="2" name="result" id="result" readonly>
     <br><br>
-    <input type="reset" value="초기화">
+    <!-- <input type="reset" value="초기화"> -->
+    <button type="reset" >초기화</button>
+
   </form>
   <script>
     function add() {
+      //event 객체 : 이벤트 핸들러에서 자동 생성 된다.
+      // event.preventDefault();//페이지 새로고침 없애줌.
+      
       var num1 = document.getElementById("num1");
       var num2 = document.getElementById("num2");
 
