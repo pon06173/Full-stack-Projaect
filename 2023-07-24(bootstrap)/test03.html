@@ -16,6 +16,14 @@
 
     console.dir(demo);
     console.dir(okBtn);
+
+    // 요소.이벤트핸들러 = 익명함수(e) {}
+    okBtn.onclick = function () {
+      console.log('안녕하세요!!');
+      alert('안녕하세요!!');
+      // demo.innerText = "결과 : 확인 버튼을 클릭했다!!"; //okBtn 누른후 text 전환
+      demo.innerHTML = "결과 : <strong>확인</strong> 버튼을 클릭했다!!"; //okBtn 누른후 text 전환
+    }
   </script>
 </body>
 </html>
