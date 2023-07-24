@@ -13,13 +13,22 @@
     var okBtn = document.getElementById("okBtn");
     /* okBtn DOM이 참조 된것을 확인 */
     console.log('okBtn DOM이 참조 된것을 확인');
+
+    /* okBtn 버튼이 클릭 되면 적용 되도록 설정 */
     console.dir(okBtn);
-    okBtn.innerHTML = "확인";
-    okBtn.style.backgroundColor = "red";
-    okBtn.style.color = 'yellow';
-    okBtn.style.position = "relative";
-    okBtn.style.left = "300px";
-    okBtn.style.top = "500px";
+    console.dir(window)
+    okBtn.onclick = function(e) {
+      okBtn.innerHTML = "확인";
+      okBtn.style.backgroundColor = "red";
+      okBtn.style.color = 'yellow';
+      okBtn.style.position = "relative";
+      okBtn.style.left = "300px";
+      okBtn.style.top = "500px"; 
+      // 화면의 배경색 변경
+      // 최상위 부모객체는 window객체
+      window.document.bgColor = "yellow";
+    }
+    
   </script>
 </body>
 </html>
