@@ -52,7 +52,22 @@
   </style>
 </head>
 <body>
-  <header id="header"></header>
+  <header id="header">
+    <h1>This is a header</h1>
+    <p>Some text in the header</p>
+  </header>
+  <button id="toggleButton">Toggle Header</button>
   <button class="button">버튼</button>
+
+  <script>
+    const toggleButton = document.getElementById('toggleButton');
+const header = document.querySelector('header');
+
+toggleButton.addEventListener('click', () => {
+  header.classList.toggle('show'); /* Toggle the show class to display the header */
+  header.classList.toggle('hide'); /* Toggle the hide class to hide the header */
+});
+
+  </script>
 </body>
 </html>
