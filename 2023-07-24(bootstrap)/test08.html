@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<style>
+  #box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    margin: auto;
+    transform: rotate(0deg);
+  }
+
+</style>
+
+</head>
+<body>
+  <button id="btn">돌리기</button>
+  <hr />
+  <div id="box">box</div>
+
+  <script>
+    var btn = document.getElementById('btn');
+    var angle = 0;
+    btn.onclick = function() {
+      angle = angle +90;
+    }
+  </script>
+</body>
+</html>
