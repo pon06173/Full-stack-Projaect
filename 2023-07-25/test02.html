@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="test02.css">
+  <script>
+    //문서의 모든 요소가 로드되면 자바스크립트 실행
+    //이벤트 핸들러 추가
+    
+    window.onload = function() {
+      //console.log("1");
+      //css의 선택자 그대로 사용가능
+      var cardNodelist = document.querySelectorAll(".card");
+      console.dir(cardNodelist);
+
+      //스프레드 연산자를 이용해서 nodelist를 array로 변환
+      var cardArr = [...cardNodelist];
+      //console.dir(cardArr);
+      var colors =['red','green','blue','orange','pink','navy']; 
+      console.dir(cardArr);
+      cardArr.forEach((item, idx)=> {
+        // console.log(item, idx);
+        item.onclick = function() {
+          console.log(this);
+          //forEach로 반복 했을 때 idx 직접 사용 가능.
+          alert(idx);
+          console.dir(document.body);
+          document.body.bgColor = colors[idx];
+        }
+      })
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <div class="card">1
+      <div>1</div>
+      <div>2</div>
+      <div>2</div>
+      <div>2</div>
+      <div>2</div>
+      <div>2</div></div>
+    
+    <div class="card">2</div>
+    <div class="card">3</div>
+    <div class="card">4</div>
+    <div class="card">5</div>
+    <div class="card">6</div>
+    <div class="card">7</div>
+    <div class="card">8</div>
+    <div class="card">9</div>
+    <div class="card">10</div>
+  </div>
+  <script>
+    //console.log("2");
+  </script>
+</body>
+</html>
