@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //객체 사용법3
+    // function을 이용한 클래스 선언
+    // function을 이용해서 함수를 만들면 생성자 함수와 같다.
+
+    // People 클래스의 생성자 함수
+    function People(name, age) {
+      // 필드에 저장
+      // 필드에 저장할땐 this.속성 = 값!!
+      this.name = name;
+      this.age = age;
+    }
+
+    //이렇게 선언하면 모든 객체에 함수가 모두 복제된다.
+    // this.showInfo = function() {
+    //   console.log('name:',name,'age:',age)
+    // }
+
+    // prototype에 선언하면 클래스에 1개만 존재한다.
+    People.prototype.showInfo = function() {
+      console.log('name:',this.name,'age:',this.age)
+    }
+
+
+    var p1 = new People("홍길동" , 25)
+    // console.log(p1)
+    p1.showInfo()
+
+    var p2 = new People("유관순" , 19)
+    p2.showInfo()
+  </script>
+</body>
+</html>

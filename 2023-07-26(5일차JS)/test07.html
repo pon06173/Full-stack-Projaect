@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //객체 선언 방법2
+    // ()또는 new Object()
+    var obj = new Object();
+    obj.name = '홍길동'
+    obj.age = 25
+    Object.prototype.info= function(){
+      // 객체 내부의 멤버함수에서 this는 객체 자신
+      console.log(this)
+    }
+
+    Object.prototype.getValue= function(){
+      // 객체 내부의 멤버함수에서 this는 객체 자신
+      return this.valueOf()
+    }
+    obj.info()
+
+    var num =1004;
+    num.info()
+
+    var address = '대구광역시 동구';
+    address.info();
+
+    console.log(num.getValue());
+    console.log(address.getValue());
+
+  </script>
+</body>
+</html>
