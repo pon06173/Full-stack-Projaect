@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #slideBox {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      padding: 0;
+      margin: 0;
+    }
+    #slideBox ul {
+      border: 1px solid black;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      top: 0px;
+      position: absolute;
+    }
+    #slideBox li {
+      border: 1px solid red;
+      width: 100px;
+      height: 100px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>서영민의 홈페이지</h1>
+  <button id="playBtn">Play</button>
+  <button id="stopBtn">Stop</button>
+  <hr>
+  <div id="slideBox">
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+  </div>
+
+  <script>
+    var ul = document.querySelector("#slideBox ul");
+        var cellArray = document.querySelectorAll("#slideBox li");
+        cellArray = [...cellArray];
+        console.dir(cellArray);
+
+    cellArray.forEach(function(li, index){
+      var r = Math.floor(Math.random()*256);
+      var g = Math.floor(Math.random()*256);
+      var b = Math.floor(Math.random()*256);
+      li.style.backgroundColor = `rgb(${r},${g},${b})`;
+    })
+
+    var y = 0;
+        var inter = setInterval(function() {
+            y = y - 5;
+            ul.style.top = y + 'px';
+        }, 30);
+  </script>
+</body>
+</html>

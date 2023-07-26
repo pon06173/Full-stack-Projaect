@@ -24,7 +24,7 @@
     //   console.log('name:',name,'age:',age)
     // }
 
-    // prototype에 선언하면 클래스에 1개만 존재한다.
+    // prototype에 선언하면 클래스에 1개만 존재한다.(this 중요!!)
     People.prototype.showInfo = function() {
       console.log('name:',this.name,'age:',this.age)
     }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //ES6에서 클래스 선언
+    class Car {
+      //constructor (생성자)
+      constructor(name, maker, price) {
+        //생성자에서 부모 생서자 호출
+        this.name = name;
+        this.maker = maker;
+        this.price = price;
+      }
+
+      //멤버 함수
+      showInfo () {
+        console.log(this.name, this.maker, this.price)
+      }
+    }
+
+    // let myCar = new Car('sonata','Haudai',2023);
+    // myCar.showInfo();
+
+    class Poter extends Car {
+      //생성자에서 부모생성자 호출
+      constructor(name, maker, price, kg) {
+        super(name, maker, price);
+        this.kg = kg;
+      }
+
+      showInfo(){
+        super.showInfo();
+        console.log(this.kg);
+      }
+    }
+
+    let myCar = new Poter('poter3', 'KIA',2019,1004)
+    myCar.showInfo();
+  </script>
+
+</body>
+</html>
