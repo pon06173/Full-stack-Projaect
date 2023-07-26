@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+
+        display: ;
+      }
+      #slideBox {
+        position: relative;
+        height: 100px;
+        padding: 0;
+        margin: 0 auto;
+        width: 300px;
+        overflow: hidden;
+      }
+      #slideBox ul {
+        border: 1px solid blue;
+        list-style: none;
+        padding: 0;
+        position: absolute;
+        top: 0px;
+        padding: 0;
+        margin: 0;
+        float: left;
+      }
+      #slideBox ul:nth-child(1) {
+        left: 0px;
+      }
+      #slideBox ul:nth-child(2) {
+        left: 100px;
+      }
+      #slideBox ul:nth-child(3) {
+        left: 200px;
+      }
+      #slideBox li {
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><b>pachinko</b></h1>
+    <hr />
+    <div id="slideBox">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>10</li>
+      </ul>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>10</li>
+      </ul>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>10</li>
+      </ul>
+    </div>
+    <hr />
+    <button id="playBtn">Play</button>
+    <button id="stopBtn">Stop</button>
+
+    <script>
+      var ul1 = document.querySelector("#slideBox ul:nth-child(1)");
+      var ul2 = document.querySelector("#slideBox ul:nth-child(2)");
+      var ul3 = document.querySelector("#slideBox ul:nth-child(3)");
+      var cellArray1 = [...ul1.querySelectorAll("li")];
+      var cellArray2 = [...ul2.querySelectorAll("li")];
+      var cellArray3 = [...ul3.querySelectorAll("li")];
+
+      var colors = [];
+      cellArray1.forEach(function (li, index) {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        colors.push(`rgb(${r},${g},${b})`);
+        li.style.backgroundColor = colors[index];
+      });
+      cellArray2.forEach(function (li, index) {
+        li.style.backgroundColor = colors[index];
+      });
+      cellArray3.forEach(function (li, index) {
+        li.style.backgroundColor = colors[index];
+      });
+
+      var y1 = 0,
+        y2 = 0,
+        y3 = 0;
+      var isPlaying = false;
+      var isInter1Playing = false;
+      var isInter2Playing = false;
+      var inter1, inter2, inter3; // Move the interval variables here
+
+      function startSlides() {
+        if (!isPlaying) {
+          isPlaying = true;
+
+          inter1 = setInterval(function () {
+            y1 = y1 - 3;
+            ul1.style.top = y1 + "px";
+            if (y1 <= -100) {
+              ul1.appendChild(ul1.firstElementChild); // Shift the first item to the end
+              y1 = 0;
+            }
+          }, 30);
+
+          inter2 = setInterval(function () {
+            y2 = y2 - 3;
+            ul2.style.top = y2 + "px";
+            if (y2 <= -100) {
+              ul2.appendChild(ul2.firstElementChild); // Shift the first item to the end
+              y2 = 0;
+            }
+          }, 20);
+
+          inter3 = setInterval(function () {
+            y3 = y3 - 3;
+            ul3.style.top = y3 + "px";
+            if (y3 <= -100) {
+              ul3.appendChild(ul3.firstElementChild); // Shift the first item to the end
+              y3 = 0;
+            }
+          }, 10);
+        }
+      }
+
+      function stopSlides() {
+        if (isPlaying) {
+          if (!isInter1Playing) {
+            clearInterval(inter1);
+            isInter1Playing = true;
+          } else if (!isInter2Playing) {
+            clearInterval(inter2);
+            isInter2Playing = true;
+          } else {
+            clearInterval(inter3);
+            isPlaying = false;
+            isInter1Playing = false;
+            isInter2Playing = false;
+          }
+        }
+      }
+
+      playBtn.addEventListener("click", function () {
+        startSlides();
+      });
+      stopBtn.addEventListener("click", function () {
+        stopSlides();
+      });
+    </script>
+  </body>
+</html>
