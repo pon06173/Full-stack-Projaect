@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+    name2 = "박길동";
+
+    // var로 변수 선언 
+    var name = "홍길동";
+    var name = "김길동";
+
+    // ES6에 추가된 템플릿 문자열 활용
+    document.write(`<p>name = ${name}</p>`);
+    // 고전적인 방식의 문자열과 데이터 결합
+    document.write("<p>name => " + name + "</p>");
+    // 콘솔에 로그 출력
+    console.log(`<p>name = ${name}</p>`);
+    console.dir(name2);
+
+    // let으로 변수 선언
+    // 같은 변수를 let으로 2개 이상 선언 불가능
+    let name3 = "강감찬";
+    let name4 = "일지매";
+
+    // var, function으로 root에서 선언 하면 window의 멤버 객체가 된다.
+
+    function name5() {
+
+    }
+
+    console.dir(window.name);
+    console.dir(window.name2);
+    console.dir(window.name3);
+    console.dir(window.name4);
+    console.dir(window.name5);
+
+    // var와 let의 스코프
+    // var는 함수 범위 내에서 사용.
+    // let은 블럭 범위에서 사용.
+    
+
+    // 함수는 선언하고 호출을 해야 실행된다.
+    function aaa() {
+        if(true) {
+            var name10 = "KIM";
+        }
+        // var로 선언된 변수는 함수 내부에서 사용 가능.
+        console.log(name10);
+        // 최상위 window에 선언된 변수(속성)은 외부에서 사용 가능.
+        window.name11 = "name11";
+        // window는 최상위 객체이므로 생략 가능.
+        name12="name12";   // window.name12="name12" 와 동일하다.
+    }
+
+    // 함수 호출 ---- 이름 + 괄호
+    // 괄호를 붙이는 것은 실행 하라는 의미.
+    aaa(); 
+
+    // 함수 내부에서 var로 선언한 변수는 접근 못한다.
+    //console.log(name10);
+
+    console.log(name11);
+    console.log(name12);
+
+
+    // const로 상수처럼 선언
+
+</script>
+
+</body>
+</html>

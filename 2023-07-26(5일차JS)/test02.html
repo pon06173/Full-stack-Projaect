@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 함수와 변수</title>
+</head>
+<body>
+    
+
+<script>
+    // 연관배열.
+    // 자바스크립트 객체는 .연산자 or []연산자로 접근
+    // 문서의 최상위에서는 window === this
+    console.log("this === window의 결과는 ", this === window);
+    console.dir(window.document.title);
+    console.log(window['document']['title'])
+    console.log(window['document'].title)
+    console.dir(document.title);
+    console.dir(document['title']);
+    
+    var name0 = "김길동";
+    var name1 = "박길동";
+    var name2 = "유관순";
+    var name3 = "이순신";
+    var name4 = "일지매";
+
+    console.log(name1);
+    console.log(window.name1);
+    console.log(this['name1']);
+
+    for(var i=0; i<5; i++) {
+        console.log(i, this['name' + i]);
+    }
+</script>
+
+</body>
+</html>

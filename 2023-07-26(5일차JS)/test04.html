@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //객체에 대하여
+    //객체 사용법
+    var obj1 = {no:1, name:"홍길동", address:"서울시 종로구"};
+
+    //자바스크립트는 기본적으로 캡슐화(정보은닉) 안됨.
+    //필요하면 얼마든지 속성 추가 가능.
+    obj1.job = "도둑";
+    obj1.grad = 'A';
+    obj1.showInfo = function() {
+      //멤버함수 내부에서 this는 객체 자신(self)
+      console.log(this.no, this.name, this.address);
+      console.log("함수선언 내에서 선언 -> ", this);
+    }
+    console.log("함수선언 외부에서 선언 -> ", this);
+    // console.log(obj1);
+    
+    // console.log(obj1['no1'], obj1['name'], obj1['address']);
+     obj1.showInfo();
+  
+  </script>
+
+  
+</body>
+</html>
