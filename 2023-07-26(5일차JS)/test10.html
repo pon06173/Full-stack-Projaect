@@ -45,10 +45,10 @@
   </div>
 
   <script>
-    var ul = document.querySelector("#slideBox ul");
-        var cellArray = document.querySelectorAll("#slideBox li");
-        cellArray = [...cellArray];
-        console.dir(cellArray);
+    var ul = document.querySelector("#slideBox ui")
+    var cellArray = document.querySelectorAll('#slideBox li');
+    cellArray = [...cellArray];
+    console.dir(cellArray);
 
     cellArray.forEach(function(li, index){
       var r = Math.floor(Math.random()*256);

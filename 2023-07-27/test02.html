@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #numForm input {
+      text-align: right;
+    }
+    #resultArea {
+            display: none;
+        }
+
+  </style>
+</head>
+<body>
+  <h1>정수의 크기 판별</h1>
+  <p>정수를 입력 하고 Enter키를 치면 다음 input으로 넘으갑니다.</p>
+
+  <form id="numForm">
+    <fieldset>
+      <legend>서로 다른 정수 3개 입력</legend>
+      <input size="3" type="text">
+      <input size="3" type="text">
+      <input size="3" type="text">
+    </fieldset>
+  </form>
+  <div id="resultArea">
+    큰수: <span></span>,
+    중간수: <span></span>,
+    작은수: <span></span>
+  </div>
+
+  <script>
+    //정수 3개를 입력 받아서 큰수, 중간, 작은수로 분류하는 프로그램
+    var resultArea = document.getElementById("resultArea");
+    var numForm = document.querySelector("#numForm")
+    var inputArr = [...numForm.querySelectorAll("input")]
+    var numArr = []
+    var max = 0, mid = 0, min = 0
+    
+    inputArr[0].focus()
+    inputArr.forEach((e,i) => {
+      // 3번 반복해서 입력 받는다.
+      inputArr[i].onkeyup = function(e) {
+        if(e.keyCode === 13) {
+          numArr.push(e.target.value)
+          try {
+            e.target.nextElementSibling.focus()
+          } catch(err) {
+            compare(numArr[0], numArr[1], numArr[2])
+            e.target.blur()
+            resultArea.style.display = "block"
+          }
+        }
+      }
+    })
+    function compare(a, b, c) {
+      // [의사코드]
+      // a와 b를 비교해서 큰수를 max에 작은수를 min에
+      // c를 max에 비교해서 크면 c가 max, 기존 max가 mid
+      // c가 min보다 작으면 c가 min, 기존 min이 mid
+      // max보다 크지도 않고 min보다 작지도 않으면 c가 mid
+      if(a>b) {
+        max = a
+        min = b
+      } else {
+        max = b
+        min = a
+      }
+      // c와 max, min 비교
+      if(c>max) {
+        mid = max
+        max = c
+      } else if(c<min) {
+        mid = min
+        min = c
+      } else {
+        mid = c
+      }
+
+      var spanArr = resultArea.querySelectorAll('span')
+      spanArr[0].innerText = max
+      spanArr[1].innerText = mid
+      spanArr[2].innerText = min
+
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="toggleButton">Toggle Element</button>
+  <div id="hiddenDiv" style="display: none;">
+    <p>This is a hidden element.</p>
+  </div>
+
+
+
+  <script>
+    var toggleButton = document.querySelector("#toggleButton");
+    var hiddenDiv = document.querySelector("#hiddenDiv");
+    toggleButton.addEventListener('click', function(){
+      console.log(hiddenDiv.style.display);
+      hiddenDiv.style.display = hiddenDiv.style.display === "block" ? "none" : "block";
+    });
+  </script>
+</body>
+</html>

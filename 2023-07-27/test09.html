@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom jQuery-like Implementation Example</title>
+  <style>
+  #btn {
+    position: relative;
+    left: 0px;
+    transition: left .5s ease;
+  }
+  </style>
+  
+</head>
+<body>
+  <button id="btn">Click Me</button>
+
+  <script>
+    
+    // 주어진 코드 (위에 주어진 $ 함수 구현과 color, click 메서드 추가)
+    const $ = function(selector) {
+      const dom = document.querySelector(selector);
+
+      dom.color = function(newColor) {
+                this.style.color = newColor;
+                return dom;
+            }
+
+
+      dom.click = function(callback){
+        this.callback = callback;
+        this.onclick - this.callback;
+        return dom;
+      }
+
+      dom.posx = function(posX) {
+        
+        this.style.left = x + 'px';
+        return dom;
+      }
+
+      dom.posy = function(posY) {
+        
+        this.style.top = y + 'px';
+        return dom;
+      }
+
+      //메서드 체인 기능을 위해 반환 한다.
+      return dom;
+    }
+
+    // var $btn = $("#btn")
+    // console.log(dom)
+
+    $("#btn").color('red').click(function(evt){
+      console.log("click 했다.")
+      this.style.backgroundColor = "yellow";
+      this.style.left = 500 + 'px';
+    }).posx(500).posy(50)
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>자바스크립트 if 예제</h1>
+  <input id="numA" value="0" />
+
+  <script>
+    //if
+    //조건 분기문
+    //도식은 순서도(flow chart)
+
+    var inputNumA = document.querySelector("input#numA")
+
+    inputNumA.addEventListener('keyup',(function(e) {
+      // keyCode console.dir로 검색해보면 13번째는 enter키이다.
+      if(e.keyCode === 13) {
+        checkNum()
+      }
+      
+    }))
+    function checkNum() {
+      // var a = prompt("정수 입력: ", "")
+      // input으로 입력되는 모든 데이터의 타입이 string
+      // 형변환을 해야 한다. Number(), parseInt()
+      // Number() 숫자가 아님 데이터가 입력 되면 0으로 변환
+      // parseInt()는 숫자가 아닌 데이터는 NaN 오류 발생
+      // parseInt()는 첫글자가 정수면 정수만 짤라 쓴다.
+      
+      var a = parseInt(inputNumA.value)
+      console.log(typeof(a), a)
+      var message = "";
+
+
+      if (a < 0) {
+        message ="음수"
+      } else if(a>0) {
+        message ="양수"
+      } else {
+        message = "영"
+      }
+
+      document.write("입력 받은 값은 " + a + "(은)는 " + message + "입니다.")
+    }
+      </script>
+</body>
+</html>

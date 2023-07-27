@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Example: Toggle Element</title>
+  <!-- jQuery 라이브러리 로드 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="toggleButton">Toggle Element</button>
+  <div id="hiddenDiv" style="display: none;">
+    <p>This is a hidden element.</p>
+  </div>
+
+  <script>
+    // jQuery를 사용하여 버튼 클릭 이벤트 처리
+    $(document).ready(function() {
+      $('#toggleButton').click(function() {
+        $('#hiddenDiv').toggle();
+      });
+    });
+  </script>
+</body>
+</html>
+

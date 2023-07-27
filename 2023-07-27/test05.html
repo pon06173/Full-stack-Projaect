@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Hello world</h1>
+  <button id="okBtn">OK</button>
+  <script>
+    //jQuery 집입점
+    // 문서의 DOM 트리가 모드 로드 되면 실행 된다.
+    //window.onload = function() 유사하지만 다르다.
+    //window.onload 와 함께 사용하면 X
+    // var $ = function(obj) {
+    //   return 0
+    // } 
+    
+    // var okBtn = $('#okBtn')
+    // console.log($('#okbtn')[0])
+    $('#okBtn').click(function() {
+        $("h1").html("asdfafsd");
+      })
+    
+
+// jquery 집입점 원형     
+$(document).ready(function() {});
+// jquery 진입점 함축형
+$(function() {});
+
+
+// jQuery $함수에 대한 설명
+//     console.dir(document)
+//     console.dir( $(document 
+// ))
+//     console.dir($)
+
+//     console.log($ == jQuery)
+  </script>
+
+
+</body>
+</html>
