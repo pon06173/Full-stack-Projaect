@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .done {
+            text-decoration: line-through;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>TodoList 입니다.</h1>
+    <hr>
+    <ul>
+    <%
+    todoList.forEach(function(item, idx) {
+    %>
+        <li class="<%=item.done?'done':''%>"><%=item.done%><a href="update?no=<%=item.no%>"><%= item.title %></a></li>
+    <%
+    });
+    %>
+    </ul>
+    <a href="todoForm.html">새 할일</a>
+</body>
+</html>
