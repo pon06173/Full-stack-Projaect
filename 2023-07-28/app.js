@@ -21,22 +21,19 @@ let todoList = [
     {no:1, title:"치맥 하기", done:true},
     {no:2, title:"방 청소 하기", done:false},
     {no:3, title:"명상 하기", done:true},
+    {no:3, title:"TodoList 구현하기", done:false},
     {no:4, title:"착한 일 하기", done:false}
 ];
 let cnt = 5;
 
-// EJS 사용을 위한 설정
-//select 기능(list)
-app.get("/todo", (req, res) => {
-    // req.app.render("home", {todoList:todoList},(err, html)=>{
-    //     if(err) throw err;
-    //     res.end(html);
-    // });
-    
+// EJS 사용을 위한 Path 설정
+app.get("/todo/list", (req, res) => {
+    req.app.render("home", {todoList:todoList},(err, html)=>{
+        if(err) throw err;
+        res.end(html);
+    });
 });
-
-//서버의 insert 기능 (save)
-app.post("/input", (req, res) => {
+app.post("/todo/input", (req, res) => {
     let todo = {
         no:cnt++, 
         title: req.body.title,
@@ -88,14 +85,14 @@ app.post("/todo/delete", (req, res) => {
 });
 
 // ---- RestAPI 방식 설정 : 결과가 JSON으로 반환
-// select 기능
+// select 기능 (list)
 app.get("/todo", (req, res) => {
     // res.end(); <--- 인자가 문자열
     // 인자가 객체
     res.send(todoList);
 });
 
-// 서버의 insert 기능
+// 서버의 insert 기능 (save)
 app.post("/todo", (req,res) => {
     let todo = {
         no:cnt++, 
@@ -107,13 +104,28 @@ app.post("/todo", (req,res) => {
 });
 
 // update 기능
-app.get("/todo/update", (req, res) => {
-
+app.post("/todo/update_ajax", (req, res) => {
+    let idx = todoList.findIndex(item=>{
+        return item.no == req.body.no;
+    });
+    if(idx !== -1) {
+        todoList[idx].title = req.body.title;
+        todoList[idx].done = req.body.done==='true'?true:false;
+        res.send(todoList);
+    }
 });
 
 // delete 기능
 app.get("/todo/delete", (req, res) => {
-
+    var no = req.query.no;
+    console.log("no => " + no);
+    let idx = todoList.findIndex(item => {
+        return item.no == no;
+    });
+    if(idx != -1) {
+        todoList.splice(idx, 1);
+    }
+    res.send(todoList); // 서버의 todoList 데이터를 JSON 문자열로 보냄.
 });
 
 // 서버 실행

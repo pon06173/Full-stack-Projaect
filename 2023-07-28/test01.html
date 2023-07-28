@@ -1,184 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Bootstrap 4 Website Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .jumbotron {
-            height: 200px;
-            background: #aaa;
-        }
-    </style>
+  <title>Bootstrap 4 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1>Todo List</h1>
-        <p>Resize this responsive page to see the effect!</p>
-    </div>
-
-    <div class="container" style="margin-top:30px">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            할 일
-                        </div>
-                    </div>
-                    <input id="newTitle" value="연습하기" type="text" class="form-control"
-                        placeholder="input new todo title">
-                    <div class="input-group-append">
-                        <button id="saveBtn" class="btn btn-success" type="button">SAVE</button>
-                    </div>
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>Todo List</h1>
+  <p>Resize this responsive page to see the effect!</p> 
+</div>
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div  class="col-sm-12">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+                    할 일
+                </div>
+                </div>
+                <input id="newTitle" value="탁구 연습하기" type="text" class="form-control" placeholder="input new todo title">
+                <div class="input-group-append">
+                    <button id="saveBtn" class="btn btn-primary" type="button">SAVE</button>
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-12">
-                <ul id="todoListUL" class="nav nav-pills flex-column">
-                    <!--자바스크립트에서 추가할 부분-->
-                </ul>
-                <hr class="d-sm-none">
-            </div>
-        </div>
     </div>
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
+    <hr/>
+  <div class="row">
+    <div class="col-sm-12">
+      <ul id="todoListUl" class="nav nav-pills flex-column">
+        <!-- 자바스크립트에서 insert해 주는 부분 -->
+      </ul>
+      <hr class="d-sm-none">
     </div>
-    <script>
-        var todoList = [
-            { no: 1, title: "점심 뭐 먹을지 알아보기", done: false },
-            { no: 2, title: "밥 먹고 커피 마시기?", done: true },
-            { no: 3, title: "자바스크립트 예습하기", done: false },
-            { no: 4, title: "CSS 복습하기", done: true },
-            { no: 5, title: "부트스트랩 복습하기", done: false },
-            { no: 6, title: "만들고 있는 홈페이지 업데이트 하기", done: false }
-        ];
-        let noCnt = 7;
+  </div>
+</div>
 
-        if(localStorage.getItem("todoListData") == null) {
-            localStorage.setItem("todoListData", JSON.stringify( {noCnt, todoList} ));
-            } else {
-            let todoListData = JSON.parse(localStorage.getItem("todoListData") );
-            noCnt = todoListData.noCnt;
-            todoList = todoListData.todoList;
-          }
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+</div>
 
+<script>
+    // 임시 데이터 배열
+    // 저장 방법 : localStorage저장, server에 저장, 클라우드(Firebase)에 저장
+    var todoList = []; // 초기화
+    var noCnt = 111;
 
-        function handleDelBtn(element){
-            // console.log(this) //window
-            // console.log(element) //element == event.target
-            // console.dir(element)
-            console.log(element.dataset.no)
-            let idx = todoList.findIndex(item=>{
-                return item.no == element.dataset.no;
-            })
-            if(idx !== -1) {
-                todoList.splice(idx, 1)
-                console.log(todoList)
-                reRender()
+    // node.js 서버에 데이터 저장하기
+    // Ajax 기술을 이용해서 서버의 데이터를 JSON문자열로 받아온다.
+    // 자바스크립트에서 Ajax 사용 방법
+    // 1. XMLHttpRequest 객체 사용.
+    // 2. jQuery의 Ajax함수 사용.
+    // 3. fetch API 사용.
+    // 4. axios 라이브러리 사용.
 
-                localStorage.setItem("todoListData", JSON.stringify( {noCnt, todoList} ));
-            }
-        }
-
-        function handleEditBtn(element) {
-            let idx = todoList.findIndex(item=>{
-                return item.no == element.dataset.no;
-            })
-            if(idx !== -1) {
-                var rowElement = element.parentElement.parentElement;
-                var titleInput = rowElement.querySelector("input[type=text]")
-                console.log(titleInput.value);
-
-                var doneCheck = rowElement.querySelector("input[type= checkbox]")
-                todoList[idx].title = titleInput.value;
-                todoList[idx].done = doneCheck.checked
-
-                reRender()
-
-                localStorage.setItem("todoListData", JSON.stringify( {noCnt, todoList} ));
-            }
-        }
-
-        function handleCheck(element){
-            let idx = todoList.findIndex(item=>{
-                return item.no == element.dataset.no;
-            })
-            if(idx !== -1) {
-                var editBtn = element.parentElement.parentElement.parentElement.querySelector('input[type=text]')
-                todoList[idx].title = titleInput.value
-                todoList[idx].done = titleInput.done
-                todoList[idx].done =! todoList[idx].done
-                reRender()
-
-                localStorage.setItem("todoListData", JSON.stringify( {noCnt, todoList} ));
-            }
-        }
-
-        function handleKeyup(element){
-            if(event.keyCode == 13) {
-                //var editBtn = element.nextElementSibling.firstElementChild;
-                var editBtn = element.parentElement.querySelector(`button[class="btn btn-success"]`)
-                handleEditBtn(editBtn)
-            }
-        }
-
-        function reRender() {
-            var todoListUL = document.getElementById('todoListUL');
-            todoListUL.innerHTML = "" //반복 전 초기화
-            todoList.forEach((item, idx) => {
-                let rowHtmlData = `<li class="nav-item">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input data-no="${item.no}" onchange="handleCheck(this)" type="checkbox" ${item.done?"checked":""}>
-                                </div>
-                            </div>
-                            <input onkeyup="handleKeyup(this)" style="text-decoration:${item.done?"line-through":"none"}" value="${item.title}"" type="text" class="form-control" placeholder="Some text">
-                            <div class="input-group-append">
-                                <button data-no="${item.no}" onclick="javascript:handleEditBtn(this)"  class="btn btn-success" type="button">저장</button>
-                                </div>
-                                <div class="input-group-append">
-                                <button data-no="${item.no}" onclick="javascript:handleDelBtn(this)"  class="btn btn-danger" type="button">삭제</button>
-                            </div>
-                        </div>
-                    </li>`;
-                todoListUL.innerHTML += rowHtmlData;
-            });
-            
-        }
+    function onLoadEventHandler() {
+        todoList = JSON.parse(this.responseText);
         reRender();
+    }
 
-        let saveBtn = document.getElementById('saveBtn');
-        saveBtn.onclick = function (e) {
-            let newTitleValue = document.getElementById('newTitle').value;
-            let newTodo = { no: noCnt++, title: newTitleValue, done: false }
-            todoList.push(newTodo);
+    function loadTodoList() {
+        // Ajax 처리 객체 생성.
+        const xhttp = new XMLHttpRequest();
+        // 요청한 결과가 로드된 후에 실행하는 이벤트 핸들러.
+        xhttp.onload = onLoadEventHandler;
+        // method, 요청 페이지 지정, 디폴트는 비동기
+        xhttp.open("GET", "http://localhost:5000/todo/", true); 
+        xhttp.send(); // 실행하라!
+    }
 
-            // 목록을 reRender() 한다(다시그려준다)
-            reRender();
-            
-            localStorage.setItem("todoListData", JSON.stringify( {noCnt, todoList} ));
-        }
+    //saveTodoList(newTitleValue)
+    function saveTodoList(newTitleValue) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = onLoadEventHandler;
+        xhttp.open("POST", "http://localhost:5000/todo/"); 
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("title="+newTitleValue);
+    }
+    loadTodoList();
 
+    function handleDelBtn(element) {
+        var no = element.dataset.no;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = onLoadEventHandler;
+        xhttp.open("GET", "http://localhost:5000/todo/delete?no="+no); 
+        xhttp.send(); // 실행하라!
+    }
 
-        // function deleteList(e){
-        //     console.dir(e.closest("li"));
-        //     const li = e.closest("li");
-        //     li.remove();
-        // }
+    function handleEditBtn(element) {
+      //console.dir(element) 
+      if(idx !== -1) {
+        // 내용 수정
+        // 같은 행의 input[type=text] 인 요소 찾기
+        var rowElement = element.parentElement.parentElement;
+        var titleInput = rowElement.querySelector("input[type=text]");
+        var doneCheck = rowElement.querySelector("input[type=checkbox]");
+        todoList[idx].title = titleInput.value;
+        todoList[idx].done = doneCheck.checked
 
-    </script>
+        // 다시 그리기
+        reRender();
+        // 저장
+      }
+
+        
+        var rowElement = element.parentElement.parentElement;
+        var titleInput = rowElement.querySelector("input[type=text]");
+        var doneCheck = rowElement.querySelector("input[type=checkbox]");
+        let no = element.dataset.no;
+        var title = titleInput.value;
+        var done = doneCheck.checked
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = onload;
+        xhttp.open("POST", "http://localhost:5000/todo/update_ajax"); 
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(`no=${no}&title=${title}&done=${done}`);
+
+    }
+
+    function handleCheck(element) {
+        let no = element.dataset.no;
+        var titleInput = element.parentElement.parentElement.parentElement.querySelector('input[type=text]');
+        var title = titleInput.value;
+        var done = element.checked;
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = onLoadEventHandler;
+        xhttp.open("POST", "http://localhost:5000/todo/update_ajax"); 
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(`no=${no}&title=${title}&done=${done}`);
+    }
+
+    function handleKeyup(element) {
+      if(event.keyCode ===13){
+        // 트리거 기법
+        //var editBtn = element.nextElementSibling.firstElementChild;
+        var editBtn = element.parentElement.querySelector('button[class="btn btn-success"]');
+        handleEditBtn(editBtn);
+      }
+    }
+
+    function handleBlur(element) {
+        var editBtn = element.nextElementSibling.firstElementChild;
+        handleEditBtn(editBtn);
+    }
+
+    function reRender() {
+        var todoListUl = document.getElementById("todoListUl");
+        todoListUl.innerHTML = ""; // 반복하기 전에 초기화 필수.
+        todoList.forEach((item, idx) => {
+            var rowHtmlData = `<li class="nav-item">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input data-no="${item.no}" onchange="handleCheck(this)" type="checkbox" ${item.done?"checked":""}>
+                    </div>
+                    </div>
+                    <input  onblur ="handleBlur(this)" onkeyup="handleKeyup(this)" style="text-decoration:${item.done?"line-through":"none"};" value="${item.title}" type="text" class="form-control" placeholder="Some text">
+                    <div class="input-group-append">
+                        <button data-no="${item.no}" onclick="handleEditBtn(this)" class="btn btn-success" type="button">Edit</button>
+                    </div>
+                    <div class="input-group-append">
+                      <button data-no="${item.no}" onclick="handleDelBtn(this)" class="btn btn-danger" type="button">Delete</button>
+                  </div>
+                </div>
+            </li>`;
+            todoListUl.innerHTML += rowHtmlData;
+        });
+    }
+    reRender();
+
+    var saveBtn = document.getElementById("saveBtn");
+    saveBtn.onclick = function(e) {
+        var newTitleValue = document.getElementById("newTitle").value;
+        // 저장
+        saveTodoList(newTitleValue);
+        // 목록을 reRender() 한다. (다시 그리기);
+        reRender();
+    }
+</script>
+
 </body>
-
 </html>
