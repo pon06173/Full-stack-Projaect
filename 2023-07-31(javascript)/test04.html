@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1+2+3+4+5+6+7+8+9+10=55
+    var num = 1
+    var str = ""
+    var total = 0
+    while(num<=10){
+      total += num
+      str += num + (num===10?"=":"+")
+      num++
+    }
+    console.log(str + total)
+
+    //재귀 호출을 이용한 반복
+    var str = ""
+    var total = 0
+    function fn (num) {
+      // console.log("num => ", num)
+      total +=num
+      str += num + (num===10?"=":"+")
+      if(num <10){
+        fn(num + 1)
+      }
+    }
+    
+    var num = 1;
+    fn(num)
+    console.log(str + total)
+  </script>
+</body>
+</html>

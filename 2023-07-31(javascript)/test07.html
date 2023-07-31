@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background-color: yellow;
+            position: absolute;
+            left: 10px;
+            z-index: 10;
+        }
+        div.area {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            position: relative;
+            top: 200px;
+            float: left;
+            z-index: -1;
+        }
+        #area1 {
+            background-color: pink;
+        }
+        #area2 {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>드래그 앤 드랍 예제</h1>
+    <hr />
+    <div class="item">Item 01</div>
+    <div class="item">Item 02</div>
+    <div class="item">Item 03</div>
+
+    <div class="area" id="area1"></div>
+    <div class="area" id="area2"></div>
+
+    <script>
+        var areaArr = [...document.querySelectorAll(".area")];
+        var itemArr = [...document.querySelectorAll(".item")];
+        var zIndex = 10;
+
+        itemArr.forEach((box, i) =>{
+            box.onmousedown = function(event) {
+                this.style.zIndex = zIndex++;
+                window.box = box;
+                this.style.position='absolute';
+                this.gapX = event.clientX - this.offsetLeft;
+                this.gapY = event.clientY - this.offsetTop;
+                this.onmousemove = function(evt2) {
+                    this.style.left =  evt2.clientX - this.gapX + 'px';
+                    this.style.top =  evt2.clientY - this.gapY + 'px';
+                }
+            }
+            
+            window.onmouseup = function() {
+                if(this.box) {
+                    this.box.onmousemove = null;
+
+                    // 드래그 앤 드랍 후 box item이 위치한 area를 판별.
+                    // areaList[0]의 영역에 있는가?
+                    // areaList[1]의 영역에 있는가?
+                    var ax1 = areaArr[0].offsetLeft;
+                    var ax2 = ax1 + areaArr[0].offsetWidth;
+                    var ay1 = areaArr[0].offsetTop;
+                    var ay2 = ay1 + areaArr[0].offsetHeight;
+
+                    var bx1 = areaArr[1].offsetLeft;
+                    var bx2 = bx1 + areaArr[1].offsetWidth;
+                    var by1 = areaArr[1].offsetTop;
+                    var by2 = by1 + areaArr[1].offsetHeight;
+
+                    var ix = this.box.offsetLeft + this.box.offsetWidth/2;
+                    var iy = this.box.offsetTop + this.box.offsetHeight/2;
+
+                    if((ix>=ax1 && ix<=ax2)&&(iy>=ay1&&iy<=ay2)) {
+                        console.log(this.box.innerText +">> pink 영역 안에 있다.")
+                    }
+                    if((ix>=bx1 && ix<=bx2) && (iy>=by1&&iy<=by2)) {
+                        console.log(this.box.innerText +">> skyblue 영역 안에 있다.")
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

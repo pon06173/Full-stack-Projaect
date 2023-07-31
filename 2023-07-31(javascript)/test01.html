@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //javascript 클로저 개념.
+    //함수가 생성될 때 초기화된 속성 값을 그대로 유지한다.
+    function makeclosureCounter(initValue=0) {
+      let count = initValue
+      return (function Counter() {
+        console.log("count inner Counter() => " + count)
+        return ++count
+      })
+    }
+
+    const CounterFn =makeclosureCounter() //내부의 count 변수는 0으로 초기화
+    const CounterFn100 = makeclosureCounter(100) //내부의 count 변수는 100 초기화
+    
+    console.log("CounterFn() =>", CounterFn())
+    console.log("CounterFn100() =>", CounterFn100())
+
+    console.log("CounterFn() =>", CounterFn())
+    console.log("CounterFn100() =>", CounterFn100())
+  </script>
+</body>
+</html>

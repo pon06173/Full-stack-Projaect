@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <h1>콜백 함수</h1>
+
+  <script>
+    //자바 스크립트는 속성에 함수를 대입 가능 (함수 참조 값이 속성(변수)에 대입한다.)
+    function test01() {
+      console.log("test01()함수 실행...")
+      
+    }
+
+    //함수 실행 = 함수명 + 괄호
+    // test01()
+
+    //변수에 함수 이름만 넣어준다.
+    // test01 함수에 fn01이름을 하나 더 만들었다.
+    // var fn01 = test01
+    // fn01()
+
+    //매개변수도 변수다
+    //다른 함수의 매개변수에 전달 가능
+    function test02(callback) {
+      console.log("test02()함수 실행 ...")
+      //콜백 함수 : 매개 변수에 전달 된 함수 호출
+      console.log(typeof(callback))
+      if(typeof(callback) == 'funtion'){
+        callback()
+      } try {
+        callback(100)
+      } catch(e) {
+        console.log(callback)
+      }
+    }
+
+    // test02 호출시 test01의 이름을 인자로 사용
+    // test02(test01)
+    // console.log("------------------------")
+    // test02("test data")
+
+    //익명 함수를 콜백 인자로 사용.
+    test02(function(num) {
+      console.log(">> 익명 함수 실행", num)
+    })
+
+    test02(function(num) {
+      console.log(">>다름 익명 함수 실행...")
+      for(var i =0; i<num5; i++){
+        console.log("i =>", i)
+      }
+    })
+  </script>
+</body>
+</html>

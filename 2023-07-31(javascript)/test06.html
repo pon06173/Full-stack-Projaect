@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background-color: yellow;
+            position: absolute;
+            left: 0px;
+            z-index: 10;
+        }
+        div.area {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            top: 250px;
+            float: left;
+            z-index: -1;
+        }
+        #area1 {
+            background-color: pink;
+        }
+        #area2 {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>드래그 앤 드랍 예제</h1>
+    <hr />
+    <div class="item">Item 01</div>
+    <div class="item">Item 02</div>
+    <div class="item">Item 03</div>
+    <hr />
+    <div class="area" id="area1" onmouseover="alert('핑크팀입니다')"></div>
+    <div class="area" id="area2" onmouseover="alert('파랑팀입니다')"></div>
+
+    <script>
+        var itemArr = [...document.querySelectorAll(".item")];
+        itemArr.forEach((box, i) =>{
+            box.onmousedown = function(event) {
+                window.box = box;
+                this.style.position='absolute';
+                this.gapX = event.clientX - this.offsetLeft;
+                this.gapY = event.clientY - this.offsetTop;
+                this.onmousemove = function(evt2) {
+                    this.style.left =  evt2.clientX - this.gapX + 'px';
+                    this.style.top =  evt2.clientY - this.gapY + 'px';
+                }
+            }
+            
+            window.onmouseup = function() {
+                if(this.box) {
+                    this.box.onmousemove = null;
+
+                    // 드래그 앤 드랍 후 box item이 위치한 area를 판별.
+                    
+                    var item = this.box;
+                    var area1 = document.getElementById("area1");
+                    var area2 = document.getElementById("area2");
+                    var area1Rect = area1.getBoundingClientRect();
+                    var area2Rect = area2.getBoundingClientRect();
+                    var itemRect = item.getBoundingClientRect();
+
+                    if (
+                      itemRect.left >= area1Rect.left &&
+                      itemRect.right <= area1Rect.right &&
+                      itemRect.top >= area1Rect.top &&
+                      itemRect.bottom <= area1Rect.bottom
+                    ) {
+                      alert("핑크팀입니다");
+                    } else if (
+                      itemRect.left >= area2Rect.left &&
+                      itemRect.right <= area2Rect.right &&
+                      itemRect.top >= area2Rect.top &&
+                      itemRect.bottom <= area2Rect.bottom
+                    ) {
+                      alert("파랑팀입니다");
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
