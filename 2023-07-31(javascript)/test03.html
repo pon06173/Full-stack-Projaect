@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="http://code.jquery.com/jquery.js"></script>
-  <style>
-    #box {
-      width: 100px;
-      height: 100px;
-      border: 1px solid red;
-      background-color: yellow;
-      position: relative;
-      left: 0px;
-    }
-  </style>
-</head>
-<body>
-  <div id="box">Box</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <style>
+      #box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        background-color: yellow;
+        position: relative;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">Box</div>
 
-  <script>
-    // var box = $("#box")[0]
-    function move(callback) {
-      var box = document.querySelector("#box")
-      box.callback = callback
-      //애니메이션 효과
-      var x = 10
-      var speed = 10;
-      var intervalRef = setInterval(function() {
-        x += speed
-        if(x >= 400 || x < 0){
-          // speed *= -1
-          x = 400
-          clearInterval(intervalRef)
-          //동작 완료 후 호출되는 callback()
-          try {
-          callback()
-         } catch(e) {}
-        }
-        box.style.left = x + "px"
-      }, 30)
-    }
+    <script>
+      // var box = $("#box")[0]
+      function move(callback) {
+        var box = document.querySelector("#box");
+        box.callback = callback;
+        //애니메이션 효과
+        var x = 10;
+        var speed = 10;
+        var intervalRef = setInterval(function () {
+          x += speed;
+          if (x >= 400 || x < 0) {
+            // speed *= -1
+            x = 400;
+            clearInterval(intervalRef);
+            //동작 완료 후 호출되는 callback()
+            try {
+              callback();
+            } catch (e) {}
+          }
+          box.style.left = x + "px";
+        }, 30);
+      }
 
-    move(function() {
-      console.log(this)
-      this.style.background = "red"
-    })
-  </script>
-</body>
+      move(function () {
+        console.log(this);
+        this.style.background = "red";
+      });
+    </script>
+  </body>
 </html>
