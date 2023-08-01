@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"/> 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <style>
+        button {
+          border-radius: 3px;  
+          border: none;
+        }
+        #preview-image {
+            max-width: 150px;
+            max-height: 170px;
+            text-align: center;
+        }
+
+        #t th {
+            text-align: center;
+        }
+        #choice {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>사원 정보 관리</h1>
+    <p>직원 정보 입력, 출력, 검색, 수정, 삭제 기능 한 페이지에 구현.</p>
+    <hr />
+    <form action="">
+        <fieldset>
+            <legend>직원 정보 입력</legend>
+            <table>
+                <tr>
+                    <th><label for="">이름</label></th>
+                    <td><input type="text" name="name"></td>
+                    <td id="preview-image" width="150px" rowspan="5" style="background-color:gray">사진 미리보기</td>
+                </tr>
+                <tr>
+                    <th><label for="">부서</label></th>
+                    <td><input type="text" name="dept"></td>
+                </tr>
+                <tr>
+                    <th><label for="">직책</label></th>
+                    <td><input type="text" name="position"></td>
+                </tr>
+                <tr>
+                    <th><label for="">이메일</label></th>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <th><label for="">파일</label></th>
+                    <td><input id="fileInput" type="file"></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><button class="btn-success" type="button">새 사원 추가</button></td>
+                </tr>
+            </table>
+        </fieldset>
+        <hr/>
+        <div id="choice">
+            <button>선택 삭제</button>
+            <form action="">
+                <select>
+                    <option value="">이름</option>
+                    <option value="">부서</option>
+                    <option value="">직책</option>
+                    <option value="">이메일</option>
+                </select>
+                <input type="text">
+                <input type="button" value="검색">
+            </form>
+        </div>
+        <div>
+            <!-- 젠코딩(VS-code 기본 기능) - emmet 확장 기능, 구글 검색 권장 -->
+            <table width="100%" border="1">
+                <thead>
+                    <tr id="t">
+                        <th>선택</th>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>부서</th>
+                        <th>직책</th>
+                        <th>이메일</th>
+                        <th>사진</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="list-area" align="center">
+                    <!-- Javascript에서 목록을 추가 해 준다. -->
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+
+
+    <script>
+        let fileInput = document.querySelector("#fileInput");
+      fileInput.addEventListener('change', (e)=>{
+          let fileList = e.target.files;
+          let previewImage = document.querySelector("#preview-image");
+          previewImage.innerHTML = "";
+          if(fileList && fileList.length > 0) {
+              for(var i=0; i<fileList.length; i++) {
+                  // PC의 하드 디스크에 저장된 파일을 읽기 위해 FileReader 객체 필요.
+                  const reader = new FileReader();
+                  // 다 읽어 들이면 처리 이벤트 핸들러
+                  reader.addEventListener('load', (e2)=>{
+                      let readFileResult = e2.target.result;
+                      let previewImage = document.querySelector("#preview-image");
+                      previewImage.innerHTML += `<img src="${readFileResult}" height="170px" width="150 "> `;
+                  });
+                  // 읽기 시작 액션
+                  reader.readAsDataURL(fileList[i]);
+              }
+          }
+      });
+
+
+      function reDraw() {
+        let memberList = [
+            // {no:1, name:"김길동", dept:"영업", position:"과장", email:"gildong@saram.com", photo:"img01.jpg"},
+            // {no:2, name:"김길순", dept:"관리", position:"사원", email:"bbbb@saram.com", photo:"img02.jpg"},
+            // {no:3, name:"박길동", dept:"관리", position:"부장", email:"aaaa@saram.com", photo:"img01.jpg"},
+            // {no:4, name:"이순신", dept:"사업", position:"책임", email:"cccc@saram.com", photo:"img01.jpg"},
+            // {no:5, name:"일지매", dept:"영업", position:"과장", email:"test01@saram.com", photo:"img01.jpg"},
+        ];
+        let noCnt = 6;
+        let listArea = document.querySelector("#list-area");
+        var rowHtml = "";
+        for(var i=0; i<5; i++) {
+            rowHtml += `<tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td><button class="btn-primary">수정</button></td>
+                <td><button class="btn-danger">삭제</button></td>
+            </tr>`;
+        }
+        listArea.innerHTML = rowHtml;
+    }
+    const request = new XMLHttpRequest()
+        request.onload = function(e) {
+            memberList = JSON.parse(e.target.responseText.trim())
+            reDraw(memberList)
+        }
+        request.open("GET", '/member/input')
+        request.send()
+    
+
+        
+    const uploadForm = document.querySelector("#uploadForm");
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            var formData = new FormData(e.target);
+
+            const request = new XMLHttpRequest();
+            request.onload = function(e) {
+                //console.log(e.target.responseText);
+                memberList = JSON.parse(e.target.responseText.trim());
+                reDraw(memberList);
+            }
+            request.open("POST", '/member/input');
+            formData.append("name", e.target.name.value);
+            formData.append("dept", e.target.dept.value);
+            formData.append("position", e.target.position.value);
+            formData.append("email", e.target.email.value);
+            request.send(formData);
+        });
+
+    </script>
+</body>
+</html>

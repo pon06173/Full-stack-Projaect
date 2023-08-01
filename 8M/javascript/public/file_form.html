@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      div#preview-image {
+        height: 200px;
+        border: 1px solid #aaa;
+        background-color: #eee;
+      }
+    </style>
+</head>
+<body>
+    <form action="fileupload" method="post" enctype="multipart/form-data">
+        <input id="fileInput" type="file" multiple name="filetoupload"><br>
+        <input type="submit">
+    </form>
+    <hr/>
+    <div id="preview-image"></div>
+
+    <script>
+      let fileInput = document.querySelector("#fileInput");
+      fileInput.addEventListener('change', (e)=>{
+          let fileList = e.target.files;
+          let previewImage = document.querySelector("#preview-image");
+          previewImage.innerHTML = "";
+          if(fileList && fileList.length > 0) {
+              for(var i=0; i<fileList.length; i++) {
+                  // PC의 하드 디스크에 저장된 파일을 읽기 위해 FileReader 객체 필요.
+                  const reader = new FileReader();
+                  // 다 읽어 들이면 처리 이벤트 핸들러
+                  reader.addEventListener('load', (e2)=>{
+                      let readFileResult = e2.target.result;
+                      let previewImage = document.querySelector("#preview-image");
+                      previewImage.innerHTML += `<img src="${readFileResult}" height="100" /> `;
+                  });
+                  // 읽기 시작 액션
+                  reader.readAsDataURL(fileList[i]);
+              }
+          }
+      });
+  </script>
+
+</body>
+</html>
