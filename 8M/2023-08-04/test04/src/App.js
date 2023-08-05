@@ -145,13 +145,16 @@ const MyComponent = () => {
   };
 
   const toggleDone = (no) => {
-    setTodoList((prevList) =>
-      prevList.map((prevItem) =>
-        prevItem.no === Number(no)
-          ? { ...prevItem, done: !prevItem.done }
-          : prevItem
-      )
-    );
+    const newTodoList = [...todoList];
+    const idx = newTodoList.findIndex((todo) => todo.no === no);
+
+    if (idx !== -1) {
+      newTodoList[idx] = {
+        ...newTodoList[idx],
+        done: !newTodoList[idx].done,
+      };
+      setTodoList(newTodoList);
+    }
   };
 
   return (
