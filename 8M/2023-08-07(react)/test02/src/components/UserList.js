@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 function UserList() {
   const [userList, setUserList] = useState([]);
+
   useEffect(function() {
     async function getUserArray() {
         onSnapshot(query (collection(db, "users")), (querySnapshot) => {
@@ -21,6 +22,7 @@ function UserList() {
   }, []);
   return (
     <>
+    <hr />
       <h2>유저 목록</h2>
       <table className="table">
         <thead>
@@ -46,7 +48,7 @@ function UserList() {
         <tfoot>
           <tr>
             <td colSpan={4}>
-              <address>KCH Full-Stack Development</address>
+              <address>Comstudy Coding schools</address>
             </td>
           </tr>
         </tfoot>
