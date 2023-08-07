@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
 
-const ListComponent = ({
-  todoList,
-  deleteTodoItem,
-  editTodoItem,
-  saveTodoItem,
-  toggleDone,
-}) => {
+const ListComponent = ({ todoList, deleteTodoItem, toggleDone }) => {
   const onClickDelBtn = (e) => {
     deleteTodoItem(e.target.dataset.no);
   };
 
   const onClickEditBtn = (e) => {
-    if (e.target.innerText === "수정") {
-      editTodoItem(e.target.dataset.no);
-    } else {
-      saveTodoItem(e.target.dataset.no);
-    }
+    // 수정 버튼 클릭 시 처리할 로직 추가
   };
 
   let list = todoList.map((item) => {
@@ -44,9 +34,6 @@ const ListComponent = ({
             <label style={item.done ? { textDecoration: "line-through" } : {}}>
               {item.title}
             </label>
-            <button data-no={item.no} onClick={onClickEditBtn}>
-              수정
-            </button>
             <button data-no={item.no} onClick={onClickDelBtn}>
               삭제
             </button>
@@ -88,60 +75,17 @@ const MyComponent = () => {
     { no: 4, title: "착한 일 하기", done: false },
   ]);
 
-  todoList.forEach((item) => {
-    if (!item.hasOwnProperty("editing")) {
-      item.editing = false;
-      item.editTitle = item.title;
-      item.setEditTitle = (value) => {
-        setTodoList((prevList) =>
-          prevList.map((prevItem) =>
-            prevItem.no === item.no
-              ? { ...prevItem, editTitle: value }
-              : prevItem
-          )
-        );
-      };
-    }
-  });
-
   const [noCnt, setNoCnt] = useState(5);
 
   const addTodoItem = (title) => {
     // 할일 목록에 새 항목을 추가.
-    //console.log("새 아이템 추가...", title);
-    // 기존 todoList를 복제한다. (참조가 끊어진다. )
-    //let newTodoList = [... todoList];
-    //newTodoList.push({no:noCnt, title:data, done:false});
-    //setTodoList(newTodoList);
     setTodoList([...todoList, { no: noCnt, title, done: false }]);
     setNoCnt(noCnt + 1);
   };
 
   //
   const deleteTodoItem = (no) => {
-    // 아이템 삭제 버튼
-    //console.log("아이템 삭제...", no);
-    setTodoList(todoList.filter((todo) => todo.no != Number(no)));
-  };
-
-  const editTodoItem = (no) => {
-    setTodoList((prevList) =>
-      prevList.map((prevItem) =>
-        prevItem.no === Number(no)
-          ? { ...prevItem, editing: !prevItem.editing }
-          : prevItem
-      )
-    );
-  };
-
-  const saveTodoItem = (no) => {
-    setTodoList((prevList) =>
-      prevList.map((prevItem) =>
-        prevItem.no === Number(no)
-          ? { ...prevItem, title: prevItem.editTitle, editing: false }
-          : prevItem
-      )
-    );
+    setTodoList(todoList.filter((todo) => todo.no !== Number(no)));
   };
 
   const toggleDone = (no) => {
@@ -169,8 +113,6 @@ const MyComponent = () => {
         <ListComponent
           todoList={todoList}
           deleteTodoItem={deleteTodoItem}
-          editTodoItem={editTodoItem}
-          saveTodoItem={saveTodoItem}
           toggleDone={toggleDone}
         />
       </main>
