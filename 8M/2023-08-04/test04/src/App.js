@@ -1,178 +1,103 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from 'react';
+import './App.css';
 
-const ListComponent = ({
-  todoList,
-  deleteTodoItem,
-  editTodoItem,
-  saveTodoItem,
-  toggleDone,
-}) => {
-  const onClickDelBtn = (e) => {
-    deleteTodoItem(e.target.dataset.no);
-  };
-
-  const onClickEditBtn = (e) => {
-    if (e.target.innerText === "수정") {
-      editTodoItem(e.target.dataset.no);
-    } else {
-      saveTodoItem(e.target.dataset.no);
-    }
-  };
-
-  let list = todoList.map((item) => {
-    return (
-      <li key={item.no} style={{ listStyle: "none" }}>
-        <input
-          type="checkbox"
-          checked={item.done}
-          onChange={() => toggleDone(item.no)}
-        />
-        {item.editing ? (
-          <>
-            <input
-              type="text"
-              value={item.editTitle}
-              onChange={(e) => item.setEditTitle(e.target.value)}
-            />
-            <button data-no={item.no} onClick={onClickEditBtn}>
-              완료
-            </button>
-          </>
-        ) : (
-          <>
-            <label style={item.done ? { textDecoration: "line-through" } : {}}>
-              {item.title}
-            </label>
-            <button data-no={item.no} onClick={onClickEditBtn}>
-              수정
-            </button>
-            <button data-no={item.no} onClick={onClickDelBtn}>
-              삭제
-            </button>
-          </>
-        )}
-      </li>
-    );
-  });
-  return <ul>{list}</ul>;
-};
-
-const InputItem = ({ addTodoItem }) => {
+const InputItem = ({appendTodo}) => {
   const [value, setValue] = useState("");
-
-  const onClickHandler = (e) => {
-    // 할일 목록에 새 항목을 추가.
-    console.log("확인 버튼 클릭...");
-    addTodoItem(value);
-    setValue("");
-  };
-
+  
   const onChangeHandler = (e) => {
     setValue(e.target.value);
   };
 
-  return (
-    <>
-      <input value={value} onChange={onChangeHandler}></input>
-      <button onClick={onClickHandler}>확인</button>
-    </>
-  );
-};
+  return (<>
+    할일 : <input value={value} onChange={onChangeHandler}></input>
+    <button onClick={e => {
+      appendTodo(value);
+      setValue("");
+    }}>확인</button>
+  </>);
+}
+
+const ItemComponent = ({item, removeTodo, updateTodo}) => {
+  let titleStyle = item.done ? "line-through" : "none";
+  let isCheck = item.done ? "checked" : "";
+  const [editValue, setEditValue] = useState(item.title);
+
+  return (<li>
+      <input type='checkbox' checked={isCheck} onChange={e=>{
+        updateTodo({no:item.no, title:item.title, done:!item.done});
+      }} />
+      <input style={{border:0, textDecoration:titleStyle}} type='text' 
+      value={editValue} 
+      onChange={e=>{setEditValue(e.target.value)}} onBlur={e=>{
+        updateTodo({no:item.no, title:editValue, done:item.done});
+      }} />
+      <button onClick={() => {
+        removeTodo(item.no);
+      }}>삭제</button>
+    </li>)
+}
+
+const ListComponent = ({todoList, removeTodo, updateTodo}) => {
+  return (<>
+    <ul>{todoList.map((item) => {
+      return (<ItemComponent key={item.no} item={item} removeTodo={removeTodo} updateTodo={updateTodo} />);
+    })}</ul>
+  </>);
+}
 
 const MyComponent = () => {
   const [todoList, setTodoList] = useState([
-    { no: 1, title: "치맥 하기", done: false },
-    { no: 2, title: "방 청소 하기", done: false },
-    { no: 3, title: "명상 하기", done: true },
-    { no: 4, title: "착한 일 하기", done: false },
+    {no:1, title:"치맥 하기", done:false},
+    {no:2, title:"방 청소 하기", done:false},
+    {no:3, title:"명상 하기", done:true},
+    {no:4, title:"착한 일 하기", done:false}
   ]);
-
-  todoList.forEach((item) => {
-    if (!item.hasOwnProperty("editing")) {
-      item.editing = false;
-      item.editTitle = item.title;
-      item.setEditTitle = (value) => {
-        setTodoList((prevList) =>
-          prevList.map((prevItem) =>
-            prevItem.no === item.no
-              ? { ...prevItem, editTitle: value }
-              : prevItem
-          )
-        );
-      };
-    }
-  });
-
-  const [noCnt, setNoCnt] = useState(5);
-
-  const addTodoItem = (title) => {
+  const [cnt, setCnt] = useState(5);
+  
+  const appendTodo = (title) => {
     // 할일 목록에 새 항목을 추가.
-    //console.log("새 아이템 추가...", title);
-    // 기존 todoList를 복제한다. (참조가 끊어진다. )
-    //let newTodoList = [... todoList];
-    //newTodoList.push({no:noCnt, title:data, done:false});
-    //setTodoList(newTodoList);
-    setTodoList([...todoList, { no: noCnt, title, done: false }]);
-    setNoCnt(noCnt + 1);
-  };
+    let newItem = {no:cnt, title:title, done:false};
+    setCnt(cnt + 1);
+    setTodoList([...todoList, newItem]);
+  }
 
-  //
-  const deleteTodoItem = (no) => {
-    // 아이템 삭제 버튼
-    //console.log("아이템 삭제...", no);
-    setTodoList(todoList.filter((todo) => todo.no != Number(no)));
-  };
+  const removeTodo = (no) => {
+    // 할일 목록에서 같은 no인 item을 찾아서 제거 한다.
+    // Javascript 배열에는 remove(), delete()함수 대신 splice()사용.
+    // 배열.splice(index, 갯수);
+    // index를 찾기 위해 Javascript에 findIndex() 함수 활용.
+    let index = todoList.findIndex(function (item) {
+      return no === item.no;
+    });
 
-  const editTodoItem = (no) => {
-    setTodoList((prevList) =>
-      prevList.map((prevItem) =>
-        prevItem.no === Number(no)
-          ? { ...prevItem, editing: !prevItem.editing }
-          : prevItem
-      )
-    );
-  };
+    let newList = [...todoList];
+    newList.splice(index, 1);
+    setTodoList(newList);
+  }
 
-  const saveTodoItem = (no) => {
-    setTodoList((prevList) =>
-      prevList.map((prevItem) =>
-        prevItem.no === Number(no)
-          ? { ...prevItem, title: prevItem.editTitle, editing: false }
-          : prevItem
-      )
-    );
-  };
+  const updateTodo = (newItem) => {
+    // newItem의 모양은 {no:1, title:"치맥 하기", done:false}
+    let index = todoList.findIndex(function (item) {
+      return newItem.no === item.no;
+    });
 
-  const toggleDone = (no) => {
-    const newTodoList = [...todoList];
-    const idx = newTodoList.findIndex((todo) => todo.no === no);
-
-    if (idx !== -1) {
-      newTodoList[idx] = {
-        ...newTodoList[idx],
-        done: !newTodoList[idx].done,
-      };
-      setTodoList(newTodoList);
+    if(index !== -1) {
+      let newList = [...todoList];
+      newList[index] = newItem;
+      setTodoList(newList);
     }
-  };
+  }
 
   return (
     <div>
       <header className="App-header">
-        <h1>Todo List App</h1>
+        <h1>Todo List</h1>
       </header>
       <main>
-        <h2>할 일 입력칸</h2>
-        <InputItem addTodoItem={addTodoItem} />
-        <hr />
-        <ListComponent
-          todoList={todoList}
-          deleteTodoItem={deleteTodoItem}
-          editTodoItem={editTodoItem}
-          saveTodoItem={saveTodoItem}
-          toggleDone={toggleDone}
-        />
+        <h2>Welcome</h2>
+        <InputItem appendTodo={appendTodo} />
+        <hr/>
+        <ListComponent todoList={todoList} removeTodo={removeTodo} updateTodo={updateTodo} />
       </main>
       <footer>(c)Comstudy21. since 2023.</footer>
     </div>
