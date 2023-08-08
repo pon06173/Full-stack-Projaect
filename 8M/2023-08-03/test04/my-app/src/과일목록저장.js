@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import "./App.css";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ function App() {
   function saveBtnHandler(e) {
     setFruitList([...fruitList, inputValue]);
     setInputValue("");
-=======
+
 import './App.css';
 import {useState} from 'react'
 
@@ -34,12 +34,12 @@ function App() {
   function saveBtnHandler(e) {
     setFruitList([...fruitList, inputValue])
     setInputValue("")
->>>>>>> ca97d5b934034fb0574e6b295acdae32e3ea7f47
+
   }
   return (
     <div className="App">
       <header className="App-header">
-<<<<<<< HEAD
+
         <h1>과일 목록</h1>
       </header>
       <div>
@@ -71,8 +71,6 @@ function App() {
       </div>
     </div>
     </div>
-    
->>>>>>> ca97d5b934034fb0574e6b295acdae32e3ea7f47
   );
 }
 
