@@ -1,12 +1,21 @@
-import { useSelector } from "react-redux";
-import WeightController from "./WeightController";
+import React from "react";
+import MyComponent from "./MyComponent"; 
+import './App.css';
 
 function App() {
-  const 몸무게 = useSelector((state) => state.체중);
+  let title = "Web site cloning 2"
+
   return (
     <div className="App">
-      <p>몸무게 : {몸무게}</p>
-      <WeightController />
+      <br />
+      <hr/>
+      <header className="App-header">
+        <h1>{title}</h1>
+        </header>
+        
+      <MyComponent />
+      <p></p>
+      <hr/>
     </div>
   );
 }
