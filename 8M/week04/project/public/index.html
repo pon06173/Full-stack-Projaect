@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memo App</title>
+</head>
+<body>
+  <h1>Memo App</h1>
+  <h2>Create a New Memo</h2>
+  <form id="memoForm">
+    <input type="date" id="regDate" name="regDate" /><br/>
+    <textarea id="memoContent" rows="4" cols="50" placeholder="Write your memo here"></textarea>
+    <br>
+    <button type="submit">Save Memo</button>
+  </form>
+  <h2>Memos</h2>
+  <ul id="memoList"></ul>
+
+  <script src="App.js">
+    const memoForm = document.getElementById('memoForm');
+    const memoContent = document.getElementById('memoContent');
+    const memoList = document.getElementById('memoList');
+    const regDate = document.getElementById('regDate');
+
+    memoForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const content = memoContent.value;
+      const regdate = regDate.value;
+      if (!content || !regdate) return;
+
+      try {
+        const response = await fetch('/api/memos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ memos: content, regdate: regdate }),
+        });
+
+        if (response.ok) {
+          const memo = await response.json();
+          memoList.innerHTML += `<li>${memo.memos}</li>`;
+          memoContent.value = '';
+          regDate.value = '';
+        } else {
+          console.error('Error saving memo');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    async function fetchMemos() {
+      try {
+        const response = await fetch('/api/memolist');
+        const data = await response.json();
+        const memos = data.memoList;
+        memos.forEach((memo) => {
+          memoList.innerHTML += `<li>${memo.memos}</li>`;
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchMemos();
+  </script>
+</body>
+</html>

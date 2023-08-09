@@ -18,7 +18,7 @@
   <h1>정수의 크기 판별</h1>
   <p>정수를 입력 하고 Enter키를 치면 다음 input으로 넘으갑니다.</p>
 
-  <form id="numForm">
+  <form id="Form">
     <fieldset>
       <legend>서로 다른 정수 3개 입력</legend>
       <input size="3" type="text">
@@ -35,8 +35,8 @@
   <script>
     //정수 3개를 입력 받아서 큰수, 중간, 작은수로 분류하는 프로그램
     var resultArea = document.getElementById("resultArea");
-    var numForm = document.querySelector("#numForm")
-    var inputArr = [...numForm.querySelectorAll("input")]
+    var numForm = document.querySelector("#Form")
+    var inputArr = [...Form.querySelectorAll("input")]
     var numArr = []
     var max = 0, mid = 0, min = 0
     
