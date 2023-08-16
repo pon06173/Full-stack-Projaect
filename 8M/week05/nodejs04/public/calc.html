@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="a">
+        <select name="op">
+          <option value="plus">plus</option>
+          <option value="minus">minus</option>
+          <option value="mult">mult</option>
+          <option value="div">div</option>
+      </select>
+        <input type="text" name="b">
+        
+        <input type="submit" value="정답">
+    </form>
+    <div id="result"></div>
+
+    <script>
+        var form = document.forms[0];
+        console.log(form);
+        form.onsubmit = function() {
+            event.preventDefault();
+        
+            var op = this.op.value;
+            var a = this.a.value;
+            var b = this.b.value;
+            var url = "http://localhost:3000/calc/"+op+"/"+a+"/"+b;
+            var xhr = new XMLHttpRequest();
+        
+            xhr.onreadystatechange = function() {
+                document.getElementById('result').innerHTML = this.responseText;
+            }
+        
+            xhr.open("GET",url,true);
+            xhr.send();
+        };
+    </script>
+</body>
+</html>

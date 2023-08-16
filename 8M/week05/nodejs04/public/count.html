@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>public/count.html</title>
+</head>
+<body>
+<div id="result"></div>
+<script>
+// setInterval() 함수를 이용해서  sever의 카운트가 변경 되면
+// 자동으로 브라우저에 반영하도록 수정 하세요.
+var form = document.forms[0];
+console.log(form);
+var count = 0;
+window.onload = function() {
+    event.preventDefault();
+
+    var url = "http://localhost:3000/count";
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        let obj = JSON.parse(this.responseText);
+        document.getElementById('result').innerHTML =  `<h4>${obj.dateStr} > ${obj.count}</h4>`;
+        console.log(this.responseText);
+        console.log(JSON.parse(this.responseText));
+        count = obj.count;
+    };
+
+    xhr.open("GET",url,true);
+    xhr.send();
+};
+
+setInterval(function() {
+    var url = "http://localhost:3000/receive/"+count;
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if(this.responseText !== "") {
+            let obj = JSON.parse(this.responseText);
+            document.getElementById('result').innerHTML =  `<h4>${obj.dateStr} > ${obj.count}</h4>`;
+            console.log(this.responseText);
+            console.log(JSON.parse(this.responseText));
+        }
+    };
+
+    xhr.open("GET",url,true);
+    xhr.send();
+}, 1000);
+</script>
+
+</body>
+</html>
