@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo_test_form.html</title>
+</head>
+<body>
+
+    <h1>폼 전송 테스트</h1>
+    <form id="testForm" action="/todo">
+        <input type="text" name="cotent" value="그냥 아무거나">
+        <input type="submit" value="전송">
+    </form>
+
+    <div id="box"></div>
+
+    <script>
+        let testForm = document.getElementById("testForm");
+        testForm.onsubmit = function(e) {
+            e.preventDefault();
+            
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                document.getElementById("box").innerHTML = xhr.responseText;
+            };
+            xhr.open("put", "/todo", true);
+            xhr.send();
+        }
+    </script>
+    
+</body>
+</html>

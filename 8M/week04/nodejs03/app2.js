@@ -1,3 +1,4 @@
+// app.js (또는 index.js)
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -5,7 +6,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const fs = require("fs");
-const todo = require("./models/todo");
 
 app.set("port", 3000);
 app.set("views", path.join(__dirname, "views"));
@@ -35,28 +35,11 @@ app.get("/todo", async (req, res) => {
   await loadData();
   res.send(todoList);
 });
-
 // post - 저장 기능
 app.post("/todo", async (req, res) => {
   await loadData();
   let title = req.body.title;
-  todoList.push({ no: todoList.length + 1, title: title, done: false });
-  async function saveDB() {
-    try {
-      const newTodo = new todo({
-        no: Number(todoList.length),
-        title: title,
-        done: false,
-      });
-      // Mongoose6부터 callback 문법이 사용되지 않음
-      await newTodo.save().then((err, todo) => {
-        if (err) throw err;
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  saveDB();
+  todoList.push({ no: noCnt++, title: title, done: false });
   res.send(todoList);
   // 업데이트 된 todoList를 파일에 기록
   fs.writeFileSync(fileURLPath, JSON.stringify({ noCnt, todoList }));
@@ -66,24 +49,22 @@ app.post("/todo", async (req, res) => {
 app.put("/todo", async (req, res) => {
   await loadData();
   let newData = req.body;
+  console.log(newData);
   let idx = todoList.findIndex((item) => {
     return newData.no === item.no;
   });
-  try {
-    const updatedTodo = await todo.updateOne(
-      { no: newData.no },
-      { $set: { title: newData.title } },
-      { new: true }
-    );
-
-    res.send(updatedTodo);
-  } catch (err) {
-    console.error("Error:", err);
+  if (idx != -1) {
+    todoList[idx] = newData;
   }
+
+  // 수정 후 파일에 다시 기록
+  fs.writeFileSync(fileURLPath, JSON.stringify({ noCnt, todoList }));
+  res.send(todoList);
 });
 // delete - 삭제 기능
 app.delete("/todo", async (req, res) => {
   await loadData();
+  console.log("req.query.no >> ", req.query.no);
   let idx = todoList.findIndex((item) => {
     return item.no === Number(req.query.no);
   });
