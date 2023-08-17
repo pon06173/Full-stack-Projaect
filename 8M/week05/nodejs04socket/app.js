@@ -60,11 +60,14 @@ io.sockets.on('connection', (socket)=>{
             socket.broadcast.emit('message', msgData);
         } else {
             // 1:1 채팅 기능
-            msgData.cenderName = userMap[msgData.sender].userName;
-            msgData.recepientName = userMap[msgData.recepient].userName;
-            userMap[msgData.recepient].emit('message', msgData);
+            if (userMap[msgData.recepient]) {
+                msgData.cenderName = userMap[msgData.sender].userName;
+                msgData.recepientName = userMap[msgData.recepient].userName;
+                userMap[msgData.recepient].emit('message', msgData);
+            } else {
+                console.log(`User ${msgData.recepient} not found.`);
             //io.sockets.to(userArr[msgData.recepient].id).emit('test', {hello:'world'});
-        }
+        }}
     });
 
     socket.on('disconnecting', function() {

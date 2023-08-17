@@ -19,6 +19,10 @@
             display: inline-block;
             height: 50px;
         }
+        #sender {
+          border: 0px;
+          font-size: large;
+        }
     </style>
 </head>
 <body>
@@ -40,13 +44,13 @@
     <table>
         <tr align="left">
             <th>보내는 사람 ID</th>
-            <td><input type="text" id="sender" value="user01"></td>
+            <td><input type="text" id="sender" value="user01" disabled></td>
         </tr>
         <tr align="left">
             <th>받는 사람 ID</th>
             <td>
                 <select id="recepientSelect">
-                    <option>사용자 없습니다</option>
+                  <option value="">사용자 선택</option>
                 </select>
             </td>
         </tr>
@@ -88,7 +92,7 @@
 
                 socket.on('message', function(data) {
                     console.log(data);
-                    msgBox.innerHTML += `(${data.cenderName}): ${data.message}<br/>`;
+                    msgBox.innerHTML += `(${data.sender}): ${data.message}<br/>`;
                 });
             });
 
@@ -102,17 +106,23 @@
                 const userNameVal = userName.value;
                 console.log(userIdVal, userNameVal);
                 socket.emit('login', {userId:userIdVal, userName:userNameVal});
+                userId.setAttribute("disabled", true); // 로그인 후 ID 입력창 비활성화
+                userName.setAttribute("disabled", true); // 로그인 후 이름 입력창 비활성화
+                loginBtn.setAttribute("disabled", true); // 로그인 버튼 비활성화
             });
 
-            sendBtn.addEventListener('click', function(event) {
-                msgBox.innerHTML += `(나): ${msgInput.value}<br/>`;
-                // 보내는 사람, 받는 사람, 메세지, 날짜, 시간 ...
-                socket.emit('message', {
-                    sender: sender.value,
-                    recepient: recepient.value,
-                    message: msgInput.value
-                });
-            });
+            sendBtn.addEventListener('click', function (event) {
+              const recepientSelect = document.querySelector('#recepientSelect');
+              const selectedOption = recepientSelect.options[recepientSelect.selectedIndex];
+              // 보내는 사람, 받는 사람, 메세지, 날짜, 시간 ...
+              const msgData = {
+                  sender: sender.value,
+                  recepient: selectedOption.value, // 선택된 옵션의 value
+                  message: msgInput.value
+              };
+
+              socket.emit('message', msgData);
+          });
         }
     </script>
 </body>
