@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Socket.io 채팅구현</h1>
+  Message : <input type="text" id="msg"> <button id="sendBtn">Send</button><br/>
+  <div id="messageBox">입장 하셨습니다.</div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const msg = document.querySelector("#msg")
+    const sendBtn = document.querySelector("#sendBtn")
+    const messageBox = document.querySelector("#messageBox")
+
+    var socket = io()
+    // 같은 서버이므로 도메인 생략
+    var chat = io.connect('/chat')
+    var news = io.connect('/news')
+    console.dir(socket)
+    if(socket) {
+      socket.on('connect', function(data) {
+        console.log("all socket 접속", data)
+      })
+    }
+    if(chat) {
+      socket.on('connect', function(data) {
+        console.log("chat socket 접속", data)
+        chat.on('a message', (message)=> {
+          console.log("from chat server message: ", message)
+        })
+      })
+    }
+    if(news) {
+      socket.on('connect', function(data) {
+        console.log("news socket 접속", data)
+        news.on('item', (message)=> {
+          console.log("from news server message: ", message)
+        })
+      })
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Socket.io 채팅구현</h1>
+  Message : <input type="text" id="msg"> <button id="sendBtn">Send</button><br/>
+  <div id="messageBox">입장 하셨습니다.</div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const msg = document.querySelector("#msg")
+    const sendBtn = document.querySelector("#sendBtn")
+    const messageBox = document.querySelector("#messageBox")
+
+    var socket = io()
+    console.dir(socket)
+    if(socket) {
+      socket.on('connect', function(data) {
+        socket.emit('hello', 'Hello world!!')
+        socket.on('welcome', function(message) {
+          console.log(message)
+        })
+        socket.on('return message', function(data) {
+          messageBox.innerHTML += "<br/>" + data
+        })
+
+        sendBtn.addEventListener('click', function(evt) {
+          const msg1 = msg.value;
+          console.log("message", msg1)
+          socket.emit('message', msg1)//emit으로 보내고 on으로 받는다.
+        })
+
+      })
+    }
+  </script>
+</body>
+</html>

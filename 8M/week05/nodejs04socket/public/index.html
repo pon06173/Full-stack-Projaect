@@ -1,11 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/public/index.html</title>
+    <style>
+        #msgBox {
+            border: 1px solid gray;
+            width: 400px;
+            height: 200px;
+        }
+        #sendBtn {
+            display: inline-block;
+            width: 300px;
+            height: 40px;
+        }
+        #loginBtn {
+            display: inline-block;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Socket.it</h1>
+    <h1>Socket.io 채팅 구현</h1>
+    <table>
+        <tr>
+            <th>접속 ID</th>
+            <td><input type="text" id="userId" value="user01"></td>
+            <td rowspan="2">
+                <button id="loginBtn">Login</button>
+            </td>
+        </tr>
+        <tr>
+            <th>성 명</th>
+            <td><input type="text" id="userName" value="홍길동"></td>
+        </tr>
+    </table>
+    <hr/>
+    <table>
+        <tr align="left">
+            <th>보내는 사람 ID</th>
+            <td><input type="text" id="sender" value="user01"></td>
+        </tr>
+        <tr align="left">
+            <th>받는 사람 ID</th>
+            <td>
+                <select id="recepientSelect">
+                    <option>사용자 없습니다</option>
+                </select>
+            </td>
+        </tr>
+        <tr align="left">
+            <th>메세지</th>
+            <td><input type="text" id="msgInput" value="Hello socket world"></td>
+        </tr>
+    </table>
+    <button id="sendBtn">Send</button><hr/>
+    <div id="msgBox">=== 채팅방 ===<br/></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const msgInput = document.querySelector("#msgInput");
+        const sendBtn = document.querySelector("#sendBtn");
+        const msgBox = document.querySelector("#msgBox");
+        const loginBtn = document.querySelector("#loginBtn");
+        const userId = document.querySelector("#userId");
+        const userName = document.querySelector("#userName");
+        const sender = document.querySelector("#sender");
+        const recepient = document.querySelector("#recepient");
+        const recepientSelect = document.querySelector('#recepientSelect');
+
+        var socket = io();
+        console.dir(socket);
+        if(socket) {
+            socket.on('connect', function(data) {
+                console.log("all socket 접속:", data);
+
+                socket.on('welcomeMsg', function(data) {
+                    msgBox.innerHTML += data.message+'<br/>';
+                    //console.dir(data);
+                    let userList = data.userList;
+                    recepientSelect.innerHTML = "";
+                    userList.forEach((user)=>{
+                        recepientSelect.innerHTML += `<option value="${user.userId}">${user.userName}(${user.userId})</option>`;
+                    });
+                });
+
+                socket.on('message', function(data) {
+                    console.log(data);
+                    msgBox.innerHTML += `(${data.cenderName}): ${data.message}<br/>`;
+                });
+            });
+
+            userId.addEventListener('keyup', (e)=>{
+                console.log(e.target.value);
+                sender.value = e.target.value;
+            });
+
+            loginBtn.addEventListener('click', function(event) {
+                const userIdVal = userId.value;
+                const userNameVal = userName.value;
+                console.log(userIdVal, userNameVal);
+                socket.emit('login', {userId:userIdVal, userName:userNameVal});
+            });
+
+            sendBtn.addEventListener('click', function(event) {
+                msgBox.innerHTML += `(나): ${msgInput.value}<br/>`;
+                // 보내는 사람, 받는 사람, 메세지, 날짜, 시간 ...
+                socket.emit('message', {
+                    sender: sender.value,
+                    recepient: recepient.value,
+                    message: msgInput.value
+                });
+            });
+        }
+    </script>
 </body>
 </html>
