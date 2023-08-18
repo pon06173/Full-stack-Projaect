@@ -56,8 +56,8 @@ io.sockets.on('connection', (socket)=>{
         if(msgData.recepient === 'All') {
             msgData.cenderName = userMap[msgData.sender].userName;
             msgData.recepientName = 'All';
-            //io.sockets.emit('message', msgData);
-            socket.broadcast.emit('message', msgData);
+            io.sockets.emit('message', msgData);
+            // socket.broadcast.emit('message', msgData);
         } else {
             // 1:1 채팅 기능
             if (userMap[msgData.recepient]) {

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,7 @@
     </style>
 </head>
 <body>
-    <h1>Socket.io 채팅 구현</h1>
+    <h1>Socket.io 귓속말 채팅 구현</h1>
     <table>
         <tr>
             <th>접속 ID</th>
@@ -47,20 +48,26 @@
             <td><input type="text" id="sender" value="user01" disabled></td>
         </tr>
         <tr align="left">
-            <th>받는 사람 ID</th>
+            <th>받는 사람</th>
             <td>
                 <select id="recepientSelect">
-                  <option value="">사용자 선택</option>
+                    <option value="All">전체채팅</option>
                 </select>
             </td>
         </tr>
         <tr align="left">
             <th>메세지</th>
-            <td><input type="text" id="msgInput" value="Hello socket world"></td>
+            <td><input type="text" id="msgInput" value="채팅을 입력해주세요."></td>
         </tr>
     </table>
     <button id="sendBtn">Send</button><hr/>
-    <div id="msgBox">=== 채팅방 ===<br/></div>
+    <div 
+    id="msgBox" 
+    style="border: 1px solid gray; 
+            width: 400px; 
+            height: 200px; 
+            overflow: auto;">
+        === 채팅방 ===<br/></div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -79,12 +86,15 @@
         if(socket) {
             socket.on('connect', function(data) {
                 console.log("all socket 접속:", data);
+                
+                
 
                 socket.on('welcomeMsg', function(data) {
                     msgBox.innerHTML += data.message+'<br/>';
                     //console.dir(data);
                     let userList = data.userList;
-                    recepientSelect.innerHTML = "";
+                    recepientSelect.innerHTML = '<option value="All">전체채팅</option>';
+                    
                     userList.forEach((user)=>{
                         recepientSelect.innerHTML += `<option value="${user.userId}">${user.userName}(${user.userId})</option>`;
                     });
@@ -93,8 +103,39 @@
                 socket.on('message', function(data) {
                     console.log(data);
                     msgBox.innerHTML += `(${data.sender}): ${data.message}<br/>`;
+
+                    msgBox.scrollTop = msgBox.scrollHeight;
                 });
             });
+
+            msgInput.addEventListener("focus", function() {
+            if (msgInput.value === "채팅을 입력해주세요.") {
+                            msgInput.value = "";
+                        }
+                    });
+
+                    
+            msgInput.addEventListener("keypress", function (event) {
+            if (event.keyCode === 13) {
+                const selectedOption = recepientSelect.options[recepientSelect.selectedIndex];
+            // 보내는 사람, 받는 사람, 메세지, 날짜, 시간 ...
+            const msgData = {
+                sender: sender.value,
+                recepient: selectedOption.value, // 선택된 옵션의 value
+                message: msgInput.value
+            }
+
+                if (selectedOption.value === "All") {
+                socket.emit('message', { ...msgData, recepient: "All" }) // '전체' 옵션일 경우 전체에게 보내기
+            } else {
+                socket.emit('message', msgData); // 1:1 채팅일 경우 선택된 사람에게 보내기
+            }
+
+            msgInput.value = ""; // 메시지 입력창 초기화
+            // event.preventDefault(); // 기본 엔터 키 동작 취소
+            }
+            });
+
 
             userId.addEventListener('keyup', (e)=>{
                 console.log(e.target.value);
@@ -109,20 +150,26 @@
                 userId.setAttribute("disabled", true); // 로그인 후 ID 입력창 비활성화
                 userName.setAttribute("disabled", true); // 로그인 후 이름 입력창 비활성화
                 loginBtn.setAttribute("disabled", true); // 로그인 버튼 비활성화
+
+                // 로그인 시 "All" 옵션을 선택한 상태로 유지
+                recepientSelect.value = "All";
             });
 
             sendBtn.addEventListener('click', function (event) {
-              const recepientSelect = document.querySelector('#recepientSelect');
-              const selectedOption = recepientSelect.options[recepientSelect.selectedIndex];
-              // 보내는 사람, 받는 사람, 메세지, 날짜, 시간 ...
-              const msgData = {
-                  sender: sender.value,
-                  recepient: selectedOption.value, // 선택된 옵션의 value
-                  message: msgInput.value
-              };
+            const selectedOption = recepientSelect.options[recepientSelect.selectedIndex];
+            // 보내는 사람, 받는 사람, 메세지, 날짜, 시간 ...
+            const msgData = {
+                sender: sender.value,
+                recepient: selectedOption.value, // 선택된 옵션의 value
+                message: msgInput.value
+            }
 
-              socket.emit('message', msgData);
-          });
+            if (selectedOption.value === "All") {
+                socket.emit('message', { ...msgData, recepient: "All" }) // '전체' 옵션일 경우 전체에게 보내기
+            } else {
+                socket.emit('message', msgData); // 1:1 채팅일 경우 선택된 사람에게 보내기
+            }
+        })
         }
     </script>
 </body>

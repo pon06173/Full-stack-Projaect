@@ -214,16 +214,20 @@
       }
 
       const todoInputForm = document.getElementById("todoInputForm");
-      todoInputForm.onsubmit = async function (e) {
-        e.preventDefault();
-        let todoItemValue = e.target.todoItem.value;
-        console.log("todoItemValue>>", todoItemValue);
-        // 입력 된 내용을 서버로 전송 한다.
-        const data = { title: todoItemValue };
-        await postJSON("POST", data);
-        loadData();
-        e.target.todoItem.value = "";
-      };
+    todoInputForm.onsubmit = async function (e) {
+      e.preventDefault();
+      let todoItemValue = e.target.todoItem.value;
+      console.log("todoItemValue>>", todoItemValue);
+      // 입력 된 내용을 서버로 전송 한다.
+      const data = { title: todoItemValue };
+      
+      // 기존의 postJSON 함수를 이용해서 데이터를 서버에 전송하고, 저장 후에 loadData를 호출합니다.
+      await postJSON("POST", data);
+      loadData();
+      
+      // 입력 필드 초기화
+      e.target.todoItem.value = "";
+    };
 
       const delBtnEventHandler = async function (element) {
         console.log("delBtnEventHandler", element.dataset.no);
