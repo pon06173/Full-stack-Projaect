@@ -146,7 +146,7 @@
         let selectNoSapn = document.querySelector(".selectNoSapn");
         let checkDoneList = document.querySelectorAll(".checkDone");
         editBtnList.forEach((btn) => {
-          btn.addEventListener("click", function (e) {
+          btn.addEventListener("click", async function (e) {
             //console.dir(e.target.dataset.no);
             let no = Number(e.target.dataset.no);
             let idx = todoList.findIndex((item) => {
@@ -162,7 +162,6 @@
 
         checkDoneList.forEach((checkbox) => {
           checkbox.addEventListener("change", async function (e) {
-            //console.log("change ...", e.target.dataset.no);
             let no = Number(e.target.dataset.no);
             let idx = todoList.findIndex((item) => {
               return no === item.no;
@@ -170,6 +169,12 @@
             if (idx !== -1) {
               let newTodoItem = todoList[idx];
               newTodoItem.done = !newTodoItem.done;
+
+              console.log(
+                "Sending done value to the server:",
+                newTodoItem.done
+              );
+
               await postJSON("PUT", newTodoItem);
               loadData();
             }
@@ -214,20 +219,20 @@
       }
 
       const todoInputForm = document.getElementById("todoInputForm");
-    todoInputForm.onsubmit = async function (e) {
-      e.preventDefault();
-      let todoItemValue = e.target.todoItem.value;
-      console.log("todoItemValue>>", todoItemValue);
-      // 입력 된 내용을 서버로 전송 한다.
-      const data = { title: todoItemValue };
-      
-      // 기존의 postJSON 함수를 이용해서 데이터를 서버에 전송하고, 저장 후에 loadData를 호출합니다.
-      await postJSON("POST", data);
-      loadData();
-      
-      // 입력 필드 초기화
-      e.target.todoItem.value = "";
-    };
+      todoInputForm.onsubmit = async function (e) {
+        e.preventDefault();
+        let todoItemValue = e.target.todoItem.value;
+        console.log("todoItemValue>>", todoItemValue);
+        // 입력 된 내용을 서버로 전송 한다.
+        const data = { title: todoItemValue };
+
+        // 기존의 postJSON 함수를 이용해서 데이터를 서버에 전송하고, 저장 후에 loadData를 호출합니다.
+        await postJSON("POST", data);
+        loadData();
+
+        // 입력 필드 초기화
+        e.target.todoItem.value = "";
+      };
 
       const delBtnEventHandler = async function (element) {
         console.log("delBtnEventHandler", element.dataset.no);
