@@ -52,15 +52,15 @@ public class Ch04Ex02 {
 	      ArrayList<Phone> phoneList = new ArrayList<>();
 	      
 	      while (true) {
-	         System.out.println("1. 입력 / 2. 수정 / 3. 삭제 / 4. 출력 / 5. 종료");
-	         int choice = scan.nextInt();
+	         System.out.println("1. 입력 / 2. 수정 / 3. 검색 / 4. 삭제 / 5. 출력 / 6. 종료");
+	         int no = scan.nextInt();
 	         
-	         if (choice == 5) {
+	         if (no == 6) {
 	            System.out.println("프로그램을 종료합니다.");
 	            break;
 	         }
 	         
-	         switch (choice) {
+	         switch (no) {
 	            case 1:
 	               System.out.print("이름 입력: ");
 	               String name = scan.next();
@@ -84,8 +84,26 @@ public class Ch04Ex02 {
 	                  }
 	               }
 	               break;
-	            
+	               
 	            case 3:
+	            	// Modify a phone record
+	            	System.out.print("검색할 이름을 입력하세요: ");
+	                String searchName = scan.next();
+	                boolean found = false;
+	                for (Phone p : phoneList) {
+	                   if (p.getName().equals(searchName)) {
+	                      System.out.println("검색 결과:");
+	                      System.out.println(p);
+	                      found = true;
+	                      break; // Exit the loop after finding the record
+	                   }
+	                }
+	                if (!found) {
+	                   System.out.println("해당하는 이름의 전화 번호를 찾을 수 없습니다.");
+	                }
+	                break;
+	            
+	            case 4:
 	               // Delete a phone record
 	               System.out.print("삭제할 이름을 입력하세요: ");
 	               String deleteName = scan.next();
@@ -104,7 +122,7 @@ public class Ch04Ex02 {
 	               }
 	               break;
 	            
-	            case 4:
+	            case 5:
 	               System.out.println("전화번호 목록:");
 	               for (Phone p : phoneList) {
 	                  System.out.println(p);
