@@ -51,7 +51,7 @@ public class Ch04Ex01 {
 	
    public static void main(String[] args) {
       Scanner scan = new Scanner(System.in);
-      Phone[] phoneArr = new Phone[10];
+      Phone[] phoneArr = new Phone[2];
       
       for(int i=0; i<phoneArr.length; i++) {
           System.out.print("이름 입력: ");
@@ -61,21 +61,22 @@ public class Ch04Ex01 {
           Phone person = new Phone(name, phone);
           phoneArr[i] = person;
        }
-
       
-//      System.out.print("이름 입력: ");
-//      String name = scan.next();
-//      System.out.print("전화 번호 입력: ");
-//      String phone = scan.next();
-//      Phone person = new Phone(name, phone);
-//      phoneArr[0] = person;
-//      
-//      System.out.print("이름 입력: ");
-//      name = scan.next();
-//      System.out.print("전화 번호 입력: ");
-//      phone = scan.next();
-//      person = new Phone(name, phone);
-//      phoneArr[1] = person;
+      System.out.println(Arrays.toString(phoneArr));
+      
+      
+      System.out.print("수정할 이름을 입력하세요: ");
+      String searchName = scan.next();
+      
+      for (int i = 0; i < phoneArr.length; i++) {
+         if (phoneArr[i].getName().equals(searchName)) {
+            System.out.print("새로운 전화 번호 입력: ");
+            String newPhone = scan.next();
+            phoneArr[i].setPhone(newPhone);
+            System.out.println("전화 번호가 수정되었습니다.");
+            break;
+         }
+      }
       
       System.out.println(Arrays.toString(phoneArr));
    }
