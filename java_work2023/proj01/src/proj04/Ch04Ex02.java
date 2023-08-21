@@ -1,48 +1,41 @@
 package proj04;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-class Phone {
-   private String name;
-   private String phone;
-   
-   public Phone() {
-      // Default Constructor
-   }
-   
-   // 생성자 오버로딩
-public Phone(String name, String phone) {
-	//super(); 상속 받지 않으니깐 부모의 생성자 호출은 삭제 해야함.
-	this.name = name;
-	this.phone = phone;
-}
+public class Phone {
+    private String name;
+    private String phone;
 
-// setters/getters
-public String getName() {
-	return name;
-}
+    public Phone() {
+        // Default Constructor
+    }
 
-public void setName(String name) {
-	this.name = name;
-}
+    public Phone(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
 
-public String getPhone() {
-	return phone;
-}
+    public String getName() {
+        return name;
+    }
 
-public void setPhone(String phone) {
-	this.phone = phone;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-@Override//phone의 내용 return
-public String toString() {
-	return "[name=" + name + ", phone=" + phone + "]";
-}
-   
-   
-   
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "[name=" + name + ", phone=" + phone + "]";
+    }
 }
 
 public class Ch04Ex02 {
@@ -55,11 +48,6 @@ public class Ch04Ex02 {
 	         System.out.println("1. 입력 / 2. 수정 / 3. 검색 / 4. 삭제 / 5. 출력 / 6. 종료");
 	         int no = scan.nextInt();
 	         
-	         if (no == 6) {
-	            System.out.println("프로그램을 종료합니다.");
-	            break;
-	         }
-	         
 	         switch (no) {
 	            case 1:
 	               System.out.print("이름 입력: ");
@@ -71,67 +59,68 @@ public class Ch04Ex02 {
 	               break;
 	            
 	            case 2:
-	               // Modify a phone record
-	               System.out.print("수정할 이름을 입력하세요: ");
-	               String searchName = scan.next();
-	               for (Phone p : phoneList) {
-	                  if (p.getName().equals(searchName)) {
-	                     System.out.print("새로운 전화 번호 입력: ");
-	                     String newPhone = scan.next();
-	                     p.setPhone(newPhone);
-	                     System.out.println("전화 번호가 수정되었습니다.");
-	                     break;
-	                  }
-	               }
-	               break;
-	               
-	            case 3:
-	            	// Modify a phone record
-	            	System.out.print("검색할 이름을 입력하세요: ");
-	                String searchName = scan.next();
-	                boolean found = false;
-	                for (Phone p : phoneList) {
-	                   if (p.getName().equals(searchName)) {
-	                      System.out.println("검색 결과:");
-	                      System.out.println(p);
-	                      found = true;
-	                      break; // Exit the loop after finding the record
-	                   }
-	                }
-	                if (!found) {
-	                   System.out.println("해당하는 이름의 전화 번호를 찾을 수 없습니다.");
-	                }
-	                break;
-	            
-	            case 4:
-	               // Delete a phone record
-	               System.out.print("삭제할 이름을 입력하세요: ");
-	               String deleteName = scan.next();
-	               Phone deletePerson = null;
-	               for (Phone p : phoneList) {
-	                  if (p.getName().equals(deleteName)) {
-	                     deletePerson = p;
-	                     break;
-	                  }
-	               }
-	               if (deletePerson != null) {
-	                  phoneList.remove(deletePerson);
-	                  System.out.println("전화 번호가 삭제되었습니다.");
-	               } else {
-	                  System.out.println("해당하는 이름의 전화 번호를 찾을 수 없습니다.");
-	               }
-	               break;
-	            
-	            case 5:
-	               System.out.println("전화번호 목록:");
-	               for (Phone p : phoneList) {
-	                  System.out.println(p);
-	               }
-	               break;
-	            
-	            default:
-	               System.out.println("잘못된 선택입니다.");
-	         }
-	      }
-	   }
-	}
+                    System.out.print("수정할 이름을 입력하세요: ");
+                    String modifyName = scan.next();
+                    for (Phone p : phoneList) {
+                        if (p.getName().equals(modifyName)) {
+                            System.out.print("수정 할 전화 번호 입력: ");
+                            String newPhone = scan.next();
+                            p.setPhone(newPhone);
+                            System.out.println("전화 번호가 수정되었습니다.");
+                            break;
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("검색할 이름을 입력하세요: ");
+                    String searchName = scan.next();
+                    boolean found = false;
+                    for (Phone p : phoneList) {
+                        if (p.getName().equals(searchName)) {
+                            System.out.println("검색 결과:");
+                            System.out.println(p);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("해당하는 이름의 전화 번호를 찾을 수 없습니다.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("삭제할 이름을 입력하세요: ");
+                    String deleteName = scan.next();
+                    Phone deletePerson = null;
+                    for (Phone p : phoneList) {
+                        if (p.getName().equals(deleteName)) {
+                            deletePerson = p;
+                            break;
+                        }
+                    }
+                    if (deletePerson != null) {
+                        phoneList.remove(deletePerson);
+                        System.out.println("전화 번호가 삭제되었습니다.");
+                    } else {
+                        System.out.println("해당하는 이름의 전화 번호를 찾을 수 없습니다.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("전화번호 목록:");
+                    for (Phone p : phoneList) {
+                        System.out.println(p);
+                    }
+                    break;
+                    
+                case 6:
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+
+                default:
+                    System.out.println("잘못된 선택입니다.");
+            }
+        }
+    }
+}
