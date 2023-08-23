@@ -69,8 +69,7 @@ class ModifyCommand implements Command {
         if (phoneToUpdate == null) {
             return "redirect:list.phone";
         }
-        
-        // Update the Phone object with the submitted form data
+   
         String newName = req.getParameter("name");
         String newPhone = req.getParameter("phone");
         phoneToUpdate.setName(newName);
