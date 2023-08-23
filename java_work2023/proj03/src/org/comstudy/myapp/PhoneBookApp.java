@@ -122,22 +122,17 @@ public class PhoneBookApp extends HttpServlet {
 		if(command != null) {
 			command.procerss(req, resp);
 		} else {
-			commandMap.get("/output.do").procerss(req, resp);
+			resp.sendRedirect("error.jsp"); 
 		}
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		process(req, resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String name = req.getParameter("name");
-//		String phone = req.getParameter("phone");
-//		phoneList.add(new Phone(noSequence++, name, phone));
-//		resp.sendRedirect("output.do"); //  doGet() 으로 이동
-		
-		process(req, resp);
-	}
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
+    }
 }
