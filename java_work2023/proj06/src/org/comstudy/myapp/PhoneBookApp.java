@@ -123,7 +123,7 @@ public class PhoneBookApp extends HttpServlet {
 			// view 페이지로  forward
 			// String viewName = "/WEB-INF/views/list.jsp";
 			viewName = "/WEB-INF/views/" + viewName + ".jsp";
-			RequestDispatcher view = req.getRequestDispatcher(viewName);
+			RequestDispatcher view = req.getRequestDispatcher(viewName); 
 			view.forward(req, resp);
 		}
 		
