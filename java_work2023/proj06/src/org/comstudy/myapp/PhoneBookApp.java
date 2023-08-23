@@ -55,10 +55,31 @@ class SearchCommand implements Command {
 }
 
 class ModifyCommand implements Command {
-	public String process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("ModifyCommand 호출 ...");
-		return "modify";
-	}
+    public String process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("ModifyCommand 호출 ...");
+        int no = Integer.parseInt(req.getParameter("no"));
+        Phone phoneToUpdate = null;
+        for (Phone p : PhoneBookApp.phoneList) {
+            if (p.getNo() == no) {
+                phoneToUpdate = p;
+                break;
+            }
+        }
+        
+        if (phoneToUpdate == null) {
+            return "redirect:list.phone";
+        }
+        
+        // Update the Phone object with the submitted form data
+        String newName = req.getParameter("name");
+        String newPhone = req.getParameter("phone");
+        phoneToUpdate.setName(newName);
+        phoneToUpdate.setPhone(newPhone);
+        
+        req.setAttribute("phone", phoneToUpdate);
+        
+        return "modify";
+    }
 }
 
 class DeleteCommand implements Command {
