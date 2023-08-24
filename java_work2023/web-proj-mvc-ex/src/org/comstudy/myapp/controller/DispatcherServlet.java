@@ -19,8 +19,18 @@ public class DispatcherServlet extends HttpServlet {
    
    @Override
    public void init() throws ServletException {
-      cmdMap.put("/hello.do", new HelloCommand());
-      cmdMap.put("/home.do", new HomeCommand());
+      try {
+         Class<?> clsHello = Class.forName("org.comstudy.myapp.command.HelloCommand");
+         Class<?> clsHome = Class.forName("org.comstudy.myapp.command.HomeCommand");
+         
+         Command helloCmdObj = (Command) clsHello.newInstance();
+         Command homeCmdObj = (Command) clsHome.newInstance();
+         
+         cmdMap.put("/hello.do", helloCmdObj);
+         cmdMap.put("/home.do", homeCmdObj);
+      } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+         e.printStackTrace();
+      }
    }
 
    protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
