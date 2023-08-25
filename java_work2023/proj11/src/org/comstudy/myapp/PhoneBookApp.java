@@ -11,16 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.comstudy.myapp.model.Phone;
+import org.comstudy.myapp.model.PhoneDAO;
 
 @WebServlet({"/", "*.phone"})
 public class PhoneBookApp extends HttpServlet {
-   public static ArrayList<Phone> phoneList = new ArrayList<Phone>();
-   static int phoneSeq = 1;
-   static {
-      phoneList.add(new Phone(phoneSeq++, "홍길동", "010-1111-1111"));
-      phoneList.add(new Phone(phoneSeq++, "김길동", "010-1111-2222"));
-      phoneList.add(new Phone(phoneSeq++, "박길동", "010-1111-3333"));
-   }
+//   public static ArrayList<Phone> phoneList = new ArrayList<Phone>();
+//   static int phoneSeq = 1;
+//   static {
+//      phoneList.add(new Phone(phoneSeq++, "홍길동", "010-1111-1111"));
+//      phoneList.add(new Phone(phoneSeq++, "김길동", "010-1111-2222"));
+//      phoneList.add(new Phone(phoneSeq++, "박길동", "010-1111-3333"));
+//   }
+	private PhoneDAO dao = new PhoneDAO();
    
    protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       resp.setCharacterEncoding("UTF-8");
@@ -32,11 +34,11 @@ public class PhoneBookApp extends HttpServlet {
       // 다음과 같이 구현 하시오. (Command를 제거 하고 그와 같은 기능을 제어문에 구현)
       String viewName = "";
       if("/list.phone".equals(endPoint)) {
-         ArrayList<Phone> list = phoneList;
+         ArrayList<Phone> list =(ArrayList<Phone>)dao.selectAll();
          String searchName = req.getParameter("name");
          if(searchName != null && searchName.length() > 0 && !searchName.equals(" ")) {
             ArrayList<Phone> newList = new ArrayList<Phone>();
-            for(Phone phone : phoneList) {
+            for(Phone phone :list) {
                if(phone.getName().indexOf(searchName) != -1) {                  
                   newList.add(phone);
                }
@@ -52,45 +54,35 @@ public class PhoneBookApp extends HttpServlet {
          
          if("POST".equals(req.getMethod())) {
             // POST 요청 처리
-            int no = phoneSeq++;
             String name = req.getParameter("name");
             String phone = req.getParameter("phone");
-            phoneList.add(new Phone(no, name, phone));
+            dao.insert(new Phone(name, phone));
             viewName = "redirect:list.phone";
          } 
       }
       if("/delete.phone".equals(endPoint)) {
          // GET 요청 처리
          int no = Integer.parseInt(req.getParameter("no"));
-         int idx = phoneList.indexOf(new Phone(no));
-         if(idx != -1) {
-            // 삭제 페이지로 이동 
-            req.setAttribute("phone", phoneList.get(idx));
-         }
+        // 삭제 페이지로 이동 
+         req.setAttribute("phone", dao.selectOne(new Phone(no)));
+         
          viewName = "delete";
          
          if("POST".equals(req.getMethod())) {
-            if(idx != -1) {
-               // 삭제 기능으로 구현.
-               phoneList.remove(idx);
-            }
+        	dao.delete(new Phone(no));
             viewName = "redirect:list.phone";
          }
       }
       if("/modify.phone".equals(endPoint)) {
          int no = Integer.parseInt(req.getParameter("no"));
-         int idx = phoneList.indexOf(new Phone(no));
-         // GET 요청 처리
-         if(idx != -1) {
-            req.setAttribute("phone", phoneList.get(idx));
-         }
+         req.setAttribute("phone", dao.selectOne(new Phone(no)));
          viewName = "modify";
          
          if("POST".equals(req.getMethod())) {
             // POST 요청 처리
             String name = req.getParameter("name");
             String phone = req.getParameter("phone");
-            phoneList.set(idx, new Phone(no, name, phone));
+            dao.update(new Phone(no, name, phone));
             viewName = "redirect:list.phone";
          } 
       }
@@ -108,13 +100,7 @@ public class PhoneBookApp extends HttpServlet {
 
    @Override
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      String requestURI = req.getRequestURI();
-      
-      if ("/proj08/".equals(requestURI) || "/proj08".equals(requestURI)) {
-         req.getRequestDispatcher("/list.phone").forward(req, resp);
-      } else {
          process(req, resp);
-      }
    }
    
    @Override

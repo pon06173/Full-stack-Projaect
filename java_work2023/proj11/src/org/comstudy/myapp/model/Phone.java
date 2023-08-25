@@ -1,10 +1,14 @@
-package org.comstudy.myapp;
+package org.comstudy.myapp.model;
 
 public class Phone {
 	private int no;
 	private String name;
 	private String phone;
 	
+	public Phone(String name, String phone) {
+		this.name = name;
+		this.phone = phone;
+	}
 	public Phone() {
 		this(0, "", "");
 	}
@@ -39,7 +43,7 @@ public class Phone {
 	}
 	@Override
 	public String toString() {
-		return "Phone [no=" + no + ", name=" + name + ", phone=" + phone + "]";
+		return "Phone [name=" + name + ", phone=" + phone + "]";
 	}
 	
 	public String toRow() {

@@ -1,4 +1,4 @@
-<%@page import="org.comstudy.myapp.Phone"%>
+<%@page import="org.comstudy.myapp.model.Phone"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
