@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+<h1>상세 보기</h1>
+<table>
+	<tbody>
+		<tr>
+			<th>id</th>
+			<td th:text="${todo.id}"></td>
+		</tr>
+		<tr>title</th>
+			<td th:text="${todo.title}"></td>
+		</tr>
+		<tr>
+			<th>done</th>
+			<td th:text="${todo.done}"></td>
+		</tr>
+	</tbody>
+</table>
+<a th:href="@{'modify?id=' + ${todo.id}}">수정하기</a>
+<a th:href="@{'delete?id=' + ${todo.id}}">삭제하기</a>
+</body>
+</html>
