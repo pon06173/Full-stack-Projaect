@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Todo List App</title>
+</head>
+<body>
+
+<h1>목록</h1>
+
+<ul>
+    <li th:each="todo : ${todos}">
+		
+        <form th:if="${not todo.done}" th:action="@{/todos/complete}" method="post">
+            <input type="hidden" name="id" th:value="${todo.id}">
+			<a th:href="@{'todos/detail?id=' + ${todo.id}}">
+	            <span th:text="${todo.title}"></span>
+	        </a>
+            <button type="submit">Complete</button>
+        </form>
+    </li>
+</ul>
+
+<ul>
+	<li><a href="todos/insert">입력</a></li>
+	<li><a href="todos/modify?id=3">수정</a></li>
+	<li><a href="todos/detail?id=3">상세보기</a></li>
+	<li><a href="todos/delete?id=3">삭제</a></li>
+</ul>
+
+</body>
+</html>

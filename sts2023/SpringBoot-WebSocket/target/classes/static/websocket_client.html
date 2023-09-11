@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <form>
+      <input id="txtMsg" type="text"> <input id="sendBtn"
+         value="Send" type="button"> <input id="closeBtn"
+         value="Disconnect" type="button">
+   </form>
+   <hr>
+   <textarea id="msgTxtArea" rows="10" cols="50"></textarea>
+
+   <script src="http://code.jquery.com/jquery.js"></script>
+   <script>
+      // 소켓 객체를 생성하면 URL의 소켓 서버와 즉시 연결 되고 서버쪽의 onOpen 메소드가 실행 된다.
+      var socket = new WebSocket("ws://"+location.host+"/broadSocket");
+
+      // socket 클라이언트 리스너 함수들 (onopen, onclose, onmessage, onerror)
+      socket.onopen = function(message) {
+         $("#msgTxtArea").append(">>> open ...\n");
+      }
+      socket.onclose = function(message) {
+         $("#msgTxtArea").append(">>> close ...\n");
+      }
+      socket.onmessage = function(message) {
+         $("#msgTxtArea").append(">>> " +  message.data + "\n");
+      }
+      socket.onerror = function(message) {
+         $("#msgTxtArea").append(">>> error ...\n");
+      }
+
+      $("#sendBtn").click(function(event) {
+         event.preventDefault();
+         $("#msgTxtArea").append("나 : " + $("#txtMsg").val() + "\n");
+         socket.send($("#txtMsg").val())
+      });
+      $("#closeBtn").click(function(event) {
+         socket.close();
+      });
+   </script>
+</body>
+</html>

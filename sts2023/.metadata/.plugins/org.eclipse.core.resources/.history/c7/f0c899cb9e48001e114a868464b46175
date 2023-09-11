@@ -1,0 +1,38 @@
+package com.example.demo.entity;
+
+import com.example.demo.dto.TodoDto;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name="TODO")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Todo {
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
+   private String title;
+   private Boolean done;
+   
+   public Todo(TodoDto dto) {
+      this.id = dto.getId();
+      this.title = dto.getTitle();
+      this.done = dto.getDone();
+   }
+   
+
+public static Todo toEntity(TodoDto dto) {
+      return new Todo(dto);
+   }
+   
+
+}

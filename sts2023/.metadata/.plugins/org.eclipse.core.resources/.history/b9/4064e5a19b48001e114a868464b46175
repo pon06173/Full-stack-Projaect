@@ -1,0 +1,29 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.example.demo.dto.TodoDto;
+import com.example.demo.entity.TodoEntity;
+import com.example.demo.repository.TodoRepository;
+
+@Service
+public class TodoSerevice {
+
+   @Autowired
+   TodoRepository todoRepository;
+
+   public List<TodoEntity> findAllTodo() {
+      return todoRepository.findAll();
+   }
+   
+   public void saveTodo(@RequestBody TodoDto dto) {
+      System.out.println("POST - /todos : " + dto);
+      
+      TodoEntity entity = TodoEntity.toEntity(dto);
+      todoRepository.save(entity);
+   }
+}
