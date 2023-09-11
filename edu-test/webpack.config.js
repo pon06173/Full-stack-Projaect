@@ -6,6 +6,7 @@ module.exports = {
     name: PROJECT_NAME,
     mode: "development",//production
     devtool: 'eval',
+    resolve: {fallback: { "constants": false }},
 
     entry: {
         app: [`${BASE_DIR}/client/views/pages/index.js`]
