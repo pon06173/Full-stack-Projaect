@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Todo List App</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+   <div class="container">
+      <h1>Todo List App</h1>
+      <p>Spring Boot와 JPA로 구현한 할 일 관리 프로그램</p>
+      <div>
+         <form id="todo-form">
+            할 일: <input type="text" id="new-todo" value="새 할일 항목" /> <button id="save-btn">저장</button>
+         </form>
+      </div>
+      <table class="table table-hover">
+         <thead>
+            <tr align="center">
+               <th width="5%">
+                  <input type="checkbox" />
+               </th>
+               <th>
+                  할일
+               </th>
+               <th>
+                  댓글
+               </th>
+               <th width="80">
+                  완료
+               </th>
+               <th width="80">
+                  삭제
+               </th>
+            </tr>
+         </thead>
+         <tbody id="todo-list-area">
+            <!-- 할 일 목록이 삽입 되는 부분 -->
+         </tbody>
+      </table>
+   </div>
+
+   <script>
+      var todoListArea = document.querySelector("#todo-list-area");
+      var saveBtn = document.querySelector("#save-btn");
+      var newTodo = document.querySelector("#new-todo");
+
+
+      //var todoList = [
+      //   {id:1, title:'스프링 부트 연습1', done:false, coments:[{id:1, content:'수고 하셨습니다1', todo_id:1}]},
+      //   {id:2, title:'스프링 부트 연습2', done:true, coments:[{id:4, content:'수고 하셨습니다1', todo_id:2}]},
+      //   {id:3, title:'스프링 부트 연습3', done:false, coments:[]},
+      //   {id:4, title:'스프링 부트 연습4', done:false, coments:[{id:2, content:'수고 하셨습니다2', todo_id:4},{id:3, content:'수고 하셨습니다3', todo_id:4}]}
+      //];
+      
+      // CommnetEntity DB 테이블에 저장 된 모양
+      //var comment = [
+      //   {id:1, content:'수고 하셨습니다1', todo_id:1},
+      //   {id:2, content:'수고 하셨습니다2', todo_id:4},
+      //   {id:3, content:'수고 하셨습니다3', todo_id:4},
+      //   {id:4, content:'수고 하셨습니다4', todo_id:2}
+      //];
+      
+      var todoList = [];
+      function getTodoList() {
+         // fetch를 이용해서 서버의 TodoList를 Ajax 요청
+         fetch("todos")
+            .then((response) => response.json())
+            .then((data) => {
+               todoList = data;
+               start();
+            });
+      }
+      getTodoList();
+
+      function start() {
+         todoListArea.innerHTML = "";
+         todoList.forEach((todo, idx) => {
+            var listItemHtml  = "";
+            todo.coments.forEach((comment)=>{
+               listItemHtml += `<li>${comment.content}</li>`;
+            });
+            todoListArea.innerHTML += `<tr align="center">
+               <td><input type="checkbox" /></td>
+               <td align="left">[${todo.id}] ${todo.title}</td>
+               <td>
+                <input data-todoid="${todo.id}" type="text" class="new-comment" />
+                <button data-todoid="${todo.id}" class="comment-btn" onclick="addComment(this)">댓글 입력</button>
+             </td>
+               <td><button>Todo 완료</button></td>
+               <td><button>Todo 삭제</button></td>
+            </tr>
+            <tr><td><button>^</button></td>
+              <td colspan="4">
+               <ul class="coment-list${todo.id}" data-todoid="${todo.id}"> ${listItemHtml}</ul>
+              </td>
+           </tr>
+            `;
+         });
+
+         saveBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('clicked !!!', newTodo.value);
+            fetch("todos", {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json",
+               },
+               body: JSON.stringify({
+                  title: newTodo.value,
+                  done: false
+               }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+               todoList = data;
+               start();
+            });
+            // 입력 input 내용 지우기
+            newTodo.value = "";
+         });
+      } // end start function
+      
+      //start();
+   </script>
+
+</body>
+
+</html>
