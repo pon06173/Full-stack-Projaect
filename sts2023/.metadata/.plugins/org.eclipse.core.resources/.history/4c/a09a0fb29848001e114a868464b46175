@@ -1,0 +1,17 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.TodoEntity;
+
+@Repository
+public interface Todorepository extends JpaRepository<TodoEntity, Long>{
+	// 자동 생성 되는 메서드들 (개발자가 직접 구현하지 않아도 사용 가능하다)
+	// save(T entity)
+	// update기능 save(T entity)를 이용한다.
+	// findAll()
+	// findByDi(ID id)
+	// deleteById(ID id)
+	
+}

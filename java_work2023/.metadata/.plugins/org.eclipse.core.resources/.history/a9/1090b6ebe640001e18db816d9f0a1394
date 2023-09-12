@@ -1,0 +1,38 @@
+package org.comstudy.ch05;
+
+import java.util.Scanner;
+
+interface Command {
+   void procerss();
+}
+
+class Menu implements Command {
+   static Scanner scan = new Scanner(System.in);
+   @Override
+   public void procerss() {
+      System.out.println("::::::: MENU ::::::::");
+      System.out.println("1.input 2.output 3.search 4.modify 5.delete 6.finish");
+      System.out.print("Choice: ");
+      int no = scan.nextInt();
+   }
+}
+
+class Input implements Command {
+   @Override
+   public void procerss() {
+      System.out.println("::::: INPUT :::::");
+   }
+}
+
+public class PhoneBookApp {
+   static Phone[] phoneArr = new Phone[30];
+   static int top = 0;
+   static Menu menu = new Menu();
+   static Input input = new Input();
+
+   public static void main(String[] args) {
+      menu.procerss();
+      input.procerss();
+      
+   }
+}

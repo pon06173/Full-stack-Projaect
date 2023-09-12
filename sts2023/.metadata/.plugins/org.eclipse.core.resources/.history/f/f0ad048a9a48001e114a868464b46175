@@ -1,0 +1,50 @@
+package com.example.demo.dto;
+
+import com.example.demo.entity.TodoEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TodoDto {
+    private Long id;
+    private String title;
+    private Boolean done;
+
+    public TodoDto(Long id) {
+        this.id = id;
+    }
+
+    public TodoDto(String title) {
+        this.title = title;
+        this.done = false;
+    }
+
+    public TodoDto(TodoEntity entity) {
+        this.id = entity.getId();
+        this.title = entity.getTitle();
+        this.done = entity.getDone();
+    }
+
+    public static TodoDto toDto(TodoEntity entity) {
+        return new TodoDto(entity);
+    }
+
+    // Getter methods
+    public Boolean getDone() {
+        return done;
+    }
+
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<h1>Todo List</h1>
+<h2>Comstudy Coding Schools</h2>
+<table width="500" border="1">
+	<thead>
+	<tr>
+		<th>체크</th>
+		<th>제목</th>
+		<th>수정</th>
+		<th>삭제</th>
+	</tr>
+	</thead>
+	<tbody id="listArea">
+		
+	</tbody>
+</table>
+
+<script>
+	var todoList =[];
+	
+	async function request() {
+         const response = await fetch('list.todo',
+            {
+               method: 'GET',
+            });
+         const data = await response.json();
+         console.log(data);
+         todoList = data;
+         drawTodoList();
+      }
+      request();
+
+	
+	var listArea = document.querySelector("#listArea");
+      function drawTodoList() {
+         listArea.innerHTML = "";
+         for (let i = 0; i < todoList.length; i++) {
+            let todo = todoList[i];
+            listArea.innerHTML += `<tr align="center">
+               <td><input type="checkbox" name="doneCheck" /></td>
+               <td>${todo.title}</td>
+               <td><input type="button" name="editBtn" value="Edit" /></td>
+               <td><input type="button" name="delBtn" value="Delete" /></td>
+            </tr>`;
+         }
+      }
+
+</script>
+</body>
+</html>

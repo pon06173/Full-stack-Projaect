@@ -1,0 +1,70 @@
+package com.example.demo.entity;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class TodoTest {
+
+    private Todo todo;
+
+    @BeforeEach
+    public void setUp() {
+        todo = new Todo();
+    }
+
+    @Test
+    public void testId() {
+        // Arrange
+        Long idValue = 4L;
+
+        // Act
+        todo.setId(idValue);
+
+        // Assert
+        assertEquals(idValue, todo.getId());
+    }
+
+    @Test
+    public void testDescription() {
+        // Arrange
+        String description = "Buy groceries";
+
+        // Act
+        todo.setDescription(description);
+
+        // Assert
+        assertEquals(description, todo.getDescription());
+    }
+
+    @Test
+    public void testIsCompleted() {
+        // Arrange
+        boolean isCompleted = true;
+
+        // Act
+        todo.setCompleted(isCompleted);
+
+        // Assert
+        assertEquals(isCompleted, todo.isCompleted());
+    }
+
+    @Test
+    public void testCreatedAt() {
+        // Arrange
+        String createdAt = "2021-08-31";
+
+        // Act
+        todo.setCreatedAt(createdAt);
+
+        // Assert
+        assertEquals(createdAt, todo.getCreatedAt());
+    }
+
+    @Test
+    public void testTodoNotNull() {
+        // Assert
+        assertNotNull(todo);
+    }
+}

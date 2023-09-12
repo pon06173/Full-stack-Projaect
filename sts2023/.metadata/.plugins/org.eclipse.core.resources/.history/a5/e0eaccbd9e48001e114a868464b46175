@@ -1,0 +1,50 @@
+package com.example.demo.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.Comment;
+import com.example.demo.entity.Todo;
+
+import jakarta.transaction.Transactional;
+
+@Repository
+public interface TodoRepository extends JpaRepository<Todo, Long> {
+   // 자동 생성 되는 메서드들 (개발자가 직접 구현하지 않아도 사용 가능하다)
+   // save(T entity) - 
+   // update기능은 따로 존재하지 않고 수정된 Entity를 save(T entity)한다.
+   // findAll()
+   // findById(ID id)
+   // deleteById(ID id)
+   
+   @Query("SELECT t FROM TodoEntity t WHERE t.title = :title AND t.done = :done")
+   List<Todo> findTodos(@Param("title") String title, @Param("done") boolean done);
+   
+   @Modifying
+    @Transactional
+    @Query("UPDATE TodoEntity t SET t.title = :title WHERE t.id = :id")
+    int updateTitleById(Long id, String title);
+   
+   @Modifying
+    @Transactional
+    @Query("UPDATE TodoEntity t SET t.done = CASE t.done WHEN true THEN false ELSE true END WHERE t.id = :id")
+    int toggleDoneById(Long id);
+   
+   
+   @Modifying
+    @Transactional
+    @Query("UPDATE TodoEntity t SET t.done = :done WHERE t.id = :id")
+    int setDoneById(Long id, boolean done);
+   
+   List<Todo> findByDone(boolean done);
+
+    // 할일에 달린 댓글들을 가져오는 JPQL 쿼리
+    @Query("SELECT t.comments FROM Todo t WHERE t.id = :todoId")
+    List<Comment> findCommentsByTodoId(Long todoId);
+   
+}
