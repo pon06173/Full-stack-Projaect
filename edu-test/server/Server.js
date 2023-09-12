@@ -2,6 +2,7 @@ const {BASE_DIR} = require("../Global");
 
 const express = require('express');
 const webServer = express();
+const expressProxy = require('express-http-proxy')
 
 const FS = require('fs');
 const Transform = require('stream').Transform;
@@ -15,6 +16,12 @@ webServer.get('/', function (request, response) {
   console.log("Root URL 들어옴");
   response.sendFile("C:/Users/sw1/Desktop/Full-stack-Projaect/edu-test/client/views/pages/index.html")
 })
+
+webServer.use('*.request', expressProxy('http://localhost:8080', {
+  proxyReqPathResolver : function (request) {
+    return`${request.params[`0`]}`
+  }
+}))
 
 webServer.get('*.page', function (request, response) {
   const streamTransform = new Transform();
