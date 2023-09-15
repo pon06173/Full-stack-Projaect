@@ -1,0 +1,27 @@
+-- create product table(mariaDB)
+use test;
+
+CREATE TABLE product
+(
+	product_index INT AUTO_INCREMENT PRIMARY KEY,
+	product_name VARCHAR(50),
+	product_category VARCHAR(50),
+	product_price INT,
+	product_explan TEXT,
+	product_writer VARCHAR(50),
+	product_date DATE
+) DEFAULT CHARACTER SET UTF8;
+
+-- create product_order table(mariaDB)
+CREATE TABLE product_order
+(
+	order_index INT PRIMARY KEY AUTO_INCREMENT,
+    order_product_number INT,
+    order_product_name VARCHAR(50),
+    order_product_category VARCHAR(50),
+    order_product_temperature VARCHAR(50),
+    order_amount INT,
+    order_price INT,
+    order_date DATE,
+    order_state VARCHAR(50)
+) DEFAULT CHARACTER SET UTF8;
