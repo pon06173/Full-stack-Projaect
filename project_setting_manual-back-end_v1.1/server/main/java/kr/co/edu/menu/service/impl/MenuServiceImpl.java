@@ -4,6 +4,7 @@ import kr.co.edu.menu.dao.MenuDAO;
 import kr.co.edu.menu.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,10 @@ public class MenuServiceImpl implements MenuService {
     public List<HashMap<String, Object>> menuSelectList() {
         // DAO를 사용하여 데이터베이스에서 목록을 조회하고 반환합니다.
         return menuDAO.menuSelectList();
+    }
+
+    public List<HashMap<String, Object>> menuSearch(String keyword, String option) {
+        return menuDAO.menuSearch(option, keyword);
     }
 
     @Override

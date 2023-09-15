@@ -27,6 +27,17 @@ public class MenuController {
         return mav;
     }
 
+    //검색
+    @RequestMapping(value = "/menuSearch.zz", method = RequestMethod.GET)
+    public ModelAndView menuSearch(@RequestParam(value = "keyword") String keyword, @RequestParam(value = "option") String option) {
+        System.out.println("dataSearch Controller" + option + keyword);
+        ModelAndView mav = new ModelAndView("jsonView");
+        List<HashMap<String, Object>> results = menuService.menuSearch(option, keyword);
+        mav.addObject("result", results);
+        return mav;
+    }
+
+
     //삽입
     @RequestMapping(value = "/menuInsert.zz", method = {RequestMethod.POST})
     public ModelAndView menuInsert(@RequestBody HashMap<String, Object> param) {

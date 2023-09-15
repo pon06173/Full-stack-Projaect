@@ -77,7 +77,7 @@ webServer.get('*.page', function (request, response, next) {
  */
 webServer.use('*.zz', expressProxy(API_SERVER_HOST, {
     proxyReqPathResolver: function (request) {
-        console.log('request : ', request.url, request.params[0], request.params[1]);
+        //console.log('request : ', request.url, request.params[0]);
         if ( request.url != "/" ) {
             return `${request.params['0']}.zz${request.url}`;    
         }

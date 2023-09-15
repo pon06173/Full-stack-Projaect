@@ -83,6 +83,7 @@
                 </ul>
             </div>
             <div class="menu-button">
+                <button class="button" id="addBtn" @click="handleButtonAction()">등록</button>
                 <button class="button" id="addBtn" @click="resetForm()">취소</button>
             </div>
         </div>
@@ -127,7 +128,7 @@
                         <td>{{ item.product_name }}</td>
                         <td>{{ item.product_writer }}</td>
                         <td>{{ item.product_date }}</td>
-                        <td><button class="button" style="margin-right: 10px;" @click="dataUpdate(item)">편집</button>
+                        <td><button class="button" style="margin-right: 10px;" @click="dataSelectOne(item)">편집</button>
                             <button class="button" @click="dataDelete(item.product_index)">삭제</button></td>
                     </tr>
                 </tbody>
@@ -273,12 +274,15 @@ export default {
                 option: vm.selectedSearchOption
             };
             axios({
-                url: "/dataSearch.json",
-                method: "post",
+                url: "/menuSearch.zz",
+                method: "get",
                 headers: {
                     "Content-Type": "application/json; charset=UTF-8",
                 },
-                data: searchPayload,  // 검색어를 함께 전송
+                params: {
+                    "option": searchPayload.option,
+                    "keyword": searchPayload.keyword
+                },
             })
                 .then(function (response) {
                     console.log("dataSearch - response : ", response.data);
@@ -389,7 +393,10 @@ export default {
         formTitle() {
             return this.isEditMode ? '상품 수정' : '상품 등록';
         },
-        
+        // 버튼 레이블을 동적으로 반환
+        buttonLabel() {
+            return this.isEditMode ? '수정' : '등록';
+        }
     },
     components: {
 

@@ -38,6 +38,23 @@
         </if>
     </select>
 
+    <select id="menuSearch" parameterType="HashMap" resultType="HashMap">
+        SELECT
+            product_index,
+            product_name,
+            product_category,
+            product_price,
+            product_writer,
+            product_explan,
+            product_date
+        FROM
+            product
+        WHERE
+            ${option} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY
+            product_index DESC
+    </select>
+
     <update id="menuUpdate" parameterType="java.util.HashMap">
         UPDATE product
         SET
