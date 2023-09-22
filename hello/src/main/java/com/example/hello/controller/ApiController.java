@@ -1,5 +1,7 @@
 package com.example.hello.controller;
 
+import com.example.hello.dto.CarDto;
+import com.example.hello.dto.CustomerDto;
 import com.example.hello.dto.UserInfoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -64,4 +66,35 @@ public class ApiController {
         log.info("dto info = {}", infoDto);
         return infoDto.toString();
     }
+
+
+//    POST
+//    URI: /user/(id)/info
+//
+//    {
+//        "name":"david",
+//        "email":"david@mail.com",
+//        "my_hobby": {
+//                "name":"play",
+//                "use": "football",
+//                "terms": 20
+//                    }
+//    }
+
+    @PostMapping(path = "/user/{id}/info")
+    public CustomerDto post1(@PathVariable(name = "id") String userId,
+                      @RequestBody CustomerDto customerDto){
+        log.info("post data user = {}", customerDto);
+        customerDto.setEmail("asdf@naver.com");
+        return customerDto;
+    }
+
+    @PostMapping(path = "/user/{id}/car")
+    public CarDto post2(@PathVariable(name = "id")String userId,
+                        @RequestBody CarDto carDto) {
+        log.info("post data user = {}", carDto);
+        carDto.setAge(20);
+        return carDto;
+    }
+
 }

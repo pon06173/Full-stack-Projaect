@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:text="${result}"></div>
+    <div th:text="${sample}"></div>
+
+    <script th:inline="javascript">
+        let msg = [[${result}]];
+        let dto = [[${sample}]];
+
+        console.log(msg);
+        console.log(dto.sno);
+    </script>
+</body>
+</html>

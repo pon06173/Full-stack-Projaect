@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li th:each="sample, state: ${samples}">
+            <a th:href="@{/sample/exview(sno=${sample.sno})}">
+                [[${sample.sno}]]-[[${sample.first}]]
+            </a>
+        </li>
+    </ul>
+</body>
+</html>
