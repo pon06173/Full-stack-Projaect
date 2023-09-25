@@ -38,7 +38,13 @@ public class UserService {
     */
 
     public UserDto getForObj(String name, int age){
-        URI uri = UriComponentsBuilder.fromUriString("http://localhost:9090").path("/apis/server").queryParam("name", name).queryParam("age", age).encode().build().toUri();
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:9090")
+                .path("/apis/server")
+                .queryParam("name", name)
+                .queryParam("age", age)
+                .encode()
+                .build()
+                .toUri();
         log.info("getForObj uri={}", uri.toString());
 
         UserDto res = restTemplate.getForObject(uri, UserDto.class);
@@ -59,7 +65,14 @@ public class UserService {
     * */
 
     public UserDto postForObj(String name, int age){
-        URI uri = UriComponentsBuilder.fromUriString("http://localhost:9090").path("/apis/server/user/{id}/pw/{pw}").queryParam("name", name).queryParam("age", age).encode().build().expand("cool", "1234").toUri();
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:9090")
+                .path("/apis/server/user/{id}/pw/{pw}")
+                .queryParam("name", name)
+                .queryParam("age", age)
+                .encode()
+                .build()
+                .expand("cool", "1234")
+                .toUri();
 
         var user = UserDto.builder().name(name).age(age).build();
 
@@ -67,10 +80,20 @@ public class UserService {
     }
 
     public UserDto exchange(String name, int age){
-        URI uri = UriComponentsBuilder.fromUriString("http://localhost:9090").path("/apis/server/user/{id}/pw/{pw}").queryParam("name", name).queryParam("age", age).encode().build().expand("cool", "1234").toUri();
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:9090")
+                .path("/apis/server/user/{id}/pw/{pw}")
+                .queryParam("name", name)
+                .queryParam("age", age)
+                .encode()
+                .build()
+                .expand("cool", "1234")
+                .toUri();
 
         var user = UserDto.builder().name(name).age(age).build();
-        var reqEntity = RequestEntity.post(uri).contentType(MediaType.APPLICATION_JSON).header("x-auth", "daegu").header("use-term", "keep").body(user);
+        var reqEntity = RequestEntity.post(uri).contentType(MediaType.APPLICATION_JSON)
+                .header("x-auth", "daegu")
+                .header("use-term", "keep")
+                .body(user);
 
         var resEntity = restTemplate.exchange(reqEntity, UserDto.class);
         log.info("server status code = {}", resEntity.getStatusCode());
