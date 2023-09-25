@@ -16,18 +16,21 @@
     "vue": "^3.3.4",
     "vue-loader": "^17.2.2",
     "vue-router": "^4.2.4",
-    "vue-style-loader": "^4.1.3",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "vue-style-loader": "^4.1.3"
   },
   "scripts": {
-    "prod": "set NODE_ENV=production&&node ./server/modules/web/Server.js",
-    "dev": "set NODE_ENV=development&&node ./server/modules/web/Server.js",
-    "windows-prod": "set NODE_ENV=production&&node ./server/modules/web/Server.js",
-    "windows-dev": "set NODE_ENV=development&&node ./server/modules/web/Server.js",
-    "linux-prod": "export NODE_ENV=production&&node ./server/modules/web/Server.js",
-    "linux-dev": "export NODE_ENV=development&&node ./server/modules/web/Server.js",
+    "prod": "NODE_ENV=production node ./server/modules/web/Server.js",
+    "dev": "NODE_ENV=development node ./server/modules/web/Server.js",
+    "windows-prod": "set NODE_ENV=production&& node ./server/modules/web/Server.js",
+    "windows-dev": "set NODE_ENV=development&& node ./server/modules/web/Server.js",
+    "linux-prod": "export NODE_ENV=production&& node ./server/modules/web/Server.js",
+    "linux-dev": "export NODE_ENV=development&& node ./server/modules/web/Server.js",
     "webpack-build": "webpack",
     "webpack-build-watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "np": "^4.15.1"
   }
 }
