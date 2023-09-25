@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li th:each="sample, state: ${samples}">
+            <span th:if="${sample.sno%5==0}">
+                [[${state.index}]]-[[${sample.first}]]
+            </span>
+            <span th:unless="${sample.sno%5==0}">
+                [[${state.index}]]-[[${sample.first}]]
+            </span>
+        </li>
+    </ul>
+</body>
+</html>
