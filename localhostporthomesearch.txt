@@ -1,0 +1,21 @@
+localhost:port/home/search
+
+
+thymeleaf: templates => /
+
+thy: templates/home/search.html (specified file not found)
+
+html: /search.html
+
+sol
+
+1. html: move templates/home/search.html
+
+=== or ===
+
+2. controller.java:
+	@RequestMapping("")
+	class {
+		@GetMapping("/search")
+		public void search() {}
+	}
