@@ -101,7 +101,7 @@
         <!-- testSourceDirectory: Test용 Java 소스 경로 -->
         <testSourceDirectory>${back-end-path}/test/java</testSourceDirectory>
         <!-- outputDirectory: 컴파일 후 .class 파일 저장 경로 -->
-        <outputDirectory>${build.directory}/classes</outputDirectory>
+        <outputDirectory>${project.build.directory}/classes</outputDirectory>
 
         <!-- resources: JAVA File 이외의 자원들을 classpath로 설정하기 위한 곳 -->
         <resources>
