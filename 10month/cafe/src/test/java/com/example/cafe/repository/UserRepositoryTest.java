@@ -27,8 +27,8 @@ class UserRepositoryTest {
         var user = UserEntity.builder()
                 .name("kim44")
                 .email("kim44@gmail.com")
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+//                .createdAt(LocalDateTime.now())
+//                .updatedAt(LocalDateTime.now())
                 .build();
 
         userRepository.save(user);
@@ -44,13 +44,13 @@ class UserRepositoryTest {
 
     @Test
     void dummyData() {
-//        var users = Arrays.asList(
-//                UserEntity.builder().name("jason").email("jason@gmail.com").createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build(),
-//                UserEntity.builder().name("turkey").email("turkey@gmail.com").createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build(),
-//                UserEntity.builder().name("keros").email("keros@gmail.com").createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build()
-//                );
-//
-//        userRepository.saveAll(users);
+        var users = Arrays.asList(
+                UserEntity.builder().name("jason").email("jason@gmail.com").createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build(),
+                UserEntity.builder().name("turkey").email("turkey@gmail.com").createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build(),
+                UserEntity.builder().name("keros").email("keros@gmail.com").createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build()
+                );
+
+        userRepository.saveAll(users);
         System.out.println("----------------------------------------");
         userRepository.findAll().stream().forEach(System.out::println);
     }
