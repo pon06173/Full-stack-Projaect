@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/bookcafe?useSSL=false&useUnicode=true&ServerTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: MySQL
+    password: qwer1234!
+
+  jpa:
+    show-sql: true
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      sql: true
+      hibernate:
+        format_sql: true
