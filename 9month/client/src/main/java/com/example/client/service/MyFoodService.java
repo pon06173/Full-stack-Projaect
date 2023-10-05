@@ -22,7 +22,13 @@ public class MyFoodService {
                 .query(query).build();
 
         var localRes = naverApis.searchLocal(localReq);
+
+
+
+
         var localItem = localRes.getItems().get(0);
+
+
         var title = localItem.getTitle();
         title = title.strip().replaceAll("<[^>]*>","");
 

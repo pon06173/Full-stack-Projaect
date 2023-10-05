@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class MyFoodDto {
+
+    private String resultCode;
     private String imgUrl;
     private String title;
     private String category;
