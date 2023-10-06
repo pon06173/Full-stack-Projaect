@@ -1,4 +1,3 @@
-
 server:
   port: 8081
 
@@ -9,3 +8,18 @@ naver:
   id: W9bHcJ9FAh8mNBAsjRSB
   secret: HRyFvtKx3F
 
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/food?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+
+  jpa:
+    show-sql: true
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true

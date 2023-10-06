@@ -41,6 +41,7 @@ public class MyFoodService {
                 .imgUrl(imageItem.getLink())
                 .title(title)
                 .addr(localItem.getAddress())
+                .addr(localItem.getAddress())
                 .roadAddr(localItem.getRoadAddress())
                 .homepage(localItem.getLink())
                 .category(localItem.getCategory())

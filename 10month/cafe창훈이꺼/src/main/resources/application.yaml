@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3307/cafe?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://127.0.0.1:3306/food?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: root
-    password: gch918918!
+    password: 0000
 
   jpa:
       show-sql: true
