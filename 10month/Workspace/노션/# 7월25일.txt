@@ -1,0 +1,16 @@
+# 7월25일
+
+https://www.w3schools.com/w3css/w3css_templates.asp
+
+- 외부 css 불러오기
+    
+    <link href="" rel="stylesheet">
+    
+- 외부 script 불러오기
+    
+    <script src=""></script>
+    
+- Bootstrap CDN 링크 사용:
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

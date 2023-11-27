@@ -1,0 +1,12 @@
+div.card {
+    width: 100px;
+    float: left;
+    background-color: pink;
+    padding: 20px;
+    margin: 20px;
+}
+
+div.card:nth-child(2n-1) {
+    background-color: skyblue;
+    color: white;
+}

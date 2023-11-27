@@ -1,0 +1,19 @@
+# 7월24일
+
+## Javascript Forms
+
+- 인터프리터 언어
+- 함수형 프로그래밍으로 객체지향도 가능.
+- HTML 엘리먼트와 콘텐트 추가, 제거
+- 엘리먼트 스타일 변경
+- 폼 유효성 검증
+- 풍부한 이벤트 핸들러
+- DOM 제어, BOM 제어, 쿠키 설정, 스토리지 데이터 제어
+- Ajax를 이용한 서버와 비동기 통신
+- WebSocket을 이용한 실시간 채팅
+- 동적 효과 및 애니메이션
+- Canvas 그래픽
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1a5c610b-ec28-4e94-b301-146b40ac999b/Untitled.png)
+
+## Javascript Form Validation(경고문)

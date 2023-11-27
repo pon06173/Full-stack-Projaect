@@ -1,0 +1,33 @@
+주문 이력 고객 주문아이디와 고객이름, 주문날짜를 출력
+select orderid,customerid,orderdate from mydb2.order;
+
+주문한 고객중의 주문아이디, 고객이름, 선적사 이름을 출력
+select o.orderid, c.customername, s.shippername from mydb2.order as o
+join customer as c on o.customerid = c.customerid
+join shipper as s on o.shipperid = s.shipperid;
+
+종업원 lastname king이 처리한 고객명단과 상품 이름 출력
+select c.customerName, p.productName from order_detail as od
+join mydb2.order as o on od.orderid = o.orderID
+join customer as c on o.customerid = c.customerid
+join product as p on od.productid = p.productID
+join employee as e on o.employeeid = e.employeeID
+where e.lastName = 'king';
+
+종업원 lastname king이 처리한 상품의 개수와 고객의 개수를 출력
+select count(c.customerid), count(p.productid) from order_detail as od
+join mydb2.order as o on od.orderid = o.orderID
+join customer as c on o.customerid = c.customerid
+join product as p on od.productid = p.productID
+join employee as e on o.employeeid = e.employeeID
+where e.lastName = 'king';
+
+1996-12-31 이후의 날짜별 주문개수 출력
+select o.orderDate, COUNT(*) from mydb2.order as o
+where orderDate >= '1996-12-31'
+group by orderdate;
+
+shipper 별 몇개의 주문이 처리되었는지 선적사 이름과 주문 카운터 출력
+select s.shipperName, COUNT(*) from mydb2.order as o
+join shipper as s on o.shipperid = s.shipperid
+GROUP BY s.shipperName;

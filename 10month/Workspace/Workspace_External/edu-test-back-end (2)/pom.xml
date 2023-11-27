@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>kr.co.edu</groupId>
+    <artifactId>edu-test</artifactId>
+    <packaging>war</packaging>
+    <version>1.0.0-BUILD-SNAPSHOT</version>
+
+    <properties>
+        <java-version>15</java-version>
+        <org.springframework.version>5.3.29</org.springframework.version>
+        <back-end-path>${project.basedir}/server</back-end-path>
+        <front-end-path>${project.basedir}/client</front-end-path>
+    </properties>
+
+    <repositories>
+        <!-- Apache재단 Maven 의존성 라이브러리 저장소 -->
+        <repository>
+            <id>mvn2s</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <!-- JSON Parsing 라이브러리 - 해당 라이브러리 다운로드 시 core, annotations 이 같이 다운 받아짐 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+
+        <!-- DB Connection Pool : HikariCP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+
+        <!-- JDBC : MariaDB -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+
+        <!-- SQL 작성 및 DBCP, JDBC 인터페이스 기능 담당 라이브러리 Mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.10</version>
+        </dependency>
+
+        <!-- SQL 작성 및 DBCP, JDBC 인터페이스 기능 담당 라이브러리 Mybatis(SpringFramework와 인터페이스 용) - 해당 라이브러리 활용 시 의존성 라이브러리's mybatis, spring-context, spring-jdbc, spring-batch-infrastructure -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <!-- finalName: 최종 packaging된 file의 이름 -->
+        <finalName>ROOT</finalName>
+        <!-- directory: 빌드 경로 (다른 곳에서 ${deploy.path} 활용하면 됨) -->
+        <directory>${project.basedir}/target</directory>
+        <!-- sourceDirectory: Java 및 관련 자원 소스 경로 -->
+        <sourceDirectory>${back-end-path}/main/java</sourceDirectory>
+        <!-- testSourceDirectory: Test용 Java 소스 경로 -->
+        <testSourceDirectory>${back-end-path}/test/java</testSourceDirectory>
+        <!-- outputDirectory: 컴파일 후 .class 파일 저장 경로 -->
+        <outputDirectory>${build.directory}/classes</outputDirectory>
+
+        <!-- resources: JAVA File 이외의 자원들을 classpath로 설정하기 위한 곳 -->
+        <resources>
+            <resource>
+                <directory>${back-end-path}/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- maven compile plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${java-version}</source><!-- 소스코드 Java 버전 -->
+                    <target>${java-version}</target><!-- compile시 결과물 Java 버전 -->
+                </configuration>
+            </plugin>
+
+            <!-- maven war package plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <!-- webResources: web 관련 자원들의 (html, js, css 등..) 경로 -->
+                    <webResources>
+                        <resource>
+                            <directory>${front-end-path}</directory>
+                        </resource>
+                    </webResources>
+                    <!-- webappDirectory: package된 후 web관련 자원들이 배포될 경로 -->
+                    <!-- <webappDirectory>${build.directory}</webappDirectory>-->
+                    <!-- web.xml 경로 -->
+                    <webXml>client/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

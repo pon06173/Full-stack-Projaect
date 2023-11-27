@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>뉴스 이미지 크롤링 결과</h1>
+    <ul>
+    <%
+    imgList.forEach((imgUrl, i) => {
+    %>
+        <li><img width="500" src="<%=imgUrl%>" /></li>
+    <%
+    });
+    %>
+</ul>
+</body>
+</html>

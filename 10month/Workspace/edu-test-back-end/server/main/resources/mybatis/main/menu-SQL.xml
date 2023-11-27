@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.edu.menu.dao.MenuDAO">
+
+    <insert id="menuInsert" parameterType="java.util.HashMap">
+        INSERT INTO product (
+            product_name
+            , product_category
+            , product_price
+            , product_writer
+            , product_explan
+            , product_date
+        ) VALUES (
+            #{product_name}
+            , #{product_category}
+            , #{product_price}
+            , #{product_writer}
+            , #{product_explan}
+            , CAST(#{product_date} AS DATE)
+        )
+    </insert>
+
+    <select id="menuSelectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+            product_name
+            , product_category
+            , product_price
+            , product_writer
+            , product_explan
+            , product_date
+        FROM
+            product
+        <if test="product_name != null and product_name != ''">
+        WHERE
+            product_name like CONCAT('%', #{product_name}, '%')
+        </if>
+    </select>
+</mapper>

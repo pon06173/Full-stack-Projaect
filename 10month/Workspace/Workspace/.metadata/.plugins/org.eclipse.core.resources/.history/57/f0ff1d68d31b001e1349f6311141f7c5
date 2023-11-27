@@ -1,0 +1,14 @@
+
+public class Test3 {
+	static int test(int a, int b) {
+		System.out.println("test 함수 실행");
+		return a + b;
+	}
+	
+	
+	public static void main(String[] args) {
+		test(2, 5);
+		}
+	}
+
+

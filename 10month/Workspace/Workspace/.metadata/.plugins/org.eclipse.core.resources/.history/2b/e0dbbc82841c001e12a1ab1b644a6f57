@@ -1,0 +1,13 @@
+
+public class Circle {
+	int radius = 5;
+	String color = "빨강";
+	
+	Circle(int r){
+		System.out.println(radius);
+	}
+	double getRound() {
+		double round = 2 * 3.14 * radius; 
+		return round;
+	}
+}

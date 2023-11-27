@@ -1,0 +1,63 @@
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class Test2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//		int sum = 0;
+		
+//		for(int i = 1; i <=10; i++) {
+//			sum += i;
+//		System.out.println(sum);
+//		}
+		
+//		int i = 1;
+//		while (i <= 100) {
+//			
+//			
+//			if (i==50) {
+//				
+//				break;
+//			}
+//			System.out.println(sum);
+//			sum += i;
+//			i++;
+//		}
+//		System.out.println(sum);
+//		Scanner sc = new Scanner(System.in);
+//        String str = sc.next();
+//        int n = sc.nextInt();
+//
+//		for (int i = 0; i < n; i++) {
+//			System.out.print(str);
+//		}
+		
+//		Scanner sc = new Scanner(System.in);
+//        int a = sc.nextInt();
+//        int b = sc.nextInt();
+//        
+//        System.out.println("a: " + a);
+//        System.out.println("b: " + b);
+		
+	        Scanner sc = new Scanner(System.in);
+			String inputString = " ";
+
+			inputString = sc.next();
+			
+
+			char[] change = inputString.toCharArray();
+			
+
+			for (int i = 0; i < change.length; i++) {
+	            if (change[i] >= 'A' && change[i] <='Z') {
+					change[i] = (char) (change[i] + 32);
+				} else if (change[i] >= 'a' && change[i] <= 'z') {
+					change[i] = (char) (change[i] - 32);
+				} else {
+					System.out.println("잘못된 입력");
+					break;
+				}
+	}
+
+}

@@ -1,0 +1,22 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+//		int a = 10;
+//		byte b = 10;
+//		short c = 10;
+//		long d = 10;
+//		
+//		System.out.println(a);
+//		System.out.println(Integer.SIZE / 8);
+//		System.out.println(c);
+//		System.out.println(d);
+		
+		float a = 123.45F;
+//		double b = 12.34;
+		
+//		char a ='A';
+		System.out.println(a);
+		
+	}
+}

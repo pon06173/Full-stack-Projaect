@@ -1,0 +1,486 @@
+# 7월21일
+
+# 도전 문제
+
+- 웹 사이트 메인 레이아웃 구현
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0b76fd3e-9e02-4412-b255-524ec105bc4a/Untitled.png)
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8ecb83ed-2739-4a3f-90c8-8cf09f3af47c/Untitled.png)
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/694530f8-9461-4bd4-a344-77dd1dbeccc2/Untitled.png)
+    
+
+- 반응형 웹 실습
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/039a3e22-c613-4c71-8ca3-57a75263d4db/Untitled.png)
+    
+
+## 소스코드(실습)
+
+- test01.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        ul {
+          list-style: none;
+          border: 1px solid blue;
+          /* padding: 10px 50px 20px 100px /* 상 10 우 50 하 20 좌 100(시계방향) */ 
+          padding-left: 0;
+        }
+        li {
+          border: 1px solid red;
+          color: orange;
+          font-size: 24pt;
+          padding: 20px;
+          margin: 5px;
+          width: 100px;
+          height: 100px;
+          text-align: center;
+          line-height: 100px; /* 글자를 센터로 할려면height랑 높이를 같게해야함 */
+        }
+        li:first-child {
+          border: 1px solid green;
+        }
+        li:nth-child(5) {
+          background-color: yellow;
+        }
+      </style>
+    </head>
+    <body>
+      
+      <h1>CSS 선택기</h1>
+      <div id="box">box</div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>4</li>
+        <li>3</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+      </ul>
+    </body>
+    </html>
+    ```
+    
+- test02.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        ul#top_menu {
+          list-style: none;
+          border: 0px solid black;
+          padding: 0;
+          /* height: 60px; */
+          width: 1000px;
+          overflow: visible; /* li를 float해서 가로로 하면 공중부양됨 */
+          
+        }
+        #top_menu > li {
+          line-height: 60px;
+          text-align: center;
+          border-top:1px solid red ;
+          border-bottom: 1px solid red;
+          margin: 0;
+          width: 200px;
+          height: 60px;
+          float: left;
+          /* box-sizing: border-box; */
+          
+          color: white;
+          font-weight: bold;
+          
+        }
+        #top_menu > li:hover {
+          background-color: pink;
+          
+        }
+        li div {
+          display: none;
+        }
+    
+        #top_menu > li:hover > div {
+          display: block;
+        }
+        a{
+          text-decoration: none;
+          color: black;
+        }
+        a:visited {
+          color: red;   
+        }
+        /* mouse over link */
+        a:hover {
+          color: hotpink;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>길동이의 홈페이지</h1>
+      <nav>
+        <ul id="top_menu">
+          <li><a href="https://www.naver.com">HOME</a></li>
+          <li><a href="https://www.naver.com">PROFILE<div>hello</div></a></li>
+          <li><a href="https://www.naver.com">GALERY</a></li>
+          <li><a href="https://www.naver.com">LECTURE</a></li>
+          <li><a href="https://www.naver.com">BOARD</a></li>
+        </ul>
+      </nav>
+    </body>
+    </html>
+    ```
+    
+- test03.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        input[type=text] {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0px;
+          border-radius: 10px;
+        }
+        input[type=submit] {
+          width: 200px;
+          padding: 20px;
+          background-color: antiquewhite;
+          color: navy;
+          font-weight: bold;
+        }
+        input[type=submit]:hover {
+          background-color: pink;
+        }
+        input[name=input1] {
+          border: 2px solid red;
+          /* border-radius: 10px; */
+        }
+        input[name=input2] {
+          border: 2px solid blue;
+          background-color: skyblue;
+          border-bottom: 4px solid yellow;
+          /* border-radius: 10px; */
+        }
+        input[name=input3] {
+          width: 200px;
+          transition: width 0.4s ease-in-out; /*ease-in-out 속도 변경가능 홈페이지 참고*/
+        }
+        input[name=input3]:focus {
+          background-color: green;
+          width: 100%;
+        }
+        input[name=input1]:focus {
+          background-color: pink;
+          /* border-radius: 10px; */
+        }
+        input[name=input2]:focus {
+          background-color: skyblue;
+          /* border-radius: 10px; */
+        }
+      </style>
+    </head>
+    <body>
+      <h1>html Form 스타일 설정</h1>
+      <form action="">
+        <input type="text"></input>
+        <input type="text" name="input1"></input>
+        <input type="text" name="input2"></input>
+        <input type="text" name="input3"></input>
+        <input type="submit">
+      </form>
+    </body>
+    </html>
+    ```
+    
+- test04.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>CSS 실습 예제</title>
+        <style>/* 내부 스타일(internel) */
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #f0f0f0;
+            }
+            h1 {
+              color: red; text-shadow: 2px 2px 2px brown;
+            }
+            p{
+              border: 1px dashed black;
+              font-size: 16px;
+              color: #333;
+              line-height: 18px;
+            }
+            div p {
+              color: #ff4500;
+            }
+    
+            em {
+              font-style: italic;
+            }
+    
+            .override-em {
+                font-style: normal;
+            }
+    
+            .box-example {
+                width: 200px;
+                height: 100px;
+                padding: 10px;
+                border: 2px solid #000;
+                margin: 20px;
+            }
+    
+        </style>
+    </head>
+    <body>
+        <h1 style="color: brown; text-shadow: 2pt 2pt 2pt black;">스타일 적용 예제</h1>
+        <p>This is a paragraph with <span class="highlight">highlighted</span> text.</p>
+        <p id="special">This is a special paragraph with <em>italic</em> text.</p>
+        <div>
+            <p>This paragraph is inside a div and has a <span class="highlight">highlighted</span> text color.</p>
+        </div>
+        <p class="override-em">This paragraph overrides the <em>italic</em> style of the <code>em</code> selector.</p>
+    
+        <div class="box-example">
+            This is an example of the box model.
+        </div>
+    </body>
+    </html>
+    ```
+    
+- test05.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        div {
+          border: 3px solid black;
+          padding: 5px;
+          margin: 5px;
+          border-radius: 8px;
+        }
+        div.container {
+          left: 0px;
+          top: 5px;
+          position: relative;
+          width: 600px;
+          height: 900px;
+        }
+        div#box1 {
+          position: absolute;
+          background-color: bisque;
+          left: 0px;
+          top: 0px;
+          width: 600px;
+          height: 280px;
+          z-index: 100;
+          box-sizing: border-box;
+        }
+        div#box2 {
+          position: absolute;
+          left: 0px;
+          top: 290px;
+          background-color: aquamarine;
+          width: 300px;
+          height: 300px;
+          box-sizing: border-box;
+          /* z-index: ; */
+        }
+        div#box3 { 
+          position: absolute;
+          left: 310px;
+          top:290px;
+          width: 290px;
+          height: 300px;
+          background-color: antiquewhite;
+          box-sizing: border-box;
+        }
+        div#box4 {
+          position: absolute;
+          left: 0px;
+          top: 600px;
+          width: 600px;
+          height: 280px;
+          background-color: aquamarine;
+          box-sizing: border-box;
+        }
+      </style>
+    </head>
+    <body>
+      <header>
+        <h1>컴스터디 코딩 스쿨</h1>
+      </header>
+      <div class="container">  
+        <div id="box1">BOX1</div>
+        <div id="box2">BOX2</div>
+        <div id="box3">BOX3</div>
+        <div id="box4">BOX4</div>
+      </div>
+    </body>
+    </html>
+    ```
+    
+- test06.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        div, header, nav, aside, article, footer,section {
+          border: 1px solid brown;
+          margin: 3px;
+          padding: 3px;
+          border-radius: 5px;
+          text-align: center;
+        }
+        aside, article {
+          float: left;
+          height: 300px;
+        }
+        aside {
+          width: 20%;
+        }
+        article {
+          width: 55%;
+        }
+        
+        div.container {
+          width: 1000px;
+        }
+        footer {
+          clear: both;
+        }
+        main article section:nth-child(1) {
+          height: 100px;
+        }
+        main article section:nth-child(2), main article section:nth-child(3) {
+          height: 170px;
+          width: 47%;
+          float: left;
+        }
+        
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <header>
+          <h1>컴스터디 코딩 스쿨</h1>
+        </header>
+        <nav>
+          Home | Profile | Gallery | Lecture | Board
+        </nav>
+        <main>
+          <aside>Left</aside>
+          <article>
+            <section>Banner</section>
+            <section>Board list</section>
+            <section>Lecture list</section>
+          </article>
+          <aside>Right</aside>
+        </main>
+        <footer>
+          <address>서울시 종로구 전시동</address>
+        </footer>
+      </div>
+    </body>
+    </html>
+    ```
+    
+- test07.html
+    
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>CSS Grid 레이아웃</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #eee;
+            }
+    
+            .container {
+                border: 0px solid black;
+                display: flex;
+                background-color: #f0f0f0;
+                padding: 20px;
+                justify-content: space-between;/* justify 양쪽의 간격을 맞춰라 */
+                height: 300px;
+            }
+    
+            .item {
+                line-height: 260px;
+                border: 1px solid red;
+                padding: 20px;
+                background-color: #007bff;
+                color: white;
+                font-size: 14px;
+            }
+    
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+            <div class="item">Item 6</div>
+        </div>
+        <div class="container">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+          <div class="item">Item 5</div>
+          <div class="item">Item 6</div>
+      </div>
+    </body>
+    </html>
+    
+    ```
+    
+- test08.html
+- test09.html
+- test10.html
+
+- ease-in-out 속도 변경가능 홈페이지 참고
+    
+    [https://cubic-bezier.com](https://cubic-bezier.com/)
+    
+
+form

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Todo 항목을 입력할 EditText -->
+    <EditText
+        android:id="@+id/editTextTodo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="텍스트 입력"
+        android:inputType="text"
+        android:padding="8dp"
+        android:singleLine="true" />
+
+    <!-- Todo 항목을 추가할 Button -->
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:padding="8dp"
+        android:text="추가"
+        app:rippleColor="#FA0000" />
+
+    <!-- Todo 항목을 표시할 RecyclerView 추가 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        android:layout_height="match_parent" />
+</LinearLayout>

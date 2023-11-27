@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+    // Javascript 클로저 개념.
+    // 함수가 생성될때 초기화된 속성의 값을 그대로 유지 한다.
+    function makeClosureCounter(initValue=0) {
+        let count = initValue;
+        return (function Counter() {
+            console.log("---- count inner Counter() => " + count);
+            return ++count;
+        });
+    }
+
+    const counterFn = makeClosureCounter(); // 내부의  count 변수는 0으로 초기화.
+    const counterFn100 = makeClosureCounter(100); //내부의 count 변수는 100 초기화.
+
+    console.log("counterFn() => ", counterFn()); // 1
+    console.log("counterFn100() => ", counterFn100()); // 101
+
+    console.log("counterFn() => ", counterFn()); // 2
+    console.log("counterFn100() => ", counterFn100()); // 102
+</script>
+
+</body>
+</html>

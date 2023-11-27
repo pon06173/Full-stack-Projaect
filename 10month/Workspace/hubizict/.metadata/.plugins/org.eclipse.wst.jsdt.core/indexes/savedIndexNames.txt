@@ -1,0 +1,2 @@
+INDEX VERSION 1.4+C:\Users\DCU\Desktop\Workspace\hubizict\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2644829662.index

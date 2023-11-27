@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background-color: yellow;
+            position: absolute;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>드래그 앤 드랍 예제</h1>
+    <hr />
+    <div id="box">Box</div>
+
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script>
+        $("#box").on('mousedown',function(event) {
+            $(this).css("position",'absolute');
+            this.gapX = event.clientX - $(this).offset().left;
+            this.gapY = event.clientY - $(this).offset().top;
+            $(document).on('mousemove',function(evt) {
+                $(box).css("left",  evt.clientX - $(box)[0].gapX + 'px');
+                $(box).css("top",  evt.clientY - $(box)[0].gapY + 'px');
+            });
+        });
+        $(document).mouseup(function() {
+            $(document).off('mousemove');
+        });
+    </script>
+</body>
+</html>

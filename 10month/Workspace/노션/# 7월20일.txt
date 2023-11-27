@@ -1,0 +1,364 @@
+# 7월20일
+
+- 실습 문제
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21b93fd1-03e4-453e-a9c6-20541a79e4bb/Untitled.png)
+    
+
+### 도전 문제
+
+1. 1호 서식 이력서를 HTML 테이블 태그 등을 이용해서 구현 하세요.
+- 웹 개발 참고 홈페이지https://www.w3schools.com/
+
+JSP 자바 서버 프레임워크
+Spring MVC(Java 기반)
+Node.js
+
+웹 퍼블리셔(웹디자인) html,css
+프론트엔드 개발자 javascript
+
+JAVA = language (JSP, 응용프로그램 개발)
+
+Javascript = 웹브라우저 등에서 실행 되는 스크립트 언어 ( Node.js, jQuery, React.js …)
+
+- <h1~h6> 점차 글자가 작아짐 <h7>은 없음.
+- **`<strong>` 굻기와** **`<em>`** 기울기태그를 함께 사용하여 텍스트를 동시에 강조하고 이탤릭체로 표시합니다.
+
+- 폼(Form)은 웹 페이지에서 사용자로부터 정보를 입력받거나 전송하기 위한 요소입니다.
+    
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Registration Form</title>
+    </head>
+    <body>
+    <h1>Registration Form</h1>
+    <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br />
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br />
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br />
+    <input type="submit" value="Register">
+    </form>
+    </body>
+    </html>
+    
+
+- 위의 예제에서는 **`<table>`** 태그로 테이블을 생성하고, **`<tr>`** 태그로 각 행을 작성합니다. 헤더 셀로 **`<th>`** 태그를 사용하고, 데이터 셀로 **`<td>`** 태그를 사용합니다.
+    
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Styled Table</title>
+    </head>
+    <body>
+    <h1>Styled Table</h1>
+    <table border="1">
+    <tr>
+    <th>이름</th>
+    <th>나이</th>
+    </tr>
+    <tr>
+    <td>John</td>
+    <td>25</td>
+    </tr>
+    <tr>
+    <td>Jane</td>
+    <td>30</td>
+    </tr>
+    </table>
+    </body>
+    </html>
+    
+
+- CSS
+    
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Styled Table</title>
+    <style>
+    table {
+    border-collapse: collapse;/셀 사이에 관계를 무시하겠다.(=실선)
+    width: 100%;
+    }
+    
+    ```
+    th, td {
+      border: 1px solid black;
+      padding: 8px; /안쪽의 간격
+      text-align: left; /글자 정렬
+    }
+    
+    th {
+      background-color: lightgray;
+    }
+    
+    ```
+    
+    </style>
+    </head>
+    <body>
+    <h1>Styled Table</h1>
+    <table>
+    <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Country</th>
+    </tr>
+    <tr>
+    <td>John</td>
+    <td>25</td>
+    <td>USA</td>
+    </tr>
+    <tr>
+    <td>Jane</td>
+    <td>30</td>
+    <td>Canada</td>
+    </tr>
+    </table>
+    </body>
+    </html>
+    
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f417e744-63ad-4702-a13c-a041761b42fe/Untitled.png)
+
+### ***VS Code에서 코딩할 때***
+
+- *html>head>title 와 같이 입력하면 다음과 같이 생성*
+
+```html
+<html>
+<head>
+    <title></title>
+</head>
+</html>
+```
+
+- *html>head+body 와 같이 입력하면 다음과 같이 생성*
+
+```html
+<html>
+<head></head>
+<body>
+    
+</body>
+</html>
+```
+
+- *ul>li*5 입력  시 다음 코드 한번에 생성*
+
+```html
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+```
+
+- shift + alt 누른 채로 연속된 여러 줄 클릭하면 그 줄들 한번에 코딩 가능
+- alt만 누르면 띄어져 있는 여러 줄들을 한번에 선택 가능
+- Ctrl + K + F로 줄 맞춤
+
+- 내부 스타일 시트 코딩1
+HTML 내부 스타일 시트는 <head></head> 태그 안에 다음과 같이 <style></style>태그를 이용하여 작성(각 태그 별 적용할 스타일 지정)
+
+```html
+<style>
+        p {
+            color: red;
+            border: 1px solid red;
+        }
+        strong {
+            color: blue;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            border: 3px dotted orange;
+        }
+</style>
+```
+
+- <a>태그를 통해 이미지 클릭 시 웹 사이트 이동(target=”blank” 옵션으로 새 창으로 띄우기)
+
+```html
+<a href="https://www.naver.com" target="blank">
+        <img src="images/example.jpg" alt="샘플 이미지" width="400" height="300">
+</a>
+```
+
+- <a>태그로 링크를 만들어 iframe 안에 html파일에 작성한 내용 보여주기
+<a> 태그에 target=”ibox” 옵션을 통해서 name=”ibox”인 iframe에 링크 걸기
+<iframe>태그에서 frameborder옵션을 통해서 테두리 값 설정
+
+```html
+<ul>
+        <li><a href="ex01.html" target="ibox">ex01</a></li>
+        <li><a href="ex02.html" target="ibox">ex02</a></li>
+        <li><a href="ex03.html" target="ibox">ex03</a></li>
+        <li><a href="ex04.html" target="ibox">ex04</a></li>
+</ul>
+<iframe name="ibox" src="ex01.html" width="500" height="500" frameborder="0"></iframe>
+```
+
+- 공백 입력을 위해선 &nbsp; 사용
+
+```html
+<main>
+        <article>
+            <section>
+                Hell&nbsp;&nbsp;&nbsp;&nbsp;o
+            </section>
+        </article>
+</main>
+```
+
+- 내부 스타일 시트 코딩2
+section:nth-child(2)의 경우  section이 여러개 있을 경우 괄호 안의 숫자에 해당하는 
+section에만 적용
+
+```html
+<style>
+        main {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        article {
+            border: 1px solid orange;
+            padding: 5px;            
+        }
+        section {
+            border: 1px solid red;
+            padding: 5px;
+            margin: 5px;
+            height: 200px;
+            color: yellowgreen;
+        }
+        section:nth-child(2) {
+            background-image: url(images/image1.jpg);
+            background-size: 320px;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+<vw> = 화면을 꽉차게 함
+```
+
+- 내부 스타일 시트 코딩3
+div#’아이디이름’ 으로 body에서 작성한 각 div 태그의 id에 맞춰 스타일 적용
+
+```html
+<style>
+        div {
+            width: 100vw;
+            height: 100vh;
+            margin: 10px;
+            background-color: aqua;
+        }
+        div#box2 {
+            background-color: navy;
+        }
+        div#bottom {
+            background-color: brown;
+        }
+</style>
+
+*만약 현재 스크린 크기가 height = 1000px, width = 800px 이라면
+1vh = 10px, 1vw = 8px
+
+height: 50vh이라면
+height - 500px 만큼 높이 지정
+
+width: 50vw이라면
+width - 400px 만큼 너비 지정
+```
+
+- vw, vh의 자세한 내용
+
+[](https://programming119.tistory.com/93)
+
+- <a href=”mailto:메일주소”></a>를 통해서 메일 전송 가능
+
+```html
+<li><a href="mailto:comstudy21@naver.com">comstudy21</a></li>
+```
+
+- 부트스트랩 적용 코드
+
+```html
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+```
+
+- <form> 태그
+
+```html
+<form action="ex08.html" method="get">
+    <!-- 라벨 for 지정하면 같은 이름의 아이디의 input이 클릭 됨. -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="kim" required>
+    <br />
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="kch@naver.com" required>
+    <br />
+    <label for="gender">성별:</label>
+    <input type="radio" id="gender" name="gender" value="M" required> 남
+    <input checked type="radio" id="gender" name="gender" value="M" required> 여
+    <br />
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" value="918918" required>
+    <br />
+    <input type="submit" value="Register">
+</form>
+```
+
+1. **`<form>`** 태그: 폼 생성 및 데이터 전송 방식
+    - **`<form>`** 태그는 데이터 입력을 위한 폼을 생성합니다.
+    - **`action`** 속성을 사용하여 폼이 제출될 URL을 지정합니다. 이 URL은 데이터가 전송되는 서버의 주소입니다.
+    - **`method`** 속성을 사용하여 데이터 전송 방식을 지정합니다. 가장 일반적인 값으로는 "GET"과 "POST"가 있습니다.
+    
+    예제:
+    
+    ```html
+    <form action="submit.jsp" method="post">
+      <!-- 폼 요소들 -->
+    </form>
+    ```
+    
+2. GET 및 POST 메서드의 차이점:
+    - GET 메서드: 데이터를 URL의 일부로 전송합니다. 데이터는 URL 파라미터 형태로 전송되며, URL 끝에 쿼리 문자열로 추가됩니다. 보안에 취약할 수 있지만, 북마크 가능하고 캐싱이 가능합니다.
+    - POST 메서드: 데이터를 HTTP 요청 본문에 포함하여 전송합니다. URL에 데이터가 노출되지 않으며, 보안적으로 안전합니다. 데이터 길이에 제한이 없고, 캐싱되지 않습니다.
+- 정의 리스트 (**`<dl>`**, **`<dt>`**, **`<dd>`** 태그):
+    - **`<dl>`** 태그는 정의 리스트를 생성합니다.
+    - **`<dt>`** 태그는 용어를 정의합니다.
+    - **`<dd>`** 태그는 용어에 대한 설명을 작성합니다.
+    
+    예제:
+    
+    ```html
+    <dl>
+      <dt>HTML</dt>
+      <dd>웹 페이지 구조를 정의하는 마크업 언어</dd>
+      <dt>CSS</dt>
+      <dd>웹 페이지 스타일링을 담당하는 스타일 시트 언어</dd>
+    </dl>
+    
+    ```
+    
+    - 위의 예제에서는 정의 리스트를 생성하고, **`<dt>`** 태그로 용어를 작성하고, **`<dd>`** 태그로 해당 용어에 대한 설명을 작성합니다.
+    - 예제 실행 결과

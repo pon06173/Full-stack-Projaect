@@ -1,0 +1,35 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+//		int a = 10;
+//		byte b = 10;
+//		short c = 10;
+//		long d = 10;
+//		
+//		System.out.println(a);
+//		System.out.println(Integer.SIZE / 8);
+//		System.out.println(c);
+//		System.out.println(d);
+		
+//		float a = 123.45F;
+//		double b = 12.34;
+		
+//		char a ='A';
+//		System.out.println(a);
+		
+//		boolean a = true;
+//		boolean b = false;
+		
+//		String a = "안녕하세요.";
+//		System.out.println(a.substring(2, 6));
+		int x = 10;
+		int y = 3;
+		
+		System.out.println(x + y);
+		System.out.println(x - y);
+		System.out.println(x * y);
+		System.out.println(x / y);
+		System.out.println(x % y);
+	}
+}
