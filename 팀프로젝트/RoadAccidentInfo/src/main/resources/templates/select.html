@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>029 : 제이쿼리(jQuery) Select(셀렉트 박스) 사용법 정리</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> -->
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('button').click(function() {
+					$('#output').text('');
+				});
+
+
+				/* ==== # Checkbox Change Event ==== */
+				/* Checkbox change event */
+				$('#slctColors').change(function() {
+					var value = $(this).val();
+					$(this).css('color', value);
+				});
+
+
+				/* ==== # Value 알아내기 ==== */
+				/* Selected Value */
+				$('#btnSelectedValue').click(function() {
+					var text = $('#slctColors option:selected').text();
+					var value = $('#slctColors').val();
+					$('#output').text("Selected Value : " + text + "/" + value);
+				});
+
+				/* Deselected Values */
+				$('#btnDeselectedValues').click(function() {
+					var str = "";
+					$('#slctColors option:not(:selected)').each(function(){
+						var text = $(this).text();
+						var value = $(this).val();
+						str += text + "/" + value + ", ";
+					});
+					$('#output').text("Deselected Values : " + str);
+				});
+
+
+				/* ==== # Value 바꾸기 ==== */
+				/* Blue로 바꾸기 */
+				$('#btnChangeValue').click(function() {
+					$('#slctColors').val('#0000ff');
+
+					// value는 모르고 text만 알때
+					// $('#slctColors option').each(function() {
+					//	if($(this).text() == 'Blue')
+					//		$(this).prop('selected', true);
+					// });
+
+					$('#slctColors').trigger('change');	// change event를 발생시킨다.
+				});
+
+				/* 5번째(Green)로 바꾸기 */
+				$('#btnChange5index').click(function() {
+					// CSS Selector eq로 찾기
+					// $('#slctColors option:eq(4)').prop('selected', true);	// index는 0부터 시작
+
+					// jQuery eq() function 사용
+					$('#slctColors option').eq(4).prop('selected', true);	// index는 0부터 시작
+
+					$('#slctColors').trigger('change');	// change event를 발생시킨다.
+				});
+
+
+				/* ==== # 개수 확인 ==== */
+				/* 전체 option 개수 */
+				$('#btnTotalNumber').click(function() {
+					var num = $('#slctColors option').length;
+					$('#output').text("전체 option 개수 : " + num);
+				});
+
+				/* 전체 Selected option 개수 */
+				$('#btnSelectedNumber').click(function() {
+					var num = $('#slctColors option:selected').length;
+					$('#output').text("전체 Selected option 개수 : " + num);
+				});
+
+				/* 전체 Selected option 개수 */
+				$('#btnDeselectedNumber').click(function() {
+					var num = $('#slctColors option:not(:selected)').length;
+					$('#output').text("전체 Deselected option 개수 : " + num);
+				});
+
+
+				/* ==== # Select Box Disabled ==== */
+				/* Select 여부 확인 */
+				$('#btnSelectCheckDisabled').click(function() {
+					var b = $('#slctColors').prop('disabled');		// jQuery 1.6 이상 (jQuery 1.6 미만에는 prop()가 없음, checked, selected, disabled는 꼭 prop()를 써야함)
+					// var b = $('#slctColors').attr('disabled');	// jQuery 1.6 미만 (jQuery 1.6 이상에서는 checked, undefined로 return됨)
+					// var b = $('#slctColors').is('disabled');
+					$('#output').text("Select 여부 확인 : " + b);
+				});
+
+				/* Select Disabled 설정 */
+				$('#btnSelectChangeDisabled').click(function() {
+					$('#slctColors').prop('disabled', true);
+				});
+
+				/* Select Disabled 해제 */
+				$('#btnSelectChangeUndisabled').click(function() {
+					$('#slctColors').prop('disabled', false);
+				});
+
+				/* Select Disabled 반전 */
+				$('#btnSelectToggleDisabled').click(function() {
+					$('#slctColors').prop('disabled', !$('#slctColors').prop('disabled'));
+				});
+
+
+				/* ==== # Select Box Disabled ==== */
+				/* Red Disabled 여부 확인 */
+				$('#btnOptionRedCheckDisabled').click(function() {
+					var b = false;
+					// value로 찾기
+					b = $('#slctColors option[value="#ff0000"]').prop('disabled');
+
+					// value는 모르고 text만 알때
+					// $('#slctColors option').each(function() {
+					// 	if($(this).text() == 'Red')
+					// 		b = $(this).prop('disabled');
+					// });
+
+					$('#output').text("Red Disabled 여부 확인 : " + b);
+				});
+
+				/* Red Disabled 설정 */
+				$('#btnOptionRedChangeDisabled').click(function() {
+					$('#slctColors option[value="#ff0000"]').prop('disabled', true);
+				});
+
+				/* Red Disabled 해제 */
+				$('#btnOptionRedChangeUndisabled').click(function() {
+					$('#slctColors option[value="#ff0000"]').prop('disabled', false);
+				});
+
+				/* Red Disabled 반전 */
+				$('#btnOptionRedToggleDisabled').click(function() {
+					var $optionRed = $('#slctColors option[value="#ff0000"]');
+					$optionRed.prop('disabled', !$optionRed.prop('disabled'));
+				});
+
+				/* 전체 Option Disabled 설정 */
+				$('#btnOptionAllChangeDisabled').click(function() {
+					$('#slctColors option').each(function() {
+						$(this).prop('disabled', true);
+					});
+				});
+
+				/* 전체 Option Disabled 해제 */
+				$('#btnOptionAllChangeUndisabled').click(function() {
+					$('#slctColors option').each(function() {
+						$(this).prop('disabled', false);
+					});
+				});
+
+				/* 전체 Option Disabled 반전 */
+				$('#btnOptionAllToggleDisabled').click(function() {
+					$('#slctColors option').each(function() {
+						$(this).prop('disabled', !$(this).prop('disabled'));
+					});
+				});
+
+
+
+				/* initial */
+				// optgroup color 설정
+				$('#slctColors optgroup').each(function(){
+					$(this).css('color', $(this).children('option:nth-child(2)').val());
+				});
+				// option color 설정
+				$('#slctColors option').each(function(){
+					$(this).css('color', $(this).val());
+				});
+				// 초기 HTML에 설정된 상태를 확인한다.
+				$('#slctColors').trigger('change');	// change event를 발생시킨다.
+			});
+		</script>
+
+		<style type="text/css">
+			div{margin-bottom:20px;}
+			span{display:block;font-weight:bold;}
+			button{margin:2px;}
+			p[id='output']{min-height:24px;border:1px solid gray;border-radius:6px;padding:10px;font-weight:bold;}
+			select{font-size:24px;font-weight:bold;}
+		</style>
+	</head>
+	<body>
+		<div>
+			<select id="slctColors" name="slctColors">
+				<optgroup label="- Red Colors">
+					<option value="#cd5c5c" selected>Indian-Red</option>
+					<option value="#ff0000" disabled>Red</option>
+					<option value="#8b0000">Dark-Red</option>
+				</optgroup>
+				<optgroup label="- Green Colors">
+					<option value="#90ee90">Light-Green</option>
+					<option value="#008000">Green</option>
+					<option value="#006400">Dark-Green</option>
+				</optgroup>
+				<optgroup label="- Blue Colors">
+					<option value="#add8e6">Light-Blue</option>
+					<option value="#0000ff">Blue</option>
+					<option value="#00008b">Dark-Blue</option>
+				</optgroup>
+				<option value="#808080">Gray</option>
+				<option value="#000000">Black</option>
+			</select>
+		</div>
+
+		<p id="output">버튼을 눌러 보세요.</p>
+
+		<div>
+			<span># Select Change Event : </span>
+			<span style="color:blue;">Source Code를 확인하세요. (검색 : .change)</span>
+		</div>
+
+		<div>
+			<span># Value 알아내기 : </span>
+			<button type="button" id="btnSelectedValue">Selected Value</button>
+			<button type="button" id="btnDeselectedValues">Deselected Values</button>
+		</div>
+
+		<div>
+			<span># Value 바꾸기 : </span>
+			<button type="button" id="btnChangeValue">Blue로 바꾸기</button>
+			<button type="button" id="btnChange5index">5번째(Green)로 바꾸기</button>
+		</div>
+
+		<div>
+			<span># 개수 확인 : </span>
+			<button type="button" id="btnTotalNumber">전체 option 개수</button>
+			<button type="button" id="btnSelectedNumber">전체 Selected option 개수</button>
+			<button type="button" id="btnDeselectedNumber">전체 Deselected option 개수</button>
+		</div>
+
+		<div>
+			<span># Select Box Disabled : </span>
+			<button type="button" id="btnSelectCheckDisabled">Select 여부 확인</button>
+			<button type="button" id="btnSelectChangeDisabled">Select Disabled 설정</button>
+			<button type="button" id="btnSelectChangeUndisabled">Select Disabled 해제</button>
+			<button type="button" id="btnSelectToggleDisabled">Select Disabled 반전</button>
+		</div>
+
+		<div>
+			<span># Option Disabled : </span>
+			<button type="button" id="btnOptionRedCheckDisabled">Red Disabled 여부 확인</button>
+			<button type="button" id="btnOptionRedChangeDisabled">Red Disabled 설정</button>
+			<button type="button" id="btnOptionRedChangeUndisabled">Red Disabled 해제</button>
+			<button type="button" id="btnOptionRedToggleDisabled">Red Disabled 반전</button>
+			<button type="button" id="btnOptionAllChangeDisabled">전체 Option Disabled 설정</button>
+			<button type="button" id="btnOptionAllChangeUndisabled">전체 Option Disabled 해제</button>
+			<button type="button" id="btnOptionAllToggleDisabled">전체 Option Disabled 반전</button>
+		</div>
+
+
+
+		<div style='border-width:1px 0;border-style:solid;margin:30px 0;text-align:center;'>
+			<p><a href='https://loomio.kr' target='_blank' style='text-decoration:none;'>루미오 : Loomio - https://loomio.kr</a></p>
+			<p><a href='https://loomio.kr/29' target='_blank' style='text-decoration:none;'>루미오 : 제이쿼리(jQuery) Select(셀렉트 박스) 사용법 정리</a></p>
+		</div>
+	</body>
+</html>

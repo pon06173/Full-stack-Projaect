@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="eb47634d-1ee0-4f4a-b909-38471a6d7882" name="Changes" comment="APIController Updated">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/kakaomap_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/kakaomap_service.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2XKLt4GjAPP1jK3aH59RcMOXN77" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0": "0",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1": "1",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2": "2",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3": "3",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4": "4",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5": "5",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4": "116",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0": "0",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1": "1",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2": "2",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3": "3",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4": "4",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5": "5",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3": "115",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4": "116",
+    "FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5": "115",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/DCU/Desktop/demo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "vcs.Subversion",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo\src\main\resources\static\fonts" />
+      <recent name="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo\src\main\resources\static\img" />
+      <recent name="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo\src\main\resources\static\css" />
+      <recent name="C:\Users\hn016\IntelliJ\RoadAccidentInfo\cu\src\main\resources\templates" />
+      <recent name="C:\Users\hn016\IntelliJ\RoadAccidentInfo\cu\src\main\java\com\localhost\roadaccidentinfo\Controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo\src\main\resources\static\js" />
+      <recent name="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo\src\main\resources\templates" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.localhost.roadaccidentinfo.Service" />
+      <recent name="com.localhost.roadaccidentinfo.Repository" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.RoadaccidentinfoApplication">
+    <configuration name="RoadaccidentinfoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.localhost.roadaccidentinfo.RoadaccidentinfoApplication" />
+      <module name="RoadAccidentInfo.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.localhost.roadaccidentinfo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AreaSerivceTest.queryAreaTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.localhost.roadaccidentinfo.Service.AreaSerivceTest.queryAreaTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AreaServiceTest.queryAreaTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.localhost.roadaccidentinfo.Service.AreaServiceTest.queryAreaTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="MapPlaceServiceTest.queryMapPlaceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.localhost.roadaccidentinfo.Service.MapPlaceServiceTest.queryMapPlaceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="RoadAccidentInfo [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="RoadaccidentinfoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="RoadAccidentInfo.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.localhost.roadaccidentinfo.RoadaccidentinfoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AreaServiceTest.queryAreaTest" />
+        <item itemvalue="Gradle.AreaSerivceTest.queryAreaTest" />
+        <item itemvalue="Gradle.MapPlaceServiceTest.queryMapPlaceTest" />
+        <item itemvalue="Gradle.RoadAccidentInfo [dependencies]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\DCU\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+    <option name="UPDATE_DEPTH" value="infinity" />
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo" />
+          <option name="myCopyRoot" value="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo" />
+          <option name="myCopyRoot" value="C:\Users\DCU\Desktop\SVN\RoadAccidentInfo" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eb47634d-1ee0-4f4a-b909-38471a6d7882" name="Changes" comment="" />
+      <created>1696899556751</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696899556751</updated>
+      <workItem from="1698631739075" duration="687000" />
+      <workItem from="1698638238424" duration="1565000" />
+      <workItem from="1699509219546" duration="76000" />
+      <workItem from="1700556364019" duration="84000" />
+      <workItem from="1700556469619" duration="3951000" />
+    </task>
+    <task id="LOCAL-00001" summary="yml update">
+      <option name="closed" value="true" />
+      <created>1698381494114</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698381494114</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Gradle Build">
+      <option name="closed" value="true" />
+      <created>1698381784011</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698381784011</updated>
+    </task>
+    <task id="LOCAL-00003" summary="package created">
+      <option name="closed" value="true" />
+      <created>1698626250110</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698626250110</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Entity Created">
+      <option name="closed" value="true" />
+      <created>1698627094273</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698627094273</updated>
+    </task>
+    <task id="LOCAL-00005" summary="DTO Created">
+      <option name="closed" value="true" />
+      <created>1698628473088</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698628473088</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Repository Created">
+      <option name="closed" value="true" />
+      <created>1698628868926</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698628868926</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Controller Refactored">
+      <option name="closed" value="true" />
+      <created>1698711270292</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698711270292</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Code Cleanup">
+      <option name="closed" value="true" />
+      <created>1698713069647</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698713069647</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Code Cleanup (2)">
+      <option name="closed" value="true" />
+      <created>1698713436948</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698713436948</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Entity Update">
+      <option name="closed" value="true" />
+      <created>1698716417494</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1698716417494</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Service Update (EntityToDTO, DTOToEntity)">
+      <option name="closed" value="true" />
+      <created>1698812763483</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1698812763483</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Service Updated (Error on Line 172)&#10;memoReopsitory.findByAddress(sigunName).getIdx();&#10;-&gt; javax.persistence.NonUniqueResultException: query did not return a unique result: 2">
+      <option name="closed" value="true" />
+      <created>1698855946444</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1698855946444</updated>
+    </task>
+    <task id="LOCAL-00013" summary="MapPlaceService.queryMapPlace created">
+      <option name="closed" value="true" />
+      <created>1699183383003</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699183383004</updated>
+    </task>
+    <task id="LOCAL-00014" summary="MapPlaceService.queryMapPlaceByIdx updated">
+      <option name="closed" value="true" />
+      <created>1699230917763</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699230917763</updated>
+    </task>
+    <task id="LOCAL-00015" summary="AccidentService Update">
+      <option name="closed" value="true" />
+      <created>1699247759826</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1699247759826</updated>
+    </task>
+    <task id="LOCAL-00016" summary="AreaService Update">
+      <option name="closed" value="true" />
+      <created>1699249855714</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1699249855714</updated>
+    </task>
+    <task id="LOCAL-00017" summary="AreaService Update&#10;(Problem: Loops when execute queryAccident func.)">
+      <option name="closed" value="true" />
+      <created>1699256383108</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699256383108</updated>
+    </task>
+    <task id="LOCAL-00018" summary="APIController Updated">
+      <option name="closed" value="true" />
+      <created>1699316707900</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1699316707900</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Controller Updated&#10;Error Page Created">
+      <option name="closed" value="true" />
+      <created>1699317813209</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1699317813209</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="yml update" />
+    <MESSAGE value="Gradle Build" />
+    <MESSAGE value="package created" />
+    <MESSAGE value="Entity Created" />
+    <MESSAGE value="DTO Created" />
+    <MESSAGE value="Repository Created" />
+    <MESSAGE value="Controller Refactor" />
+    <MESSAGE value="Controller Refactored" />
+    <MESSAGE value="Code Cleanup" />
+    <MESSAGE value="Code Cleanup (2)" />
+    <MESSAGE value="Entity Update" />
+    <MESSAGE value="Service Update (EntityToDTO, DTOToEntity)" />
+    <MESSAGE value="Service Updated (Error on Line 172)&#10;memoReopsitory.findByAddress(sigunName).getIdx();&#10;-&gt; javax.persistence.NonUniqueResultException: query did not return a unique result: 2" />
+    <MESSAGE value="MapPlaceService.queryMapPlaceByIdx updated" />
+    <MESSAGE value="MapPlaceService.queryMapPlace created" />
+    <MESSAGE value="AccidentService Update" />
+    <MESSAGE value="AreaService Update&#10;(Problem: Loops when execute queryAccident func.)" />
+    <MESSAGE value="AreaService Update" />
+    <MESSAGE value="APIController Update" />
+    <MESSAGE value="Controller Updated&#10;Error Page Created" />
+    <MESSAGE value="APIController Updated" />
+    <MESSAGE value="Controller/AccidentService Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Controller/AccidentService Updated" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="json" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<meta charset="UTF-8">
+
+<head>
+    <style>
+        html, body {
+            margin: 0px;
+            font-family: "Noto Sans KR", "NanumGothic", "나눔고딕", sans-serif;
+            overflow: hidden;
+            width: 600px;
+        }
+
+        body { padding: 24px; }
+
+        p { margin: 0; }
+
+        a { text-decoration: none; }
+
+        a:hover { text-decoration: underline; }
+
+        .header { margin-bottom: 12px; }
+    </style>
+
+
+    <title>오류</title>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="heading">
+        <h2>오류 </h2>
+    </div>
+</div>
+
+<div>
+    <div>
+        <p>요청한 URL을 처리하던 중 [[${status}]] [[${error}]] 오류가 발생하였습니다.</p>
+        <p>없는 주소를 요청하였거나, 요청에 문제가 있습니다.</p>
+    </div>
+</div>
+
+<hr />
+
+<div class="footer">
+    <p>이전 페이지로 돌아가려면 <a href="javascript:window.history.back()">여기</a>를 누르십시오.</p>
+    <p>기술 지원이 필요하다면 <a href="mailto:memoapp@example.com">여기</a>로 문의하십시오.</p>
+</div>
+
+</body>
+
+</html>

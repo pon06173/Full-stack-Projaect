@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>교통사고 다발지역 정보 조회 서비스</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicons ================================================== -->
+    <link rel="shortcut icon" href="/img/fav.png" type="image/png">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css"  href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css"  href="/css/kakaomap_service.css"> 
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome/css/font-awesome.css">
+
+    <!-- Stylesheet ================================================== -->
+    <link rel="stylesheet" type="text/css"  href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/nivo-lightbox/nivo-lightbox.css">
+    <link rel="stylesheet" type="text/css" href="/css/nivo-lightbox/default.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/js/modernizr.custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="overflow-y:  hidden; height: 100%;">
+<!-- Navigation
+    ==========================================-->
+<!-- Header -->
+<header id="header" style="height: calc(100vh);">
+    <div class="intro">
+
+            <div id="map" style="width:100%; height:-webkit-fill-available; position: absolute; ">
+
+                <div id="modal" class="modal-overlay">
+                    <div class="modal-window">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <div class="title">
+                            <h2>상세정보</h2>
+                        </div>
+                        <div class="content" style="width: 100%;">
+                            <p id="detail_address">주소 : <span id="modalTitle"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메뉴바 -->
+                <div class="info-bar" style="visibility:hidden">
+                    <div id="logo" class="Logo border-bottom" style="display: flex; flex-direction: row;">
+                        <a class="page-scroll" href="#page-top">
+                            <img src="/img/logo.png" alt="로고 이미지" style="width: 15px; height: 25px;">
+                            <span>LOCALHOST</span>
+                        </a>
+                    </div>
+                    <button class="sc-button" id="onoffButton">
+                        <span name="toggle-control">닫기</span>
+                    </button>
+                    <div class="info-main" style="width: 100%; height: calc(100vh - 60px)">
+                        <div class="categories" style="width: 60px; height: calc(100vh - 60px); font-size: 12px;">
+                            <ul class="ac">
+                                <li style="margin-top: 20px; margin-bottom: 20px;">
+                                    <button class="link-button" data-href="#page-top" id="scroll_map">
+                                        <a style="display: inline-block;"><img src="/img/Map.png" style="width: 31px; height: 31px;"></a>
+                                        <span style="display: block;">지도</span>
+                                    </button>
+                                </li>
+                                <li style="margin-top: 20px; margin-bottom: 20px;">
+                                    <button class="link-button" data-href="#graph" id="scroll_graph">
+                                        <a style="display: inline-block;"><img src="/img/Analytics.png" style="width: 31px; height: 31px;"></a>
+                                        <span style="display: block;">그래프</span>
+                                    </button>
+                                </li>
+                                <li style="margin-top: 20px; margin-bottom: 20px;">
+                                    <button class="link-button" data-href="#QnA" id="scroll_qna">
+                                        <a style="display: inline-block;"><img src="/img/service.png" style="width: 31px; height: 31px;"></a>
+                                        <span style="display: block;">서비스</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="map_wrap" style="background-color:#f2f9f9; width: 330px; height: calc(100vh - 60px)">
+                            <form onsubmit="searchPlaces(); return false;">
+                                시, 군, 읍 검색 : <input type="text" value="경산시" id="keyword" size="15">
+                                <button type="submit" class="btn-success">검색하기</button>
+                            </form>
+                            <div id="menu_wrap" class="bg_white" >
+                                <div class="option">
+                                    <div>
+
+                                    </div>
+                                </div>
+
+                                <ul id="placesList"></ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+        <div class="custom_zoomcontrol radius_border1" style="display: block; box-shadow: rgba(0, 0, 0, 0.2) 2px 1px 5px; background-color: #FFFFFF; visibility:hidden">
+            <span onclick="zoomIn()"><img src="/img/ico_plus.png" alt=""></span>
+            <span onclick="zoomOut()"><img src="/img/ico_minus.png" alt=""></span>
+        </div>
+
+        <div class="vis-weather" style="width: auto; height: auto; background-color: white; border-radius: 10px; display: flex; flex-direction: row; position: absolute; top: 10px; box-shadow: rgba(0, 0, 0, 0.2) 2px 1px 5px; z-index: 3">
+
+        </div>
+        <div class="sum_accidents" style="width: auto; height: auto; background-color: white; border-radius: 10px; display: flex; flex-direction: row; position: absolute; top: 10px; box-shadow: rgba(0, 0, 0, 0.2) 2px 1px 5px; z-index: 3">
+
+        </div>
+
+        <div class="locationBtn" style="visibility:hidden;">
+            <button id="current-location-btn"></button>
+        </div>
+
+        <ul id="category" style="font-size: 12px; background-color: #FFFFFF; box-shadow: rgba(0, 0, 0, 0.2) 2px 1px 5px; visibility:hidden">
+            <li id="BK9" data-order="0" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg jaywalk">
+                    <img class="accident_option_item" src="/img/walk_accident.png" alt="">
+                    <span>무단횡단</span>
+                </button>
+            </li>
+            <li id="MT1" data-order="1" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg old">
+                    <img class="accident_option_item" src="/img/old_accident.png" alt="">
+                    <span>보행노인</span>
+                </button>
+            </li>
+            <li id="PM9" data-order="2" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg child">
+                    <img class="accident_option_item" src="/img/child_accident.png" alt="">
+                    <span>어린이</span>
+                </button>
+            </li>
+            <li id="OL7" data-order="3" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg school">
+                    <img class="accident_option_item" src="/img/schoolzone_accident.png" alt="">
+                    <span>스쿨존</span>
+                </button>
+            </li>
+            <li id="CE7" data-order="4" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg frozen">
+                    <img class="accident_option_item" src="/img/frozen_accident.png" alt="" >
+                    <span>결빙</span>
+                </button>
+            </li>
+            <li id="CE7" data-order="5" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg drive">
+                    <img class="accident_option_item" src="/img/drive_accident.png" alt="" >
+                    <span>음주운전</span>
+                </button>
+            </li>
+            <li id="CE7" data-order="6" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg bicycle">
+                    <img class="accident_option_item" src="/img/bicycle_accident.png" alt="" >
+                    <span>자전거</span>
+                </button>
+            </li>
+            <li id="CE7" data-order="7" style="margin-top: 0px; margin-bottom: 0px;">
+                <button class="category_bg allType">
+                    <div style="height: 51px; display: flex; align-items: center">
+                        <span style="font-weight: 500">전체</span>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- graph Section -->
+<div id="graph" class="text-center" style = "height: calc(100vh)">
+    <div class="container" style="margin-right: 400px; margin-top: 10px;">
+
+        <div class="list" style="margin-left: 100px; width: 100%; display: felx; flex-direction: row;">
+            <div style="float: right;">
+                <select id="selectData" name="selectData" style="font-size:24px;font-weight:bold;">
+                    <option value="occur" selected>사고 발생 건수</option>
+                    <option value="castl">사상자 수</option>
+                    <option value="dpsr">사망자 수</option>
+                    <option value="ser">중상자 수</option>
+                    <option value="slt">경상자 수</option>
+                    <option value="inj">부상자 수</option>
+                </select>
+            </div>
+            <ul class="cat">
+                <li>
+                    <ol class="type">
+                        <li id="allBtn"><a href="#" data-filter="*" class="active">전체</a></li>
+                        <li id="jaywalkBtn"><a href="#" data-filter=".web">무단횡단</a></li>
+                        <li id="oldBtn"><a href="#" data-filter=".photography">보행노인</a></li>
+                        <li id="childBtn"><a href="#" data-filter=".photography1">보행어린이</a></li>
+                        <li id="schoolBtn"><a href="#" data-filter=".product">스쿨존어린이</a></li>
+                        <li id="elderlyBtn"><a href="#" data-filter=".product1">자전거</a></li>
+                        <li id="frozenBtn"><a href="#" data-filter=".frozen">결빙</a></li>
+                        <li id="drunkBtn"><a href="#" data-filter=".drunk">음주운전</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <!-- <div class="clearfix"></div> -->
+        </div>
+        <div class="rowItems" style="display: flex; flex-direction: row; margin-right: 200px;">
+            <div class="row">
+                <div style="display: flex; justify-content: center;">
+                    <canvas id="myChart" width="560" height="350"></canvas>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 30px; display: flex; flex-direction: column;">
+                <div id="pie_row1" style="width: 230%; display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap;">
+                    <div id="myChart2Area" style="display: flex; justify-content: center;" status="visible">
+                        <canvas id="myChart2" width="200" height="165"></canvas>
+                    </div>
+                    <div id="myChart5Area" style="display: flex; justify-content: center; margin-left: 15px;" status="visible">
+                        <canvas id="myChart5" width="200" height="165"></canvas>
+                    </div>
+                    <div id="myChart6Area" style="display: flex; justify-content: center; margin-left: 15px;" status="visible">
+                        <canvas id="myChart6" width="200" height="165"></canvas>
+                    </div>
+                    <div id="myChart7Area" style="display: flex; justify-content: center; margin-left: 15px;" status="visible">
+                        <canvas id="myChart7" width="200" height="165"></canvas>
+                    </div>
+                    <div id="myChart8Area" style="display: flex; justify-content: center;" status="visible">
+                        <canvas id="myChart8" width="200" height="165"></canvas>
+                    </div>
+                    <div id="myChart9Area" style="display: flex; justify-content: center; margin-left: 15px;" status="visible">
+                        <canvas id="myChart9" width="200" height="165"></canvas>
+                    </div>
+                    <div id="myChart10Area" style="display: flex; justify-content: center; margin-left: 15px;" status="visible">
+                        <canvas id="myChart10" width="200" height="165"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rowItems" style="display: flex; flex-direction: row; margin-right: 100px;">
+            <div class="row">
+                <div style="display: flex; justify-content: center;">
+                    <canvas id="myChart3" width="560" height="350"></canvas>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 150px;">
+                <div style="display: flex; justify-content: center;">
+                    <canvas id="myChart4" width="560" height="350"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QnA Section -->
+<div id="QnA" class="text-center" style="height: calc(100vh)">
+    <div class="container">
+        <h2>서비스 소개</h2>
+        <hr>
+        <div class="col-md-8 col-md-offset-2">
+            <div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="circle1 "></div>
+                    </div>
+                    <div class="col-xs-9">
+                        <p>&#8226; 사고 정보를 스크래핑 해 저장, 저장한 데이터를 지도에 표시</p>
+                        <p>&#8226; 여러 공공데이터 서버에서 정보를 받아와 데이터베이스에 저장</p>
+                        <p>&#8226; 저장한 데이터 집합을 범위에 따라 지도에 표시</p>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-xs-3">
+                        <div class="circle2"></div>
+                    </div>
+                    <div class="col-xs-9">
+                        <p>&#8226; 사고 데이터를 취합해 그래프로 표시</p>
+                        <p>&#8226; 유형과 연도를 서버에 요청해 그에 따른 통곗값을 수신</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="circle3"></div>
+                    </div>
+                    <div class="col-xs-9" style="align-items: center; justify-content: center;">
+                        <p>&#8226; 사용자는 지도의 표시된 위치에서 주의운전</p>
+                        <p>&#8226; 사고 예방 효과</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="social col-md">
+                <ul>
+                    <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.github.com/"><i class="fa fa-github"></i></a></li>
+                    <li><a href="https://www.youtube.com/"><i class="fa fa-youtube-play"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="container text-center">
+            <div class="fnav">
+                <p>Copyright &copy; 2023. Designed by <a href="https://codelatte.org/" rel="nofollow">Codelatte</a>.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<script>
+    var modal = document.getElementById("myModal");
+
+    modal.addEventListener("click", function(e) {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+</script>
+<script type="text/javascript" src="/js/jquery.1.11.1.js"></script>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/SmoothScroll.js"></script>
+<script type="text/javascript" src="/js/nivo-lightbox.js"></script>
+<script type="text/javascript" src="/js/jquery.isotope.js"></script>
+<script type="text/javascript" src="/js/jqBootstrapValidation.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f58160e3cfcdf61d19dab3b9cb3fc690&libraries=services"></script>
+<script>
+    let lat = 37.5566803113882;
+    let lng = 126.904501286522;
+    $(".vis-weather").attr("style", "visibility:hidden");
+    $(".locationBtn").attr("style", "visibility:hidden");
+    function getLocation() {
+        if (navigator.geolocation) { // GPS를 지원하면
+            navigator.geolocation.getCurrentPosition(function(position) {
+              lat = position.coords.latitude;
+              lng = position.coords.longitude;
+              console.log(position.coords.latitude + ' ' + position.coords.longitude);
+              getAddr(lat,lng);
+            }, function(error) {
+              console.error(error);
+            }, {
+              enableHighAccuracy: false,
+              maximumAge: 0,
+              timeout: Infinity
+            });
+        } 
+        else {
+            alert('GPS를 지원하지 않습니다');
+        }
+    }
+    getLocation();
+
+    function getAddr(lat,lng){
+        let geocoder = new kakao.maps.services.Geocoder();
+    
+        let coord = new kakao.maps.LatLng(lat, lng);
+        let callback = function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                console.log(result[0]);
+                console.log(result[0].address.region_2depth_name);
+
+                $(".sum_accidents").attr("style", "visibility:hidden");
+                let weatherList = [];
+                $.ajax({
+                    url: "http://localhost/api/weather?areaName=" + result[0].address.region_2depth_name.substring(0,2),
+                    type: "GET",
+                    origin: "http://127.0.0.1:3000",
+                    timeout:  -1,
+                    async: false,
+                    success: function (result) {
+                        console.log("결과");
+                        for(let i=0; i<result.length; i++){
+                            console.log(result[i]);
+                            let areaString = (result[i].substring(0).split("지역: ")[1]).substring(0).split(",")[0];
+                            let skyString = (result[i].substring(0).split("하늘 상태: ")[1]).substring(0).split(",")[0];
+                            let temperString = (result[i].substring(0).split("현재 기온: ")[1]).substring(0).split(",")[0];
+                            let rainString = (result[i].substring(0).split("강수 상태: ")[1]);
+                            console.log(areaString);
+                            console.log(skyString);
+                            console.log(temperString);
+                            console.log(rainString);
+                            if(rainString == "비"){
+                                skyString = "비";
+                            }
+                            weatherList.push({area: areaString, skyStatus: skyString, nwTemp: temperString, nwRain: rainString});
+                            console.log(weatherList);
+        
+                            let imgSrc;
+                            if(skyString == "맑음"){
+                                imgSrc = "/img/sunny.png";
+                            }
+                            else if(skyString == "구름많음"){
+                                imgSrc = "/img/cloudy.png";
+                            }
+                            else if(skyString == "흐림"){
+                                imgSrc = "/img/cloudy.png";
+                            }
+                            else if(skyString == "비"){
+                                imgSrc = "/img/rainny.png";
+                            }
+        
+                            //console.log(areaName);
+                            $(".vis-weather").html("");
+                            $(".vis-weather").append(
+                            `
+                                <p style="color: black; margin: 0px; margin-right: 5px; margin-left: 5px; font-weight: bold; font-size: 16px;"> ${areaString}시 </p>
+                                <p style="color: black; margin: 0px; font-size: 15px">${skyString} ${temperString}°C 강수상태: ${rainString}</p>
+                                <img style="width: 25px; height: 25px;" src="${imgSrc}"/>
+                            `
+                            )
+                            $(".sum_accidents").attr("style", "visibility:visible").
+                            css({"width": "auto", "height": "auto", "background-color": "white", "border-radius": "10px", "border" : "3px", 
+                                "justify-content" : "center",
+                                "display": "flex", "flex-direction": "row", 
+                                "position": "absolute", "top": "60px", "right" : "30vw" ,"box-shadow": "rgba(0, 0, 0, 0.2) 2px 1px 5px", "z-index": "3",
+                                "align-items" : "center"
+                            });
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+                $("#keyword").attr("value", "");
+            }
+        }
+        geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+    }
+</script>
+<script type="text/javascript" src="/js/graph.js"></script>
+<script type="text/javascript" src="/js/kakaomap_service.js"></script>
+<script type="text/javascript" src="/js/map.js"></script>
+
+</body>
+</html>

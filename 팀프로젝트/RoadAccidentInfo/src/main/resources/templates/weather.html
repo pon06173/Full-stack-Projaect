@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="vis-weather">
+        <h1>전국 날씨</h1>
+        <ul class="list-group list-group-flush weather" style="font-weight: 600;">
+
+        </ul>
+    </div>
+</body>
+
+</html>
+<script>
+    $(document).ready(function () {
+        let weatherList = [];
+        $.ajax({
+            url: "http://localhost/api/weather?areaName=" + "포항",
+            type: "GET",
+            origin: "http://127.0.0.1:3000",
+            timeout:  -1,
+            async: false,
+            success: function (result) {
+                console.log("결과");
+                for(let i=0; i<result.length; i++){
+                    console.log(result[i]);
+                    let areaString = (result[i].substring(0).split("지역: ")[1]).substring(0).split(",")[0];
+                    let skyString = (result[i].substring(0).split("하늘 상태: ")[1]).substring(0).split(",")[0];
+                    let temperString = (result[i].substring(0).split("현재 기온: ")[1]).substring(0).split(",")[0];
+                    let rainString = (result[i].substring(0).split("강수 상태: ")[1]);
+                    console.log(areaString);
+                    console.log(skyString);
+                    console.log(temperString);
+                    console.log(rainString);
+                    if(rainString == "비"){
+                        skyString = "비";
+                    }
+                    weatherList.push({area: areaString, skyStatus: skyString, nwTemp: temperString, nwRain: rainString});
+                    console.log(weatherList);
+
+                    let imgSrc;
+                    if(skyString == "맑음"){
+                        imgSrc = "../static/img/sunny.png";
+                    }
+                    else if(skyString == "구름많음"){
+                        imgSrc = "../static/img/cloudy.png";
+                    }
+                    else if(skyString == "흐림"){
+                        imgSrc = "../static/img/cloudy.png";
+                    }
+                    else if(skyString == "비"){
+                        imgSrc = "../static/img/rainny.png";
+                    }
+
+                    //console.log(areaName);
+                    $(".list-group").append(
+                    `
+                        <li>
+                            <div style="display: flex; flex-direction: row;">
+                                <p>${areaString} ${skyString} ${temperString} ${rainString}</p>
+                                <img style="width: 50px; height: 50px;" src="${imgSrc}"/>
+                            </div>
+                        </li>
+                    `
+                )
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
+
+</script>
