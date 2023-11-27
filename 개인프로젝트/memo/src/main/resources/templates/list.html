@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>메모장</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/list.css" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="col-12 d-flex align-items-center">
+            <img src="/png/logo.png" alt="로고" class="logo">
+            <h1>메모장 등록</h1>
+            </div>
+        </div>
+
+        <div class="col-6 text-right">
+            <a class="btn mt-3" id="logoutBtn" href="/logout">로그아웃</a>
+        </div>
+        <br><br><br><br>
+    </div>
+    <form id="todoForm" action="/write" method="post">
+        <input type="hidden" id="idx" name="idx">
+        <div class="form-group col-6">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요.">
+        </div>
+        <br>
+        <div class="form-group col-6">
+            <label for="content" class="form-label">작성내용</label>
+            <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해주세요." rows="3"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary mt-3" id="add">저장</button>
+        <button type="button" class="btn btn-secondary mt-3" id="reset" onclick="clearForm()">취소</button>
+    </form>
+
+<hr>
+<div>
+    <table class="table">
+        <thead class="table-light text-center">
+        <tr>
+            <th scope="col" class="col-1">번호</th>
+            <th scope="col" class="col-2">제목</th>
+            <th scope="col" class="col-5">본문</th>
+            <th scope="col" class="col-2">등록일</th>
+            <th scope="col" class="col-2"></th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        <tr th:each="item, status : ${boardList}" th:onclick="">
+            <th class="text-center align-middle" scope="row" th:text="${status.count}"></th>
+            <td class="text-center align-middle" th:text="${item.title}"></td>
+            <td class="text-center align-middle" th:text="${item.content}"></td>
+            <td class="text-center align-middle" th:text="${#temporals.format(item.createAt, 'yyyy/MM/dd')}">@mdo</td>
+            <td class="text-center align-middle">
+                <button type="button" class="btn btn-primary mt-3" th:onclick="mod([[${item}]])">수정</button>
+                <button type="button" class="btn btn-danger" th:onclick="del([[${item.idx}]])">삭제</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<script src="/js/list.js"></script>
+<script th:inline="javascript">
+    var msg = [[${msg}]];
+    if (msg) {
+        alert(msg);
+    }
+</script>
+</body>
+</html>

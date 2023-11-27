@@ -1,0 +1,39 @@
+
+#logoutBtn {
+    float: right; /* 로그아웃 버튼을 오른쪽으로 이동시키는 스타일 */
+    margin-top: 0;
+    background-color: #888; /* 마우스 오버 시 배경색 변경 */
+    color: #fff; /* 마우스 오버 시 텍스트색 변경 */
+}
+
+#logout-button:hover {
+    background-color: #999; /* 마우스 오버 시 배경색 변경 */
+    color: #fff; /* 마우스 오버 시 텍스트색 변경 */
+}
+
+.todoList{
+    max-width: 75%;
+    margin: 30px auto;
+}
+
+.container{
+    margin-top: 10px;
+}
+
+.logo{
+    width: 48px;
+    margin-right: 12px;
+}
+
+.row{
+    background: #888888;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mt-3 {
+    margin-top: 0 !important;
+}
+
